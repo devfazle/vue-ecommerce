@@ -174,7 +174,7 @@
             <li class="menu-item">
                 <router-link :to="{name: 'adminforms'}" href="cards-basic.html" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-collection"></i>
-                    <div data-i18n="Basic">Cards</div>
+                    <div data-i18n="Basic">FORMS</div>
                 </router-link>
             </li>
             <!-- User interface -->
