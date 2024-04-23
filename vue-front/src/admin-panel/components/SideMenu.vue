@@ -358,18 +358,18 @@
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
             <li class="menu-item">
-                <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank"
+                <router-link :to="{name: 'contactus'}"
                     class="menu-link">
                     <i class="menu-icon tf-icons bx bx-support"></i>
-                    <div data-i18n="Support">Support</div>
-                </a>
+                    <div data-i18n="Support">Contact Us</div>
+                </router-link>
             </li>
             <li class="menu-item">
-                <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank" class="menu-link">
+                <router-link :to="{name: 'products'}"
+                     class="menu-link">
                     <i class="menu-icon tf-icons bx bx-file"></i>
-                    <div data-i18n="Documentation">Documentation</div>
-                </a>
+                    <div data-i18n="Documentation">Product</div>
+                </router-link>
             </li>
         </ul>
     </aside>
