@@ -39,13 +39,13 @@ const router = createRouter({
       ],
     },
     {
-      path: '',
-      name: 'home',
+      path: '/',
+      name: 'h',
       component: FrontMainLayout,
       children: [
         {
           path: '',
-          name: 'home1',
+          name: 'home',
           component: FrontPage,
         },
         {

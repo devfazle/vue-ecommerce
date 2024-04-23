@@ -33,7 +33,7 @@ import "@/assets/front-assets/vendor/isotope/isotope.pkgd.min.js"
 import "@/assets/front-assets/js/main.js"
 
 //component files
-import Header from "../components/Header.vue"
+import Header from "../components/Menu.vue"
 import Footer from "../components/Footer.vue"
 import Cart from "../components/Cart.vue"
 import Modal from "../components/Modal.vue"
