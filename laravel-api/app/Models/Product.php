@@ -19,10 +19,10 @@ class Product extends Model
         return $this->hasMany(Wishlist::class);
     }
     public function order_item(){
-        return $this->belongsTo(Order_item::class);
+        return $this->hasMany(Order_item::class);
     }
     public function purchase(){
-        return $this->belongsTo(Purchase::class);
+        return $this->hasMany(Purchase::class);
     }
     public function cart(){
         return $this->hasMany(Cart::class);
