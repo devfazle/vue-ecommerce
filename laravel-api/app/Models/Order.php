@@ -19,6 +19,6 @@ class Order extends Model
         return $this->belongsTo(Payment::class);
     }
     public function shipment(){
-        return $this->hasOne(Shipment::class);
+        return $this->hasMany(Shipment::class);
     }
 }
