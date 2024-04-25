@@ -7,6 +7,7 @@ import Products from '@/admin-panel/views/Products.vue'
 import FrontMainLayout from '@/front-panel/views/MainLayout.vue'
 import Product from '@/front-panel/views/Product.vue'
 import FrontPage from '@/front-panel/views/FrontPage.vue'
+import FazleProduct from '@/admin-panel/fazle/Product.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,6 +36,11 @@ const router = createRouter({
           path: 'product',
           name: 'products',
           component: Products,
+        },
+        {
+          path: 'product2',
+          name: 'products2',
+          component: FazleProduct,
         },
       ],
     },

@@ -350,10 +350,10 @@
             </li>
             <!-- Tables -->
             <li class="menu-item">
-                <a href="tables-basic.html" class="menu-link">
+                <router-link :to="{name: 'products2'}" href="tables-basic.html" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-table"></i>
                     <div data-i18n="Tables">Tables</div>
-                </a>
+                </router-link>
             </li>
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
