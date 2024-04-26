@@ -71,6 +71,14 @@
                     <i class="menu-icon tf-icons bx bx-layout"></i>
                     <div data-i18n="Layouts">Layouts</div>
                 </a>
+                <a href="roles" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Layouts">Roles</div>
+                </a>
+                <a href="users" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Layouts">Users</div>
+                </a>
 
                 <ul class="menu-sub">
                     <li class="menu-item">

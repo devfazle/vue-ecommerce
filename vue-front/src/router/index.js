@@ -7,6 +7,9 @@ import Products from '@/admin-panel/views/Products.vue'
 import FrontMainLayout from '@/front-panel/views/MainLayout.vue'
 import Product from '@/front-panel/views/Product.vue'
 import FrontPage from '@/front-panel/views/FrontPage.vue'
+import Roles from '@/admin-panel/nazad/Roles/Roles.vue'
+import Users from '@/admin-panel/nazad/Users/Users.vue'
+import UserCreate from '@/admin-panel/nazad/Users/UserCreate.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,6 +38,22 @@ const router = createRouter({
           path: 'product',
           name: 'products',
           component: Products,
+        },
+        {
+          path: 'roles',
+          name: 'roles',
+          component: Roles,
+        },
+        {
+          path: 'users',
+          name: 'users',
+          component: Users,
+          
+        },
+        {
+          path: 'create',
+          name: 'usercreate',
+          component: UserCreate,
         },
       ],
     },

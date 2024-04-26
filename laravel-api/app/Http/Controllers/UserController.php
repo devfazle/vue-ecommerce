@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'desc')->get();
+        $users = User::orderBy('id', 'desc')->with('role')->get();
         return $this->sendResponse($users, 'User list fetched successfully!');
     }
 
