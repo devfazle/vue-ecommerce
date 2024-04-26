@@ -18,7 +18,7 @@ use App\Http\Controllers\WishlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->prefix('admin')->group(function(){
+Route::prefix('admin')->group(function(){
     Route::resource('users',UserController::class)->names('users');
     Route::resource('carts',CartsController::class)->names('carts');
     Route::resource('categorys',CategoryController::class)->names('categorys');
