@@ -32,7 +32,7 @@ class CartsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required'
+            'quantity' => 'required'
         ]);
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors(),422);

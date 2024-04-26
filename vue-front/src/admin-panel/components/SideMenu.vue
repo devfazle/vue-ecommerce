@@ -1,3 +1,21 @@
+<script>
+    export default {
+        name: "AdminSideMenu",
+        data() {
+            return {
+                customerShow: ""
+            }
+        },
+
+        methods: {
+            toggleCustomer() {
+                this.customerShow === " open" ? this.customerShow = '' : this.customerShow = ' open'
+            }
+        }
+    }
+</script>
+
+
 <template>
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
         <div class="app-brand demo">
@@ -104,10 +122,10 @@
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Pages</span>
             </li>
-            <li class="menu-item">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <li :class="'menu-item'+customerShow">
+                <a @click="toggleCustomer" href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                    <div data-i18n="Account Settings">Account Settings</div>
+                    <div data-i18n="Account Settings">Customer</div>
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
