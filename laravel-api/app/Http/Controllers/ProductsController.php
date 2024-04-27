@@ -14,7 +14,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('id', 'desc')->with('category','sub_category','wishlist','order_item','purchase','cart')->get();
+        $products = Product::orderBy('id', 'desc')->with('category','sub_category','wishlist','order_item','purchase','cart','photo')->get();
         return $this->sendResponse($products, 'Product list fetched successfully!');
 
     }
@@ -36,6 +36,7 @@ class ProductsController extends Controller
             'category_id' => 'required',
             'name' => 'required',
             'price' => 'required',
+            'photo' => 'required',
             'description' => 'required',
             'sub_category' => 'required',
         ]);
@@ -75,6 +76,7 @@ class ProductsController extends Controller
             'category_id' => 'required',
             'name' => 'required',
             'price' => 'required',
+            'photo' => 'required',
             'description' => 'required',
             'sub_category' => 'required',
         ]);
