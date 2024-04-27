@@ -13,36 +13,33 @@
                     <div class="card-body">
                         <div class="container">
                             <h2>Users Table</h2>
-                            <div><RouterLink class="btn btn-primary" :to="{name:'usercreate'}">Add Users</RouterLink></div>
+                            <div><RouterLink class="btn btn-primary" :to="{name:'paymentcreate'}">Add Payment</RouterLink></div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>Sl</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Address</th>
-                                            <th>Bank info</th>
-                                            <th>Phone</th>
-                                            <th>Role</th>
+                                            <th>Date</th>
+                                            <th>Method</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th>Order Id</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="(data, k) in list">
                                             <td>{{++k}}</td>
-                                            <td>{{ data.name }}</td>
-                                            <td>{{ data.email }}</td>
-                                            <td>{{ data.address }}</td>
-                                            <td>{{ data.bank_info }}</td>
-                                            <td>{{ data.phone_number }}</td>
-                                            <td>{{ data.role.name }}</td>
+                                            <td>{{ data.date }}</td>
+                                            <td>{{ data.method }}</td>
+                                            <td>{{ data.amount }}</td>
+                                            <td>{{ data.status }}</td>
+                                            <td>{{ data.order_id }}</td>
                                             <td>
                                                 <button class="btn btn-primary" @click="update(data.id)">Edit</button>
-                                                <button class="btn btn-danger" @click="deleteUser(data.id)">Delete</button>
+                                                <button class="btn btn-danger" @click="deletePayment(data.id)">Delete</button>
                                             </td>
                                         </tr>
-                                        <!-- Add more rows for additional products -->
                                     </tbody>
                                 </table>
                             </div>
@@ -59,28 +56,28 @@ export default {
     data() {
         return {
             test: "<h1>Income table</h1>",
-            url: 'http://localhost:8000/api/admin/users',
+            url: 'http://localhost:8000/api/admin/payments',
             list:'',
 
         }
     },
     methods: {
-        getUserList() {
+        getPaymentList() {
             axios.get(this.url)
                 .then((result) => {
                     this.list = result.data.data
                     
-                //    console.log(result.data.data)
+                   console.log(result.data.data)
 
                 });
         },
-        update(id) {
-            this.$router.push({path:'/admin/useredit/'+id});
-        },
-        async deleteUser(id) {
+        // update(id) {
+        //     this.$router.push({path:'/admin/useredit/'+id});
+        // },
+        async deletePayment(id) {
             try {
                 await axios.delete(`${this.url}/${id}`);
-                this.getUserList(); // Call getIncomeList after successful deletion
+                this.getPaymentList(); // Call getIncomeList after successful deletion
             } catch (error) {
                 console.error("Error deleting User:", error);
                 // Handle error as needed (show user message, etc.)
@@ -89,7 +86,7 @@ export default {
 
     },
     mounted() {
-        this.getUserList()
+        this.getPaymentList()
     },
 }
 </script>

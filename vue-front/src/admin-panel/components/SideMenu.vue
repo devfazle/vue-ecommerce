@@ -71,14 +71,14 @@
                     <i class="menu-icon tf-icons bx bx-layout"></i>
                     <div data-i18n="Layouts">Layouts</div>
                 </a>
-                <a href="roles" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-layout"></i>
-                    <div data-i18n="Layouts">Roles</div>
-                </a>
-                <a href="users" class="menu-link menu-toggle">
+                <router-link :to="{name: 'users'}" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-layout"></i>
                     <div data-i18n="Layouts">Users</div>
-                </a>
+                </router-link>
+                <router-link :to="{name: 'payment'}" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Layouts">Payment</div>
+                </router-link>
 
                 <ul class="menu-sub">
                     <li class="menu-item">

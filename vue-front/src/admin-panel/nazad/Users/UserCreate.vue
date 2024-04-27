@@ -32,11 +32,17 @@
                                     placeholder="0158" />
                             </div>
                             <div class="mb-3">
+                                <label class="form-label" for="basic-default-phone">Password</label>
+                                <input type="text" v-model="password" class="form-control"
+                                    placeholder="0158" />
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label" for="basic-default-phone">Role</label>
-                                <select class="form-control" v-model="role_id" >
+                                <select class="form-control" v-model="role_id" @onchange="this.value" >
                                     <option value="">Select one</option>
-                                    <option v-for="(data, k) in list" :key="k" :value="data.id">{{ data.name }}
-                                </option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Customer</option>
+                                    <option value="3">Guest</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -49,7 +55,7 @@
                                 <textarea id="basic-default-message" v-model="bank_info" class="form-control"
                                     placeholder="Inter your bank account and name"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Send</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </form>
                     </div>
                 </div>
@@ -62,58 +68,42 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            test: "<h1>Income table</h1>",
-            url: 'http://localhost:8000/api/admin/roles',
+            test: "<h1>Users table</h1>",
+            url: 'http://localhost:8000/api/admin/users',
             name: "",
             email: "",
             phone_number: "",
+            password: "",
             address: "",
             bank_info: "",
-            role_id: '',
+            role_id: "",
 
         }
     },
     methods: {
-        getUsersList() {
-            axios.get(this.url)
-                .then((result) => {
-                    this.list = result.data.data
-                   console.log(result.data.data)
-
-                });
-        },
-
-        //add income----------------------
         save() {
-            // axios.post(this.urlI, {
-                //      name:this.name,
-                //      email:this.email,
-                //      phone_number:this.phone_number,
-                //      address:this.address,
-            //     role_id: this.role_id,
-            //     date: this.date,
-            //     employee_id: this.employee_id,
-            //     amount: this.amount,
-            //     details: this.details,
+            axios.post(this.url, {
+                     name:this.name,
+                     email:this.email,
+                     phone_number:this.phone_number,
+                     password:this.password,
+                     address:this.address,
+                     bank_info:this.bank_info,
+                     role_id: this.role_id,
             
                
-            //     
+                
 
 
-            // })
-            //     .then((response) => {
-            //         // this.$router.push('/income');
-            //     }, (error) => {
-            //         console.log(error);
-            //     });
-            
-            console.log(this.role_id)
+            })
+                .then((response) => {
+                    this.$router.push('/admin/users');
+                }, (error) => {
+                    console.log(error);
+                });
 
         },
 
-    },
-    mounted() {
-        this.getUsersList()
     },
 }
 </script>

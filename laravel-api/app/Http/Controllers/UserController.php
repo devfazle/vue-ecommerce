@@ -39,6 +39,7 @@ class UserController extends Controller
             "phone_number" => 'required',
             "bank_info" => 'required',
             "role_id" => 'required',
+            "password" => 'required',
         ]);
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors(), 422);
@@ -72,7 +73,6 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|unique:users',
             'name' => 'required',
             "address" => 'required',
             "phone_number" => 'required',

@@ -13,6 +13,7 @@
                     <div class="card-body">
                         <div class="container">
                             <h2>Role Table</h2>
+                            <div><RouterLink class="btn btn-primary" :to="{name:'rolecreate'}">Add Roles</RouterLink></div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead class="thead-dark">
@@ -27,7 +28,10 @@
                                             <td>{{++k}}</td>
                                             <td>{{ data.id }}</td>
                                             <td>{{ data.name }}</td>
-                                            <td><button class="btn btn-primary" @click="update(data.id)" href="">Edit</button><button class="btn btn-danger" @click="deleteIncome(data.id)"href="">Delete</button></td>
+                                            <td>
+                                                <button class="btn btn-primary" @click="update(data.id)">Edit</button>
+                                                <button class="btn btn-danger" @click="deleteRole(data.id)">Delete</button>
+                                            </td>
                                         </tr>
                                         <!-- Add more rows for additional products -->
                                     </tbody>
@@ -46,14 +50,14 @@ export default {
     data() {
         return {
             test: "<h1>Income table</h1>",
-            urlI: 'http://localhost:8000/api/admin/roles',
+            url: 'http://localhost:8000/api/admin/roles',
             list:'',
 
         }
     },
     methods: {
-        getUserList() {
-            axios.get(this.urlI)
+        getRoleList() {
+            axios.get(this.url)
                 .then((result) => {
                     this.list = result.data.data
                     
@@ -61,10 +65,22 @@ export default {
 
                 });
         },
+        update(id) {
+            this.$router.push({path:'/admin/roleedit/'+id});
+        },
+        async deleteRole(id) {
+            try {
+                await axios.delete(`${this.url}/${id}`);
+                this.getRoleList(); // Call getIncomeList after successful deletion
+            } catch (error) {
+                console.error("Error deleting User:", error);
+                // Handle error as needed (show user message, etc.)
+            }
+        }
 
     },
     mounted() {
-        this.getUserList()
+        this.getRoleList()
     },
 }
 </script>

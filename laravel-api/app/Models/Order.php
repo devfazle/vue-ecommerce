@@ -16,7 +16,7 @@ class Order extends Model
         return $this->hasMany(Order_item::class);
     }
     public function payment(){
-        return $this->belongsTo(Payment::class);
+        return $this->hasone(Payment::class);
     }
     public function shipment(){
         return $this->hasOne(Shipment::class);
