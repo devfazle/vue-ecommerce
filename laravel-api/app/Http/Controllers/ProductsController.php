@@ -36,7 +36,6 @@ class ProductsController extends Controller
             'category_id' => 'required',
             'name' => 'required',
             'price' => 'required',
-            'photo' => 'required',
             'description' => 'required',
             'sub_category' => 'required',
         ]);
@@ -76,7 +75,6 @@ class ProductsController extends Controller
             'category_id' => 'required',
             'name' => 'required',
             'price' => 'required',
-            'photo' => 'required',
             'description' => 'required',
             'sub_category' => 'required',
         ]);
