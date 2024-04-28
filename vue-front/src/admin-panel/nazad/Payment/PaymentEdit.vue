@@ -7,39 +7,46 @@
             <div class="col-xl">
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Users Form</h5>
+                        <h5 class="mb-0">Payment Update Form</h5>
                         <small class="text-muted float-end">Default label</small>
                     </div>
                     <div class="card-body">
-                        <form v-on:submit.prevent="save">
+                        <form v-on:submit.prevent="save()">
                             <div class="mb-3">
-                                <label class="form-label" for="basic-default-fullname">Name</label>
-                                <input type="text" v-model="name" class="form-control" id="basic-default-fullname"
+                                <label class="form-label" for="basic-default-fullname">Date</label>
+                                <input type="datetime-local" v-model="date" class="form-control" id=""
                                     placeholder="John Doe" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="basic-default-phone">Phone</label>
-                                <input type="text" v-model="phone_number" class="form-control"
-                                    placeholder="0158" />
+                                <label class="form-label" for="basic-default-phone">Order Id</label>
+                                <input type="text" v-on:keyup="order()" v-model="order_id" id="order" class="form-control phone-mask"
+                                    placeholder="123456" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="basic-default-phone">Role</label>
-                                <select class="form-control" v-model="role_id" @onchange="this.value" >
-                                    <option value="">Select one</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Customer</option>
-                                    <option value="3">Guest</option>
-                                </select>
+                                <label class="form-label" for="basic-default-phone">Amount</label>
+                                <input type="number" v-model="amount" id="amount" class="form-control"
+                                     disabled />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="basic-default-phone">Address</label>
-                                <input type="text" v-model="address" id="basic-default-phone" class="form-control phone-mask"
-                                    placeholder="Dhaka" />
+                                <label class="form-label" for="basic-default-email">Method</label>
+                                <div class="input-group input-group-merge">
+                                    <select class="form-control" v-model="method" @onchange="this.value" >
+                                        <option >Select one</option>
+                                        <option value="Bikash">Bikash</option>
+                                        <option value="Rocket">Rocket</option>
+                                        <option value="Cash on">Cash On</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="basic-default-message">Bank Info</label>
-                                <textarea id="basic-default-message" v-model="bank_info" class="form-control"
-                                    placeholder="Inter your bank account and name"></textarea>
+                                <label class="form-label" for="basic-default-email">Status</label>
+                                <div class="input-group input-group-merge">
+                                    <select class="form-control" v-model="status" @onchange="this.value" >
+                                        <option >Select one</option>
+                                        <option value="complete">Complete</option>
+                                        <option value="pending">Pending</option>
+                                    </select>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
@@ -54,38 +61,50 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            url: 'http://localhost:8000/api/admin/users',
-            name: "",
-            phone_number: "",
-            address: "",
-            bank_info: "",
-            role_id: "",
+            url: 'http://localhost:8000/api/admin/payments',
+            urll: 'http://localhost:8000/api/admin/orders',
+            list:[],
+            list2:[],
+            date:"",
+            method: "",
+            amount: "",
+            status: "",
+            order_id: "",
         }
     },
     methods: {
         getUserList(id) {
             axios.get(`${this.url}/${id}/edit`)
                 .then((result) => {
-                    this.name = result.data.data.name
-                    this.email = result.data.data.email
-                    this.phone_number = result.data.data.phone_number
-                    this.address = result.data.data.address
-                    this.bank_info = result.data.data.bank_info
-                    this.role_id = result.data.data.role_id
+                    this.date=result.data.data.date,
+                    this.method=result.data.data.method,
+                    this.amount=result.data.data.amount,
+                    this.order_id=result.data.data.order_id,
+                    this.status=result.data.data.status,
+                    
+                    console.log(result.data.data)
                 });
         },
         save() {
             axios.put(`${this.url}/${this.$route.params.id}`, {
-                     name:this.name,
-                     phone_number:this.phone_number,
-                     address:this.address,
-                     bank_info:this.bank_info,
-                     role_id: this.role_id,
+                     date:this.date,
+                     method:this.method,
+                     amount:this.amount,
+                     order_id:this.order_id,
+                     status: this.status,
             })
                 .then((response) => {
-                    this.$router.push('/admin/users');
+                    this.$router.push('/admin/payment');
                 }, (error) => {
                     console.log(error);
+                });
+        },
+        order(){
+            var value1 = parseFloat($('#order').val()) || 0;
+            // console.log(value1)
+            axios.get(`${this.urll}/${value1}/edit`)
+                .then((result) => {
+                    this.amount= result.data.data.total_price
                 });
         },
     },

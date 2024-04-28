@@ -77,7 +77,6 @@ class PaymentsController extends Controller
             'method' => 'required',
             'amount' => 'required',
             'status' => 'required',
-            'users_id' => 'required',
         ]);
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors(), 422);

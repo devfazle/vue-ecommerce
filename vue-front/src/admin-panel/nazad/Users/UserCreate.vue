@@ -68,7 +68,6 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            test: "<h1>Users table</h1>",
             url: 'http://localhost:8000/api/admin/users',
             name: "",
             email: "",

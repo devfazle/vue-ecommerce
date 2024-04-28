@@ -58,7 +58,6 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            test: "<h1>Income table</h1>",
             url: 'http://localhost:8000/api/admin/users',
             list:'',
 

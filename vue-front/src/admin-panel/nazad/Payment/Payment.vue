@@ -55,7 +55,6 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            test: "<h1>Income table</h1>",
             url: 'http://localhost:8000/api/admin/payments',
             list:'',
 
@@ -71,9 +70,9 @@ export default {
 
                 });
         },
-        // update(id) {
-        //     this.$router.push({path:'/admin/useredit/'+id});
-        // },
+        update(id) {
+            this.$router.push({path:'/admin/paymentedit/'+id});
+        },
         async deletePayment(id) {
             try {
                 await axios.delete(`${this.url}/${id}`);

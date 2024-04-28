@@ -7,14 +7,14 @@
             <div class="col-xl">
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Users Form</h5>
+                        <h5 class="mb-0">Payment Create Form</h5>
                         <small class="text-muted float-end">Default label</small>
                     </div>
                     <div class="card-body">
                         <form v-on:submit.prevent="save">
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-fullname">Date</label>
-                                <input type="datetime-local" v-model="date" class="form-control" id="basic-default-fullname"
+                                <input type="datetime-local" v-model="date" class="form-control" id="date"
                                     placeholder="John Doe" />
                             </div>
                             <div class="mb-3">
@@ -30,9 +30,12 @@
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-email">Method</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="text" v-model="method" id="basic-default-email" class="form-control"
-                                        placeholder="john.doe" aria-label="Bikash"
-                                        aria-describedby="basic-default-email2" />
+                                    <select class="form-control" v-model="method" @onchange="this.value" >
+                                        <option >Select one</option>
+                                        <option value="Bikash">Bikash</option>
+                                        <option value="Rocket">Rocket</option>
+                                        <option value="Cash on">Cash On</option>
+                                    </select>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
@@ -49,7 +52,6 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            test: "<h1>Users table</h1>",
             url: 'http://localhost:8000/api/admin/payments',
             urll: 'http://localhost:8000/api/admin/orders',
             list:[],
@@ -95,7 +97,7 @@ export default {
                 .then((result) => {
                     this.amount= result.data.data.total_price
                 });
-        }
+        },
     },
     mounted(){
         this.getOrderList()
