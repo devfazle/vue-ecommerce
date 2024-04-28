@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Sub_category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,7 +17,10 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::orderBy('id', 'desc')->with('category','sub_category','wishlist','order_item','purchase','cart','photo')->get();
-        return $this->sendResponse($products, 'Product list fetched successfully!');
+        $category_id=Category::orderBy('id', 'desc')->get();
+        $sub_category_id=Sub_category::orderBy('id', 'desc')->get();
+        $tdata=( [$products,$category_id,$sub_category_id]);
+        return $this->sendResponse($tdata, 'Product list fetched successfully!');
 
     }
 

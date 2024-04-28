@@ -11,8 +11,8 @@ export default {
   methods: {
     getProductList() {
       axios.get(this.url).then((response) => {
-        console.log(response.data.data);
-        this.productlist = response.data.data;
+        this.productlist=response.data.data[0];
+        console.log(response.data.data[0]);
       });
     },
     deleteProduct(id) {
