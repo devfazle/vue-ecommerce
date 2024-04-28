@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
             $table->dateTime('delivery_date');
-            $table->integer('recipient');
-            $table->integer('address');
+            $table->string('recipient',100);
+            $table->string('address',255);
             $table->enum('status', ['pending', 'processing','shipped','delivered','cancelled'])->default('pending');
             $table->unsignedBigInteger('order_id');
             $table->timestamps();
