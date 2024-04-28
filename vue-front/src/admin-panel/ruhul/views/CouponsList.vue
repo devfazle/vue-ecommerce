@@ -20,12 +20,11 @@ export default {
             axios.delete("http://127.0.0.1:8000/api/admin/cupons/" + id).then(() => {
                 this.getCupons()
             });
-        }
-        // update(id){
-        //   this.$router.push({
+        },
+        update(id){
+            this.$router.push(`/admin/coupons/coupons-update/${id}`)
 
-        //   })
-        // }
+        }
     },
 
     mounted(){

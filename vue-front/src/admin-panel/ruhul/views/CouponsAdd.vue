@@ -37,6 +37,7 @@ export default {
         .post("http://127.0.0.1:8000/api/admin/cupons", cuponsData)
         .then((response) => {
           console.log(response);
+          this.$router.push('/admin/coupons/coupons-list')
         });
     },
   },

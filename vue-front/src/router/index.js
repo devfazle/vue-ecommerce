@@ -12,7 +12,7 @@ import CartLayout from "@/admin-panel/fazle/views/CartLayout.vue";
 import CouponsAdd from "@/admin-panel/ruhul/views/CouponsAdd.vue";
 import CouponsLaout from "@/admin-panel/ruhul/views/CouponsLaout.vue";
 import CouponsList from "@/admin-panel/ruhul/views/CouponsList.vue";
-
+import UpdateCupons from "@/admin-panel/ruhul/views/UpdateCupons.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -52,9 +52,14 @@ const router = createRouter({
               component: CouponsAdd,
             },
             {
-              path: "coupons-show",
+              path: "coupons-list",
               name: "couponsshow",
               component: CouponsList,
+            },
+            {
+              path: "coupons-update/:id",
+              name: "couponsUpdate",
+              component: UpdateCupons,
             },
           ],
         },
