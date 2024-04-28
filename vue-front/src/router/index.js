@@ -1,10 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AdminMainLayout from "@/admin-panel/views/MainLayout.vue";
 import AdminDashboard from "@/admin-panel/views/Dashboard.vue";
 import AdminForms from "@/admin-panel/views/Forms.vue";
 import ContactUs from "@/admin-panel/views/ContactUs.vue";
 import Products from "@/admin-panel/views/Products.vue";
-import FrontMainLayout from "@/front-panel/views/MainLayout.vue";
 import Product from "@/front-panel/views/Product.vue";
 import FrontPage from "@/front-panel/views/FrontPage.vue";
 import CartsAdd from "@/admin-panel/fazle/views/CartsAdd.vue";
@@ -18,7 +16,7 @@ const router = createRouter({
     {
       path: "/admin",
       name: "admin",
-      component: AdminMainLayout,
+      component: () => import('@/admin-panel/views/MainLayout.vue'),
       children: [
         {
           path: "",
@@ -67,7 +65,7 @@ const router = createRouter({
     {
       path: "/",
       name: "h",
-      component: FrontMainLayout,
+      component: () => import('@/front-panel/views/MainLayout.vue'),
       children: [
         {
           path: "",
