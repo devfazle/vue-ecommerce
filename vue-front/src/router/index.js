@@ -13,6 +13,8 @@ import CouponsAdd from "@/admin-panel/ruhul/views/CouponsAdd.vue";
 import CouponsLaout from "@/admin-panel/ruhul/views/CouponsLaout.vue";
 import CouponsList from "@/admin-panel/ruhul/views/CouponsList.vue";
 import UpdateCupons from "@/admin-panel/ruhul/views/UpdateCupons.vue";
+import UseCuponsAdd from "@/admin-panel/ruhul/views/UseCuponsAdd.vue";
+import UsecuponList from "@/admin-panel/ruhul/views/UsecuponList.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -60,6 +62,16 @@ const router = createRouter({
               path: "coupons-update/:id",
               name: "couponsUpdate",
               component: UpdateCupons,
+            },
+            {
+              path: "coupons-use",
+              name: "couponsUse",
+              component: UseCuponsAdd,
+            },
+            {
+              path: "coupons-uselist",
+              name: "couponsUselist",
+              component: UsecuponList,
             },
           ],
         },
