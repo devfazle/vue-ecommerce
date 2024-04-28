@@ -9,6 +9,9 @@ import Product from "@/front-panel/views/Product.vue";
 import FrontPage from "@/front-panel/views/FrontPage.vue";
 import CartsAdd from "@/admin-panel/fazle/views/CartsAdd.vue";
 import CartLayout from "@/admin-panel/fazle/views/CartLayout.vue";
+import CouponsAdd from "@/admin-panel/ruhul/views/CouponsAdd.vue";
+import CouponsLaout from "@/admin-panel/ruhul/views/CouponsLaout.vue";
+import CouponsList from "@/admin-panel/ruhul/views/CouponsList.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +41,24 @@ const router = createRouter({
           name: "products",
           component: Products,
         },
+        {
+          path: "coupons",
+          name: "coupons",
+          component: CouponsLaout,
+          children: [
+            {
+              path: "coupons-add",
+              name: "couponsAdd",
+              component: CouponsAdd,
+            },
+            {
+              path: "coupons-show",
+              name: "couponsshow",
+              component: CouponsList,
+            },
+          ],
+        },
+
         {
           path: "cart",
           name: "cart",
