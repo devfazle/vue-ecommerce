@@ -52,12 +52,13 @@ export default {
                  axios.post('http://127.0.0.1:8000/api/admin/categorys/',categoriesData )
                     .then((res) => {
                         console.log(res)
+                        this.$router.push('/admin/categorylist');
                     });
                  
             }
         },
         mounted(){
-            this.savecategory();
+           
         }
     }
 

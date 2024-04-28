@@ -6,7 +6,7 @@
         <div class="col-xl">
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Category Update  </h5>
+                        <h5 class="mb-0">Category Update {{ id }} </h5>
                     
                     </div>
                     <div class="card-body">
@@ -31,6 +31,7 @@ export default {
     data() {
         return{
             name:'',
+            id: this.$route.params.id,
         }
     },
     methods: {

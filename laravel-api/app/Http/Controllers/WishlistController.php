@@ -24,7 +24,18 @@ class WishlistController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::where('role_id', 2)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $products = Product::orderBy('id', 'desc')->get();
+
+        $data = [
+            'users' => $users,
+            'products' => $products
+        ];
+
+        return $this->sendResponse($data, 'Wish list fetched successfully!');
     }
 
     /**
@@ -67,13 +78,14 @@ class WishlistController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'product_id' => 'required',
-            'user_id' => 'required'
-        ]);
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors(),422);
-        }
+        // $validator = Validator::make($request->all(), [
+        //     'product_id' => 'required',
+        //     'user_id' => 'required'
+        // ]);
+        // if($validator->fails()){
+        //     return $this->sendError('Validation Error.', $validator->errors(),422);
+        // }
+        
         $input = $request->all();
         $wishlists = Wishlist::find($id)->update($input);
         return $this->sendResponse($wishlists, 'Wishlist updated successfully!');

@@ -1,6 +1,6 @@
 <template>
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Add Sub_category</h5>
+        <h5 class="mb-0">Update Sub_category</h5>
     </div>
     <div class="card-body">
         <div class="mb-3">
@@ -15,7 +15,7 @@
             <input v-model="name" type="text" class="form-control" id="basic-default-fullname"
                 placeholder="Sub category name" />
         </div>
-        <button @click="saveSub_category" type="submit" class="btn btn-primary">Submit</button>
+        <button @click="updateSub_category()" type="submit" class="btn btn-primary">Submit</button>
     </div>
 </template>
 
@@ -25,35 +25,34 @@ import axios from 'axios';
 export default {
      data() {
         return {
-            category:[],
+            sub_categorys:[],
             category_id:0,
-            name:''  
+            name:'' , 
+            id:this.$route.params.id,
         }
     },
     methods: {
-        getCategory(){
-            axios.get("http://127.0.0.1:8000/api/admin/categorys")
-            .then((result) =>{
-                this.category = result.data.data;
-                console.log(this.category)
-            })
+        getsubcategorys(){
+            axios.get("http://127.0.0.1:8000/api/admin/subcategorys/" + this.id + '/edit').then((res) => {
+                const subcategorys = res.data.data;
+                this.name =subcategorys.name                   
+                this.category_id =subcategorys.category_id                   
+                
+            });
         },
-        saveSub_category(){
-            const subcategory = {
-                category_id:this.category_id,
-                name:this.name
+        updateSub_category(){
+            const subcategorysData = {
+                 name: this.name,
             }
-            console.log('ok');
-            
-            axios.post("http://127.0.0.1:8000/api/admin/subcategorys", subcategory)
-            .then((res) => {
-                console.log(res);
-                this.$router.push('/admin/sub_category/sub_list');
-            })
+            axios.put("http://127.0.0.1:8000/api/admin/subcategorys/"+this.id, subcategorysData)
+                .then((response) => {
+                    console.log(response);
+                });
         }
     },
     mounted(){
-        this.getCategory();
+        this.getsubcategorys();
+        this.updateSub_category();
     }
 }
 </script>
