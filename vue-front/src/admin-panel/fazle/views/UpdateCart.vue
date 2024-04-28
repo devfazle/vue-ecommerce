@@ -8,11 +8,13 @@ export default {
             users: [],
             user_id: 0,
             product_id: 0,
-            quantity: 0
+            quantity: 0,
+            id: this.$route.params.id
         }
     },
 
     methods: {
+
         getInfo() {
             axios.get('http://127.0.0.1:8000/api/admin/carts/create')
                 .then((result) => {
@@ -21,23 +23,25 @@ export default {
                     console.log(this.users);
                 })
         },
-        // getProducts() {
-        //     axios.get('http://127.0.0.1:8000/api/admin/carts/create')
-        //         .then((result) => {
-        //             this.products = result.data.data.products;
-        //             console.log(this.prodcuts);
-        //         })
-        // },
-        storeCart() {
+
+        getCart() {
+            axios.get("http://127.0.0.1:8000/api/admin/carts/" + this.id + '/edit')
+                .then((response) => {
+                    const cart = response.data.data;
+                    this.user_id = cart.user_id;
+                    this.product_id = cart.product_id;
+                    this.quantity = cart.quantity;
+                });
+        },
+
+        updateCart() {
             const cartData = {
                 user_id: this.user_id,
                 product_id: this.product_id,
                 quantity: this.quantity
             }
 
-            console.log('ok');
-
-            axios.post("http://127.0.0.1:8000/api/admin/carts", cartData)
+            axios.put("http://127.0.0.1:8000/api/admin/carts/"+this.id, cartData)
                 .then((response) => {
                     console.log(response);
                 });
@@ -47,7 +51,7 @@ export default {
 
     mounted() {
         this.getInfo();
-        // this.getProducts();
+        this.getCart();
     }
 }
 
@@ -56,7 +60,7 @@ export default {
 
 <template>
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Add Cart</h5>
+        <h5 class="mb-0">Cart Update</h5>
     </div>
     <div class="card-body">
         <div class="mb-3">
@@ -78,6 +82,6 @@ export default {
             <input v-model="quantity" type="text" class="form-control" id="basic-default-fullname"
                 placeholder="John Doe" />
         </div>
-        <button @click="storeCart" type="submit" class="btn btn-primary">Submit</button>
+        <button @click="updateCart" type="submit" class="btn btn-primary">Submit</button>
     </div>
 </template>

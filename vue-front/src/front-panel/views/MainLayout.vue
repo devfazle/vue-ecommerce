@@ -44,19 +44,19 @@ import Product from "./Product.vue"
 
 
 <template>
-    <!-- Header -->
-	<Header/>
+	<!-- Header -->
+	<Header />
 
 	<!-- Cart -->
-	<Cart/>
+	<Cart />
 
-	
+
 	<!-- views -->
-	<router-view/>
-		
+	<router-view />
+
 
 	<!-- Footer -->
-	<Footer/>
+	<Footer />
 
 
 	<!-- Back to top -->
@@ -67,5 +67,5 @@ import Product from "./Product.vue"
 	</div>
 
 	<!-- Modal1 -->
-	<Modal/>
+	<Modal />
 </template>
