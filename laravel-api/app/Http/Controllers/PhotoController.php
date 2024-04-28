@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PhotoController extends Controller
 {
+    use ApiResponse;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $photos = Photo::orderBy('id', 'desc')->get();
+        return $this->sendResponse($photos, 'Photos list fetched successfully!');
     }
 
     /**
@@ -28,10 +31,22 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        $file = $request->file('photo');
+        $validator = Validator::make($request->all(), [
+            'path' => 'required',
+            'imageable_id' => 'required',
+            'imageable_type' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors(), 422);
+        }
+        $input = $request->all();
+        $file = $request->path;
         $filename = time().'.'.$file->getClientOriginalExtension();
-        Storage::disk('public')->put('photo/' . $filename, file_get_contents($file));
-        $input['photo']=$filename;
+        $request->path->move(public_path('photos'), $filename);
+        //Storage::disk('public')->put('photos/' . $filename, file_get_contents($file));
+        //$input['path']=$filename;
+        $photos = Photo::create($input);
+        return $this->sendResponse($photos, 'Photos created successfully!');
     }
 
     /**
