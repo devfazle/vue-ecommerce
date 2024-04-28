@@ -14,7 +14,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles=Role::orderBy('id','desc')->with('user')->get();
+        $roles=Role::orderBy('id','desc')->get();
         return $this->sendResponse($roles,'Role list fetched successfully!');
     
     }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('method', 100);
             $table->decimal('amount', 10,2);
             $table->enum('status', ['complete', 'pending'])->default('pending');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('order_id');
             $table->timestamps();
         });
     }

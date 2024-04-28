@@ -12,53 +12,53 @@
                     </div>
                     <div class="card-body">
                         <div class="container">
-    <h2>Product Table</h2>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Category</th>
-                    <th>Image</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Product 1</td>
-                    <td>Description of Product 1</td>
-                    <td>$10.99</td>
-                    <td>50</td>
-                    <td>Category A</td>
-                    <td><img src="@/assets/admin-assets/img/images.jpg" alt=""></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Product 2</td>
-                    <td>Description of Product 2</td>
-                    <td>$19.99</td>
-                    <td>30</td>
-                    <td>Category B</td>
-                    <td><img src="@/assets/admin-assets/img/images.jpg" alt=""></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Product 3</td>
-                    <td>Description of Product 3</td>
-                    <td>$14.50</td>
-                    <td>20</td>
-                    <td>Category A</td>
-                    <td><img src="@/assets/admin-assets/img/images.jpg" alt=""></td>
-                </tr>
-                <!-- Add more rows for additional products -->
-            </tbody>
-        </table>
-    </div>
-</div>
+                            <h2>Product Table</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Category</th>
+                                            <th>Image</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Product 1</td>
+                                            <td>Description of Product 1</td>
+                                            <td>$10.99</td>
+                                            <td>50</td>
+                                            <td>Category A</td>
+                                            <td><img src="@/assets/admin-assets/img/images.jpg" alt=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Product 2</td>
+                                            <td>Description of Product 2</td>
+                                            <td>$19.99</td>
+                                            <td>30</td>
+                                            <td>Category B</td>
+                                            <td><img src="@/assets/admin-assets/img/images.jpg" alt=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Product 3</td>
+                                            <td>Description of Product 3</td>
+                                            <td>$14.50</td>
+                                            <td>20</td>
+                                            <td>Category A</td>
+                                            <td><img src="@/assets/admin-assets/img/images.jpg" alt=""></td>
+                                        </tr>
+                                        <!-- Add more rows for additional products -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
