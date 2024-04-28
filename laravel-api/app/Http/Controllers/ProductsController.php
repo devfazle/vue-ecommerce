@@ -42,13 +42,24 @@ class ProductsController extends Controller
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'sub_category' => 'required',
+            'sub_category_id' => 'required',
+            'path' => 'required',
         ]);
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors(), 422);
         }
-        $input = $request->all();
+        $input['category_id'] = $request->category_id;
+        $input['name'] = $request->name;
+        $input['price'] = $request->price;
+        $input['description'] = $request->description;
+        $input['sub_category_id'] = $request->sub_category_id;
+
+        $path['path']=$request->path;
+        $file = $request->path;
+        $filename = time().'.'.$file->getClientOriginalExtension();
+        $request->path->move(public_path('photos/products'), $filename);
         $products = Product::create($input);
+        $products->photo()->create(['path' => $filename]);
         return $this->sendResponse($products, 'Product created successfully!');
     }
 
@@ -81,7 +92,7 @@ class ProductsController extends Controller
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'sub_category' => 'required',
+            'sub_category_id' => 'required',
         ]);
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors(), 422);

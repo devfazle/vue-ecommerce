@@ -11,7 +11,7 @@ export default {
   methods: {
     getProductList() {
       axios.get(this.url).then((response) => {
-        this.productlist=response.data.data[0];
+        this.productlist = response.data.data[0];
         console.log(response.data.data[0]);
       });
     },
@@ -35,9 +35,7 @@ export default {
     <div class="row">
       <div class="col-xl">
         <div class="card mb-4">
-          <div
-            class="card-header d-flex justify-content-between align-items-center"
-          >
+          <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Filters</h5>
             <div class="col-md-12 row">
               <div class="col-md-4">
@@ -60,21 +58,16 @@ export default {
               </div>
             </div>
           </div>
-          <div
-            class="col-md-12 row d-flex justify-content-between align-items-center"
-          >
+          <div class="col-md-12 row d-flex justify-content-between align-items-center">
             <div class="row">
               <div class="col-md-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search Product"
-                />
+                <input type="text" class="form-control" placeholder="Search Product" />
               </div>
               <div class="col-md-5"></div>
               <div class="col-md-4">
                 <button class="col-md-6 btn btn-dark">Export</button>
-                <button class="col-md-6 btn btn-primary">Add Product</button>
+                <router-link :to="{ name: 'addproducts' }" class="col-md-6 btn btn-primary">Add Products</router-link>
+
               </div>
             </div>
           </div>
@@ -84,12 +77,7 @@ export default {
                 <tr>
                   <th>
                     <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        value=""
-                        id="flexCheckDefault"
-                      />
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                     </div>
                   </th>
                   <th>PRODUCT</th>
@@ -102,32 +90,19 @@ export default {
                   <th style="width: 230px" class="text-center">Action</th>
                 </tr>
               </thead>
-              <tbody
-                v-for="(data, i) in productlist"
-                :key="i"
-                class="text-center"
-              >
+              <tbody v-for="(data, i) in productlist" :key="i" class="text-center">
                 <tr>
                   <td>
                     <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        value=""
-                        id="flexCheckDefault"
-                      />
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                     </div>
                   </td>
                   <td>
                     <div class="mb-3" style="max-width: 200px">
                       <div class="row g-0">
                         <div class="col-md-4">
-                          {{ data.photo.path }}
-                          <img
-                            src="..."
-                            class="img-fluid rounded-start"
-                            alt="..."
-                          />
+                          
+                          <img :src="`http://127.0.0.1:8000/photos/products/${data.photo.path}`" class="img-fluid rounded-start" alt="..." />
                         </div>
                         <div class="col-md-8">
                           <div class="">
@@ -141,12 +116,7 @@ export default {
                   <td>{{ data.category.name }}</td>
                   <td>
                     <div class="form-check form-switch">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        role="switch"
-                        checked
-                      />
+                      <input class="form-check-input" type="checkbox" role="switch" checked />
                     </div>
                   </td>
                   <td>{{ data.price }}</td>
@@ -159,10 +129,7 @@ export default {
                     <button class="btn btn-success" @click="edit(data.id)">
                       Edit
                     </button>
-                    <button
-                      class="btn btn-danger"
-                      @click="deleteProduct(data.id)"
-                    >
+                    <button class="btn btn-danger" @click="deleteProduct(data.id)">
                       Delete
                     </button>
                   </td>
@@ -176,4 +143,3 @@ export default {
     </div>
   </div>
 </template>
-
