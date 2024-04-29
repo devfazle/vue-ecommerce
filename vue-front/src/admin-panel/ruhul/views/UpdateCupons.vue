@@ -29,12 +29,12 @@ export default {
     save() {
       axios
         .put(this.url+'/'+this.$route.params.id, {
-          // code: this.code,
+          code: this.code,
           percentage: this.percentage,
-          // valid_from: this.valid_from,
-          // valid_to: this.valid_to,
-          // max_uses: this.max_uses,
-          // use_count: this.use_count,
+          valid_from: this.valid_from,
+          valid_to: this.valid_to,
+          max_uses: this.max_uses,
+          use_count: this.use_count,
         })
         .then(
           (response) => {
@@ -72,7 +72,7 @@ export default {
             </div>
             <div class="mb-3">
               <label class="form-label" for="basic-default-fullname">Percentage</label>
-              <input type="text" v-model="id" class="form-control" id="basic-default-fullname" placeholder="30%" />
+              <input type="text" v-model="percentage" class="form-control" id="basic-default-fullname" placeholder="30%" />
             </div>
             <div class="mb-3">
               <label class="form-label" for="basic-default-fullname">Valid_from</label>
