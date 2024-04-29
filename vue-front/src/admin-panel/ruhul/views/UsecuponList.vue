@@ -22,7 +22,7 @@ export default {
             });
         },
         update(id){
-            this.$router.push(`/admin/coupons/coupons-update/${id}`)
+            this.$router.push(`/admin/coupons/coupons-useupdate/${id}`)
 
         }
     },
