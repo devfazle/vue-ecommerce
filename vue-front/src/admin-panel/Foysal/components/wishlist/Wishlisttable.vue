@@ -1,12 +1,12 @@
 <template>
-     <div class="card">
+    <div class="card">
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <h5 class="mb-0">Cart List</h5>
+                    <h5 class="mb-0">Wish List</h5>
                 </div>
                 <div class="col-auto">
-                    <router-link :to="{name: 'wishlistadd'}" class="btn btn-primary btn-lg">Add More</router-link>
+                    <router-link :to="{ name: 'wishlistadd' }" class="btn btn-primary btn-lg">Add More</router-link>
                 </div>
             </div>
         </div>
@@ -24,10 +24,9 @@
                     <tr v-for="(w, i) in wishlists" :key="i">
                         <td>{{ i + 1 }}</td>
                         <td>{{ w.product.name }}</td>
-                        <td>{{ w.quantity }}</td>
                         <td>{{ w.user.name }}</td>
                         <td>
-                            <router-link :to="{ name: 'wishlistupdate', params: { id: w.id } }" class="btn btn-info mr-2">Edit</router-link>
+                         <router-link :to="{ name: 'wishlistupdate', params: { id: w.id } }" class="btn btn-info mr-2">Edit</router-link> 
                             <button @click="deleteWishlist(w.id)" class="btn btn-danger">Delete</button>
                         </td>
                     </tr>
@@ -50,20 +49,26 @@ export default {
     methods: {
         getwishlist() {
             axios.get('http://127.0.0.1:8000/api/admin/wishlists')
-                .then((result) => {
-                    this.carts = result.data.data;
-                    console.log(result);
+                .then((res) => {
+                    this.wishlists = res.data.data
+                    // console.log(res.data.data)
                 })
         },
         deleteWishlist(id) {
-            axios.delete("http://127.0.0.1:8000/api/admin/wishlists/" + id).then(() => {
-                this.getwishlist()
-            });
+
+            if (confirm('are you sure, you want to delete this file?')) {
+
+                axios.delete("http://127.0.0.1:8000/api/admin/wishlists/" + id).then(() => {
+                    this.getwishlist()
+                });
+            }
+
+
         }
     },
 
     mounted() {
-       
+        this.getwishlist()
     }
 }
 </script>

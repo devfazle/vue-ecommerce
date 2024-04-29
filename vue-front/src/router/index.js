@@ -17,6 +17,7 @@ import Sub_categoryupdate from '@/admin-panel/foysal/components/category/sub_cat
 import Wishlistlayout from '@/admin-panel/foysal/components/wishlist/Wishlistlayout.vue'
 import Wishlistadd from '@/admin-panel/foysal/components/wishlist/Wishlistadd.vue'
 import Wishlisttable from '@/admin-panel/foysal/components/wishlist/Wishlisttable.vue'
+import Wishlistupdate from '@/admin-panel/foysal/components/wishlist/Wishlistupdate.vue'
 
 
 
@@ -103,6 +104,11 @@ const router = createRouter({
               path: 'wishlisttable',
               name: 'wishlisttable',
               component:Wishlisttable,
+            },
+            {
+              path: 'wishlistupdate/:id',
+              name: 'wishlistupdate',
+              component:Wishlistupdate,
             },
           ]
         }
