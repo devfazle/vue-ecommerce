@@ -5,7 +5,7 @@ export default {
   data() {
     return {
       url: "http://127.0.0.1:8000/api/admin/products",
-      productlist: "",
+      productlist: [],
     };
   },
   methods: {
@@ -17,7 +17,7 @@ export default {
     },
     deleteProduct(id) {
       axios.delete(`${this.url}/${id}`);
-      this.getProductList;
+      this.getProductList();
     },
   },
   mounted() {
