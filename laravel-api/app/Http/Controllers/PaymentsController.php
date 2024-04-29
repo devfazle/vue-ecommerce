@@ -14,7 +14,7 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        $payments = Payment::orderBy('id', 'desc')->with('user','order')->get();
+        $payments = Payment::orderBy('id', 'desc')->with('order')->get();
         return $this->sendResponse($payments, 'Payment list fetched successfully!');
 
     }
@@ -37,7 +37,7 @@ class PaymentsController extends Controller
             'method' => 'required',
             'amount' => 'required',
             'status' => 'required',
-            'users_id' => 'required',
+            'order_id' => 'required',
 
         ]);
         if ($validator->fails()) {
@@ -53,7 +53,7 @@ class PaymentsController extends Controller
      */
     public function show(string $id)
     {
-        $payments = Payment::orderBy('id', 'desc')->with('user','order')->find($id);
+        $payments = Payment::orderBy('id', 'desc')->with('order')->find($id);
         return $this->sendResponse($payments, 'Payment list fetched successfully!');
 
     }
@@ -77,7 +77,6 @@ class PaymentsController extends Controller
             'method' => 'required',
             'amount' => 'required',
             'status' => 'required',
-            'users_id' => 'required',
         ]);
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors(), 422);
