@@ -68,7 +68,7 @@ class ProductsController extends Controller
      */
     public function show(string $id)
     {
-        $products = Product::with('category','sub_category','wishlist','order_item','purchase','cart')->find($id);
+        $products = Product::with('category','sub_category','photo')->find($id);
         return $this->sendResponse($products, 'Product list fetched successfully!');
 
     }

@@ -36,7 +36,7 @@ import "@/assets/front-assets/js/main.js"
 import Header from "../components/Menu.vue"
 import Footer from "../components/Footer.vue"
 import Cart from "../components/Cart.vue"
-import Modal from "../components/Modal.vue"
+//import Modal from "../components/Modal.vue" //<<<<<<<<< here is modal >>>>>>>>>>>>>>>>>>>
 import Product from "./Product.vue"
 
 
@@ -67,5 +67,5 @@ import Product from "./Product.vue"
 	</div>
 
 	<!-- Modal1 -->
-	<Modal />
+	<!-- <Modal /> -->
 </template>
