@@ -9,7 +9,7 @@ export default {
     },
 
     methods: {
-        getCupons() {
+        getUseCupons() {
             axios.get('http://127.0.0.1:8000/api/admin/couponusages')
                 .then((result) => {
                     this.list = result.data.data;
@@ -18,7 +18,7 @@ export default {
         },
         deletecupons(id) {
             axios.delete("http://127.0.0.1:8000/api/admin/couponusages/" + id).then(() => {
-                this.getCupons()
+                this.getUseCupons()
             });
         },
         update(id){
@@ -28,7 +28,7 @@ export default {
     },
 
     mounted(){
-    this.getCupons()
+    this.getUseCupons()
   },
 };
 </script>
@@ -41,7 +41,7 @@ export default {
                     <h5 class="mb-0">Cupons List</h5>
                 </div>
                 <div class="col-auto">
-                    <router-link :to="{name: 'couponsUse'}" class="btn btn-primary btn-lg">Add More</router-link>
+                    <router-link :to="{name: 'couponsAdd'}" class="btn btn-primary btn-lg">Add More</router-link>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@ export default {
                         <th>SL</th>
                         <th>User</th>
                         <th>Code</th>
-                        <th>Usage count</th>
+                        <th>Usege Count</th>
                         <th>Action</th>
                     </tr>
                 </thead>

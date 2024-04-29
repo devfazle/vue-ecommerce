@@ -71,17 +71,17 @@ class CuponsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'code' => 'required',
-            'percentage' => 'required',
-            'valid_from' => 'required',
-            'valid_to' => 'required',
-            'max_uses' => 'required',
-            'use_count' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors(), 422);
-        }
+        // $validator = Validator::make($request->all(), [
+        //     'code' => 'required',
+        //     'percentage' => 'required',
+        //     'valid_from' => 'required',
+        //     'valid_to' => 'required',
+        //     'max_uses' => 'required',
+        //     'use_count' => 'required',
+        // ]);
+        // if ($validator->fails()) {
+        //     return $this->sendError('Validation Error.', $validator->errors(), 422);
+        // }
         $input = $request->all();
         $cupons = Cupon::find($id)->update($input);
         return $this->sendResponse($cupons, 'Cupon updated successfully!');

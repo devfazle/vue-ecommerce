@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coupon_usage;
+use App\Models\Cupon;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,7 +18,6 @@ class CouponUsagesController extends Controller
     {
         $coupon_usages = Coupon_usage::orderBy('id', 'desc')->with('user', 'cupon')->get();
         return $this->sendResponse($coupon_usages, 'Coupon_usage list fetched successfully!');
-
     }
 
     /**
@@ -24,7 +25,18 @@ class CouponUsagesController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::where('role_id', 2)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $coupons = Cupon::get();
+
+        $data = [
+            'users' => $users,
+            'ruhul' => $coupons,
+        ];
+
+        return $this->sendResponse($data, 'User list fetched successfully!');
     }
 
     /**
@@ -52,7 +64,6 @@ class CouponUsagesController extends Controller
     {
         $coupon_usages = Coupon_usage::with('user', 'cupon')->find($id);
         return $this->sendResponse($coupon_usages, 'Coupon_usage list fetched successfully!');
-
     }
 
     /**

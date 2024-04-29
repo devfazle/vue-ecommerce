@@ -13,22 +13,22 @@ export default {
     },
 
     methods: {
-        getuse() {
-            axios.get('http://127.0.0.1:8000/api/admin/cupons')
-                .then((result) => {
-                    this.cupons = result.data.data;
-                    //this.users = result.data.data;
-                    console.log(result.data.data);
-                    //console.log(result.data.data[0]);
-                })
-            axios.get('http://127.0.0.1:8000/api/admin/users')
-                .then((result) => {
-                   // this.cupons = result.data.data;
-                    this.users = result.data.data;
-                    console.log(result.data.data);
-                   // console.log(result.data.data[0].user.name);
-                })
-        },
+        // getuse() {
+        //     axios.get('http://127.0.0.1:8000/api/admin/cupons')
+        //         .then((result) => {
+        //             this.cupons = result.data.data;
+        //             //this.users = result.data.data;
+        //             console.log(result.data.data);
+        //             //console.log(result.data.data[0]);
+        //         })
+        //     axios.get('http://127.0.0.1:8000/api/admin/users')
+        //         .then((result) => {
+        //            // this.cupons = result.data.data;
+        //             this.users = result.data.data;
+        //             console.log(result.data.data);
+        //            // console.log(result.data.data[0].user.name);
+        //         })
+        // },
         getCupons() {
             axios.get('http://127.0.0.1:8000/api/admin/couponusages')
                 .then((result) => {
@@ -40,7 +40,7 @@ export default {
             const uData = {
                 user_id: this.user_id,
                 usage_count: this.usage_count,
-                cupon_id: this.cupon_id, 
+                cupon_id: this.cupon_id,
             }
 
             console.log('ok');
@@ -49,13 +49,22 @@ export default {
                 .then((response) => {
                     console.log(response);
                 });
+        },
+        getData() {
+            axios.get('http://127.0.0.1:8000/api/admin/couponusages/create')
+                .then((result) => {
+                    this.cupons = result.data.data.ruhul;
+                    this.users = result.data.data.users;
+                    console.log(result.data.data);
+                })
         }
 
     },
 
     mounted() {
-        this.getuse()
+        //this.getuse()
         this.getCupons()
+        this.getData()
     }
 }
 
@@ -82,9 +91,8 @@ export default {
         </div>
         <div class="mb-3">
             <label class="form-label" for="basic-default-fullname">Usage Count</label>
-            <input v-model="usage_count" type="text" class="form-control" id="basic-default-fullname"
-                placeholder=" " />
+            <input v-model="usage_count" type="text" class="form-control" id="basic-default-fullname" placeholder=" " />
         </div>
-        <button @click="storeCart" type="submit" class="btn btn-primary">Submit</button>
+        <button @click="storeUsesCupons" type="submit" class="btn btn-primary">Submit</button>
     </div>
 </template>
