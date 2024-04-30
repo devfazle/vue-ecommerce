@@ -1,14 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AdminMainLayout from "@/admin-panel/views/MainLayout.vue";
 import AdminDashboard from "@/admin-panel/views/Dashboard.vue";
 import AdminForms from "@/admin-panel/views/Forms.vue";
 import ContactUs from "@/admin-panel/views/ContactUs.vue";
 import Products from "@/admin-panel/views/Products.vue";
-import FrontMainLayout from "@/front-panel/views/MainLayout.vue";
 import Product from "@/front-panel/views/Product.vue";
 import FrontPage from "@/front-panel/views/FrontPage.vue";
 import CartsAdd from "@/admin-panel/fazle/views/CartsAdd.vue";
 import CartLayout from "@/admin-panel/fazle/views/CartLayout.vue";
+
 import CouponsAdd from "@/admin-panel/ruhul/views/CouponsAdd.vue";
 import CouponsLaout from "@/admin-panel/ruhul/views/CouponsLaout.vue";
 import CouponsList from "@/admin-panel/ruhul/views/CouponsList.vue";
@@ -16,13 +15,31 @@ import UpdateCupons from "@/admin-panel/ruhul/views/UpdateCupons.vue";
 import UseCuponsAdd from "@/admin-panel/ruhul/views/UseCuponsAdd.vue";
 import UsecuponList from "@/admin-panel/ruhul/views/UsecuponList.vue";
 import UpdateUseCoupon from "@/admin-panel/ruhul/views/UpdateUseCoupon.vue";
+
+
+import CartTable from "@/admin-panel/fazle/views/CartTable.vue";
+import UpdateCart from "@/admin-panel/fazle/views/UpdateCart.vue";
+
+import ProductsList from "@/admin-panel/devhelal/products/ProductsList.vue";
+import AddProduct from "@/admin-panel/devhelal/products/AddProduct.vue";
+
+import Roles from '@/admin-panel/nazad/Roles/Roles.vue'
+import Users from '@/admin-panel/nazad/Users/Users.vue'
+import UserCreate from '@/admin-panel/nazad/Users/UserCreate.vue'
+import RoleCreate from '@/admin-panel/nazad/Roles/RoleCreate.vue'
+import UserEdit from '@/admin-panel/nazad/Users/UserEdit.vue'
+import RoleEdit from '@/admin-panel/nazad/Roles/RoleEdit.vue'
+import Payment from '@/admin-panel/nazad/Payment/Payment.vue'
+import PaytmentCreate from '@/admin-panel/nazad/Payment/PaytmentCreate.vue'
+import PaymentEdit from '@/admin-panel/nazad/Payment/PaymentEdit.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/admin",
       name: "admin",
-      component: AdminMainLayout,
+      component: () => import('@/admin-panel/views/MainLayout.vue'),
       children: [
         {
           path: "",
@@ -38,6 +55,16 @@ const router = createRouter({
           path: "contact",
           name: "contactus",
           component: ContactUs,
+        },
+        {
+          path: "productlist",
+          name: "productslist",
+          component: ProductsList,
+        },
+        {
+          path: "addproduct",
+          name: "addproducts",
+          component: AddProduct,
         },
         {
           path: "product",
@@ -81,7 +108,52 @@ const router = createRouter({
             },
           ],
         },
-
+        {
+          path: 'roles',
+          name: 'roles',
+          component: Roles,
+        },
+        {
+          path: 'rolecreate',
+          name: 'rolecreate',
+          component: RoleCreate,
+        },
+        {
+          path: 'roleedit/:id',
+          name: 'roleedit',
+          component: RoleEdit,
+        },
+        {
+          path: 'users',
+          name: 'users',
+          component: Users,
+        },
+        {
+          path: 'usercreate',
+          name: 'usercreate',
+          component: UserCreate,
+        },
+        {
+          path: 'useredit/:id',
+          name: 'useredit',
+          component: UserEdit
+        },
+        {
+          path: 'payment',
+          name: 'payment',
+          component: Payment,
+        },
+        {
+          path: 'paymentcreate',
+          name: 'paymentcreate',
+          component: PaytmentCreate,
+        },
+        {
+          path: 'paymentedit/:id',
+          name: 'paymentedit',
+          component: PaymentEdit
+        },
+>>>>>>> 371607ab46ab3570e9cfb2d00a377cc7ed8c92d5
         {
           path: "cart",
           name: "cart",
@@ -92,6 +164,16 @@ const router = createRouter({
               name: "cartAdd",
               component: CartsAdd,
             },
+            {
+              path: "cart-table",
+              name: "cartTable",
+              component: CartTable,
+            },
+            {
+              path: "cart-update/:id",
+              name: "cartUpdate",
+              component: UpdateCart,
+            },
           ],
         },
       ],
@@ -99,7 +181,7 @@ const router = createRouter({
     {
       path: "/",
       name: "h",
-      component: FrontMainLayout,
+      component: () => import('@/front-panel/views/MainLayout.vue'),
       children: [
         {
           path: "",

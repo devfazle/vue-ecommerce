@@ -87,6 +87,14 @@
                     <i class="menu-icon tf-icons bx bx-layout"></i>
                     <div data-i18n="Layouts">Layouts</div>
                 </a>
+                <router-link :to="{name: 'users'}" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Layouts">Users</div>
+                </router-link>
+                <router-link :to="{name: 'payment'}" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Layouts">Payment</div>
+                </router-link>
 
                 <ul class="menu-sub">
                     <li class="menu-item">
@@ -127,9 +135,9 @@
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <a href="pages-account-settings-account.html" class="menu-link">
-                            <div data-i18n="Account">Account</div>
-                        </a>
+                        <router-link :to="{name: 'cartTable'}" class="menu-link">
+                            <div data-i18n="Account">Cart</div>
+                        </router-link>
                     </li>
                     <li class="menu-item">
                         <a href="pages-account-settings-notifications.html" class="menu-link">
