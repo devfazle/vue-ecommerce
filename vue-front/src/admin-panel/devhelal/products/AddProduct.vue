@@ -79,11 +79,7 @@ export default {
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Product Name" v-model="name" />
                                 </div>
-                                <!-- <div class="input-group ">
-                <input type="text" class="form-control " placeholder="Product Description" />
-                
-              </div> -->
-                                <div class="form-floating">
+                                <div class="form-floating mt-4">
                                     <textarea class="form-control" placeholder="Make Product Description Here"
                                         id="floatingTextarea2" style="height: 250px" v-model="description"></textarea>
                                     <label for="floatingTextarea2">Product Description</label>
@@ -102,7 +98,6 @@ export default {
                                     <input type="file" class="form-control" @change="onFileSelected" />
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -115,7 +110,7 @@ export default {
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Base Price" v-model="price" />
                         </div>
-                        <div class="input-group ">
+                        <div class="input-group mt-4">
                             <input type="text" class="form-control " placeholder="Discount Price" disabled />
                         </div>
                         <div class="form-check">
@@ -137,17 +132,20 @@ export default {
                     <div class="card-body">
                         <h5>Organize</h5>
                         <div class="row">
-                            <select class="form-select col-md-10" v-model="category_id">
+                            <div class="col-md-10 mt-2">
+                              <select class="form-select" v-model="category_id">
                                 <option value="0">Category</option>
                                 <option v-for="(cdata, i) in categorylist" :key="i" :value="cdata.id">{{ cdata.name }}
                                 </option>
                             </select>
-                            <button class="btn btn-outline-info col-md-2">
-                                <h3>+</h3>
-                            </button>
+                            </div>
+                            <div class="col-md-1 mt-3">
+                                <button class="btn btn-outline-info btn-sm">+</button> 
+                            </div>
+                            
                         </div>
                         <div class="row">
-                            <select class="form-select col-md-10" v-model="sub_category_id">
+                            <select class="form-select col-md-10 mt-2" v-model="sub_category_id">
                                 <option value="0">Sub Category</option>
                                 <option v-for="(scdata, i) in sub_categorylist" :key="i" :value="scdata.id">{{
                                     scdata.name }}</option>
@@ -157,26 +155,26 @@ export default {
                             </button>
                         </div>
                         <div class="row">
-                            <select class="form-select">
+                            <select class="form-select mt-2">
                                 <option selected>Vendor</option>
                             </select>
                         </div>
                         <div class="row">
-                            <select class="form-select">
+                            <select class="form-select mt-2">
                                 <option selected>Collection</option>
                                 <option>New Model</option>
                                 <option>Golen Model</option>
                             </select>
                         </div>
                         <div class="row">
-                            <select class="form-select">
+                            <select class="form-select mt-2">
                                 <option selected>Status</option>
                                 <option>Publish</option>
                                 <option>Unpublish</option>
                             </select>
                         </div>
                         <div class="row">
-                            <select class="form-select ">
+                            <select class="form-select mt-2">
                                 <option selected>Tag</option>
                             </select>
                         </div>
