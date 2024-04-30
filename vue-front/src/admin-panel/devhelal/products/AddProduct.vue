@@ -1,7 +1,6 @@
 <script>
 import axios from 'axios'
 export default {
-
     data() {
         return {
             url: "http://127.0.0.1:8000/api/admin/products",
@@ -30,13 +29,13 @@ export default {
         setCategory() {
             const id = ("dev Helal:", this.category_id);
             this.category_id_null = id;
-            if (id !== 0 && this.category_id_null!=0) {
+            if (id !== 0 && this.category_id_null != 0) {
                 axios.get(`${this.category_url}/${id}`).then((response) => {
                     const category = response.data.data.sub_category;
                     this.sub_categorylist = category;
-                }); 
-            }  
-           this.sub_categorylist = "";
+                });
+            }
+            this.sub_categorylist = "";
         },
         onFileSelected(event) {
             this.path = event.target.files[0];
@@ -159,7 +158,7 @@ export default {
                         <div class="row">
                             <div class="col-md-10 mt-2">
                                 <select class="form-select col-md-10 mt-2" v-model="sub_category_id"
-                                    :disabled="sub_categorylist == '' ">
+                                    :disabled="sub_categorylist == ''">
                                     <option value="0">Sub Category</option>
                                     <option v-for="(scdata, i) in sub_categorylist" :key="i" :value="scdata.id">{{
                                         scdata.name }}</option>
