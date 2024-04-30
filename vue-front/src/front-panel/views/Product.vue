@@ -20,6 +20,12 @@ export default {
 		getId(id) {
 			this.id = id;
 			this.modalclass == 'show-modal1' ? this.modalclass = '' : this.modalclass = 'show-modal1';
+		},
+		updateModalClass(newTitle) {
+			this.modalclass = newTitle;
+		},
+		updateId(newId) {
+			this.id = newId;
 		}
 	},
 	mounted() {
@@ -33,7 +39,7 @@ export default {
 
 
 <template>
-	<QuickView :id="id" :url="url" :modalclass="modalclass"/>
+	<QuickView :id="id" :url="url" :modalclass="modalclass" @update:modalclass="updateModalClass" @update:id="updateId" />
 	<div class="bg0 m-t-23 p-b-140">
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">

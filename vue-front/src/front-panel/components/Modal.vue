@@ -23,30 +23,33 @@ export default {
 		},
 		closeModal() {
 			this.mclass = ''
+		},
+		updateModalClass() {
+			this.$emit('update:modalclass', '');
 		}
 	},
 	mounted() {
 		this.getProduct()
 	},
 	watch: {
-    modalclass(newValue) {
-      this.mclass = newValue;
-	  console.log(newValue);
-    },
-	id(newValue) {
-		this.idx = newValue;
-		this.getProduct()
+		modalclass(newValue) {
+			this.mclass = newValue;
+			console.log(newValue);
+		},
+		id(newValue) {
+			this.idx = newValue;
+			this.getProduct()
+		}
 	}
-  }
 }
 </script>
 
 <template>
-	<div :class="'wrap-modal1 js-modal1 p-t-60 p-b-20'+' '+mclass">
+	<div :class="'wrap-modal1 js-modal1 p-t-60 p-b-20' + ' ' + mclass">
 		<div class="overlay-modal1 js-hide-modal1"></div>
 		<div class="container">
 			<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-				<button @click="closeModal" class="how-pos3 hov3 trans-04 js-hide-modal1">
+				<button @click="updateModalClass" class="how-pos3 hov3 trans-04 js-hide-modal1">
 					<img src="@/assets/front-assets/images/icons/icon-close.png" alt="CLOSE">
 				</button>
 
@@ -80,7 +83,7 @@ export default {
 							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
 								{{ product.name }}
 								{{ mclass }}
-								{{ id+''+idx }}
+								{{ id + '' + idx }}
 							</h4>
 
 							<span class="mtext-106 cl2">
