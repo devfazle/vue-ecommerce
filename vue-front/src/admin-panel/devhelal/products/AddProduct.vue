@@ -1,9 +1,11 @@
 <script>
 import axios from 'axios'
 export default {
+
     data() {
         return {
             url: "http://127.0.0.1:8000/api/admin/products",
+            category_url: "http://127.0.0.1:8000/api/admin/categorys",
             category_id: 0,
             name: "",
             price: "",
@@ -13,6 +15,7 @@ export default {
             productlist: [],
             categorylist: [],
             sub_categorylist: [],
+            category_id_null: 0,
         }
     },
     methods: {
@@ -20,41 +23,42 @@ export default {
             axios.get(this.url).then((response) => {
                 const product = response.data.data[0];
                 const category = response.data.data[1];
-                //const subcategory = response.data.data[2];
                 this.productlist = product;
                 this.categorylist = category;
-                this.sub_categorylist = category;
-                //console.log(category)
             });
         },
-        setCategory(){
-            axios.get(this.url).then((response) => {
-                const subCategory = response.data.data[1];
-                //console.log(subCategory)
-            });
+        setCategory() {
+            const id = ("dev Helal:", this.category_id);
+            this.category_id_null = id;
+            if (id !== 0 && this.category_id_null!=0) {
+                axios.get(`${this.category_url}/${id}`).then((response) => {
+                    const category = response.data.data.sub_category;
+                    this.sub_categorylist = category;
+                }); 
+            }  
+           this.sub_categorylist = "";
         },
         onFileSelected(event) {
-      this.path = event.target.files[0];
-    },
-        save(){
-        const formData = new FormData();
-         formData.append('photo', this.path);
-            const alldata={
-            category_id: this.category_id,
-            name: this.name,
-            price: this.price,
-            description:this.description,
-            sub_category_id: this.sub_category_id,
-            path:this.path
+            this.path = event.target.files[0];
+        },
+        save() {
+            const formData = new FormData();
+            formData.append('photo', this.path);
+            const alldata = {
+                category_id: this.category_id,
+                name: this.name,
+                price: this.price,
+                description: this.description,
+                sub_category_id: this.sub_category_id,
+                path: this.path
             }
-            axios.post(this.url,alldata,{
+            axios.post(this.url, alldata, {
                 headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+                    'Content-Type': 'multipart/form-data'
+                }
             })
             this.$router.push({ name: 'productslist' });
         },
-    
     },
     mounted() {
         this.getProductList();
@@ -69,8 +73,8 @@ export default {
             </div>
             <div class="col-md-3 "></div>
             <div class="col-md-5 ">
-                <router-link :to="{ name: 'productslist' } " class="btn btn-outline-danger">Discard</router-link>
-                <button class="btn btn-dark ml-2" > Save Draft</button>
+                <router-link :to="{ name: 'productslist' }" class="btn btn-outline-danger">Discard</router-link>
+                <button class="btn btn-dark ml-2"> Save Draft</button>
                 <button class="btn btn-primary ml-2" @click="save()"> Publish Product</button>
             </div>
 
@@ -140,76 +144,73 @@ export default {
                         <h5 class="text-dark">Organize</h5>
                         <div class="row">
                             <div class="col-md-10 mt-2">
-                              <select class="form-select" v-model="category_id" @change="setCategory()">
-                                <option value="0">Category</option>
-                                <option v-for="(cdata, i) in categorylist" :key="i" :value="cdata.id">{{ cdata.name }}
-                                </option>
-                            </select>
+                                <select class="form-select" v-model="category_id" @change="setCategory()">
+                                    <option value="0">Category</option>
+                                    <option v-for="(cdata, i) in categorylist" :key="i" :value="cdata.id">{{ cdata.name
+                                        }}
+                                    </option>
+                                </select>
                             </div>
                             <div class="col-md-1 mt-3">
-                                <button class="btn btn-outline-info btn-sm">+</button> 
+                                <button class="btn btn-outline-info btn-sm">+</button>
                             </div>
-                            
+
                         </div>
                         <div class="row">
                             <div class="col-md-10 mt-2">
-                            <select class="form-select col-md-10 mt-2" v-model="sub_category_id">
-                                <option value="0">Sub Category</option>
-                                <option v-for="(scdata, i) in sub_categorylist" :key="i" :value="scdata.id">{{
-                                    scdata.sub_category }}</option>
-                            </select>
-                            <!-- <select class="form-select col-md-10 mt-2" v-model="sub_category_id">
-                                <option value="0">Sub Category</option>
-                                <option v-for="(scdata, i) in sub_categorylist" :key="i" :value="scdata.id">{{
-                                    scdata.name }}</option>
-                            </select> -->
-                        </div>
-                    
+                                <select class="form-select col-md-10 mt-2" v-model="sub_category_id"
+                                    :disabled="sub_categorylist == '' ">
+                                    <option value="0">Sub Category</option>
+                                    <option v-for="(scdata, i) in sub_categorylist" :key="i" :value="scdata.id">{{
+                                        scdata.name }}</option>
+                                </select>
+                            </div>
+
                             <div class="col-md-1 mt-3">
-                                <button class="btn btn-outline-info btn-sm">+</button> 
+                                <button class="btn btn-outline-info btn-sm">+</button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10 mt-2">
-                            <select class="form-select mt-2">
-                                <option selected>Vendor</option>
-                            </select>
-                        </div>
-                        <div class="col-md-1 mt-3">
-                                
+                                <select class="form-select mt-2">
+                                    <option selected>Vendor</option>
+                                </select>
+                            </div>
+                            <div class="col-md-1 mt-3">
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10 mt-2">
-                            <select class="form-select mt-2">
-                                <option selected>Collection</option>
-                                <option>New Model</option>
-                                <option>Golen Model</option>
-                            </select>
-                        </div>
-                        <div class="col-md-1 mt-3"> 
+                                <select class="form-select mt-2">
+                                    <option selected>Collection</option>
+                                    <option>New Model</option>
+                                    <option>Golen Model</option>
+                                </select>
+                            </div>
+                            <div class="col-md-1 mt-3">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10 mt-2">
-                            <select class="form-select mt-2">
-                                <option selected>Status</option>
-                                <option>Publish</option>
-                                <option>Unpublish</option>
-                            </select>
-                        </div>
-                        <div class="col-md-1 mt-3"> 
+                                <select class="form-select mt-2">
+                                    <option selected>Status</option>
+                                    <option>Publish</option>
+                                    <option>Unpublish</option>
+                                </select>
                             </div>
-                    </div>
+                            <div class="col-md-1 mt-3">
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-10 mt-2">
-                            <select class="form-select mt-2">
-                                <option selected>Tag</option>
-                            </select>
-                        </div>
-                        <div class="col-md-1 mt-3"> 
+                                <select class="form-select mt-2">
+                                    <option selected>Tag</option>
+                                </select>
                             </div>
-                    </div>
+                            <div class="col-md-1 mt-3">
+                            </div>
+                        </div>
 
                     </div>
                 </div>

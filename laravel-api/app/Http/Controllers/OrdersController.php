@@ -13,7 +13,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders=Order::orderBy('id','desc')->with('')->get();
+        $orders=Order::orderBy('id','desc')->with('user')->get();
         return $this->sendResponse($orders,'Order list fetched successfully!');
     
     }

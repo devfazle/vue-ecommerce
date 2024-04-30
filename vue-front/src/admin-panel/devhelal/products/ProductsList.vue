@@ -74,7 +74,7 @@ export default {
               <div class="col-md-5"></div>
               <div class="col-md-4">
                 <button class="col-md-6 btn btn-dark">Export</button>
-                <button class="col-md-6 btn btn-primary">Add Product</button>
+                <router-link :to="{name: 'addproducts'}" class="col-md-6 btn btn-primary">Add Product</router-link>
               </div>
             </div>
           </div>
