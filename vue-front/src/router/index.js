@@ -153,7 +153,6 @@ const router = createRouter({
           name: 'paymentedit',
           component: PaymentEdit
         },
->>>>>>> 371607ab46ab3570e9cfb2d00a377cc7ed8c92d5
         {
           path: "cart",
           name: "cart",
