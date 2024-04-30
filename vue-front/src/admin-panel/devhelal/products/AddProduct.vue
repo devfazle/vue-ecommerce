@@ -20,10 +20,17 @@ export default {
             axios.get(this.url).then((response) => {
                 const product = response.data.data[0];
                 const category = response.data.data[1];
-                const subcategory = response.data.data[2];
+                //const subcategory = response.data.data[2];
                 this.productlist = product;
                 this.categorylist = category;
-                this.sub_categorylist = subcategory;
+                this.sub_categorylist = category;
+                //console.log(category)
+            });
+        },
+        setCategory(){
+            axios.get(this.url).then((response) => {
+                const subCategory = response.data.data[1];
+                //console.log(subCategory)
             });
         },
         onFileSelected(event) {
@@ -55,16 +62,16 @@ export default {
 }
 </script>
 <template>
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="container-xxl flex-grow-1 container-p-y text-dark">
         <div class="col-md-12 row">
             <div class="col-md-4 ">
                 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Add a New Product</h4>
             </div>
-            <div class="col-md-4 "></div>
-            <div class="col-md-4 ">
+            <div class="col-md-3 "></div>
+            <div class="col-md-5 ">
                 <router-link :to="{ name: 'productslist' } " class="btn btn-outline-danger">Discard</router-link>
-                <button class="btn btn-dark" > Save Draft</button>
-                <button class="btn btn-success" @click="save()"> Publish Product</button>
+                <button class="btn btn-dark ml-2" > Save Draft</button>
+                <button class="btn btn-primary ml-2" @click="save()"> Publish Product</button>
             </div>
 
         </div>
@@ -74,7 +81,7 @@ export default {
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5>Product Information</h5>
+                            <h5 class="text-dark">Product Information</h5>
                             <div class="row">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Product Name" v-model="name" />
@@ -82,7 +89,7 @@ export default {
                                 <div class="form-floating mt-4">
                                     <textarea class="form-control" placeholder="Make Product Description Here"
                                         id="floatingTextarea2" style="height: 250px" v-model="description"></textarea>
-                                    <label for="floatingTextarea2">Product Description</label>
+                                    <label class="text-dark">Product Description</label>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +99,7 @@ export default {
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5>Product Image</h5>
+                            <h5 class="text-dark">Product Image</h5>
                             <div class="row">
                                 <div class="input-group">
                                     <input type="file" class="form-control" @change="onFileSelected" />
@@ -106,7 +113,7 @@ export default {
             <div class="col-4">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5>Pricing</h5>
+                        <h5 class="text-dark">Pricing</h5>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Base Price" v-model="price" />
                         </div>
@@ -130,10 +137,10 @@ export default {
                 </div>
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5>Organize</h5>
+                        <h5 class="text-dark">Organize</h5>
                         <div class="row">
                             <div class="col-md-10 mt-2">
-                              <select class="form-select" v-model="category_id">
+                              <select class="form-select" v-model="category_id" @change="setCategory()">
                                 <option value="0">Category</option>
                                 <option v-for="(cdata, i) in categorylist" :key="i" :value="cdata.id">{{ cdata.name }}
                                 </option>
@@ -145,39 +152,64 @@ export default {
                             
                         </div>
                         <div class="row">
+                            <div class="col-md-10 mt-2">
                             <select class="form-select col-md-10 mt-2" v-model="sub_category_id">
                                 <option value="0">Sub Category</option>
                                 <option v-for="(scdata, i) in sub_categorylist" :key="i" :value="scdata.id">{{
-                                    scdata.name }}</option>
+                                    scdata.sub_category }}</option>
                             </select>
-                            <button class="btn btn-outline-info col-md-2">
-                                <h3>+</h3>
-                            </button>
+                            <!-- <select class="form-select col-md-10 mt-2" v-model="sub_category_id">
+                                <option value="0">Sub Category</option>
+                                <option v-for="(scdata, i) in sub_categorylist" :key="i" :value="scdata.id">{{
+                                    scdata.name }}</option>
+                            </select> -->
+                        </div>
+                    
+                            <div class="col-md-1 mt-3">
+                                <button class="btn btn-outline-info btn-sm">+</button> 
+                            </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-10 mt-2">
                             <select class="form-select mt-2">
                                 <option selected>Vendor</option>
                             </select>
                         </div>
+                        <div class="col-md-1 mt-3">
+                                
+                            </div>
+                        </div>
                         <div class="row">
+                            <div class="col-md-10 mt-2">
                             <select class="form-select mt-2">
                                 <option selected>Collection</option>
                                 <option>New Model</option>
                                 <option>Golen Model</option>
                             </select>
                         </div>
+                        <div class="col-md-1 mt-3"> 
+                            </div>
+                        </div>
                         <div class="row">
+                            <div class="col-md-10 mt-2">
                             <select class="form-select mt-2">
                                 <option selected>Status</option>
                                 <option>Publish</option>
                                 <option>Unpublish</option>
                             </select>
                         </div>
+                        <div class="col-md-1 mt-3"> 
+                            </div>
+                    </div>
                         <div class="row">
+                            <div class="col-md-10 mt-2">
                             <select class="form-select mt-2">
                                 <option selected>Tag</option>
                             </select>
                         </div>
+                        <div class="col-md-1 mt-3"> 
+                            </div>
+                    </div>
 
                     </div>
                 </div>
