@@ -18,18 +18,20 @@ export default {
         },
         deletecupons(id) {
             axios.delete("http://127.0.0.1:8000/api/admin/cupons/" + id).then(() => {
-                this.getCupons()
+                this.getCupons();
+                alert('Coupon deleted successfully!');
             });
         },
-        update(id){
+        update(id) {
             this.$router.push(`/admin/coupons/coupons-update/${id}`)
 
         }
+
     },
 
-    mounted(){
-    this.getCupons()
-  },
+    mounted() {
+        this.getCupons()
+    },
 };
 </script>
 
@@ -41,7 +43,7 @@ export default {
                     <h5 class="mb-0">Cupons List</h5>
                 </div>
                 <div class="col-auto">
-                    <router-link :to="{name: 'couponsAdd'}" class="btn btn-primary btn-lg">Add More</router-link>
+                    <router-link :to="{ name: 'couponsAdd' }" class="btn btn-primary btn-lg">Add More</router-link>
                 </div>
             </div>
         </div>
@@ -69,8 +71,8 @@ export default {
                         <td>{{ c.max_uses }}</td>
                         <td>{{ c.use_count }}</td>
                         <td>
-                          <button @click="update(c.id)" class="btn btn-info">Edit</button>
-                          <button @click="deletecupons(c.id)" class="btn btn-danger">Delete</button>
+                            <button @click="update(c.id)" class="btn btn-info" @onclick="refresh">Edit</button>
+                            <button @click="deletecupons(c.id)" class="btn btn-danger">Delete</button>
                         </td>
                         <!-- <td>
                             <router-link :to="{ name: 'cartUpdate', params: { id: c.id } }" class="btn btn-info mr-2">Edit</router-link>

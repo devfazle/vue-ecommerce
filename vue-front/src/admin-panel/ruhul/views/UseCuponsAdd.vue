@@ -49,6 +49,7 @@ export default {
                 .then((response) => {
                     console.log(response);
                 });
+                this.$router.push('/admin/coupons/coupons-uselist')
         },
         getData() {
             axios.get('http://127.0.0.1:8000/api/admin/couponusages/create')
@@ -57,9 +58,9 @@ export default {
                     this.users = result.data.data.users;
                     console.log(result.data.data);
                 })
-        }
-
-    },
+            }
+            
+        },
 
     mounted() {
         //this.getuse()

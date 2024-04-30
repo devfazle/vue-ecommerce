@@ -40,6 +40,7 @@ export default {
                 cupon_id: this.cupon_id,
                 usage_count: this.usage_count
             }
+            this.$router.push({ name: "couponsUselist" })
 
             axios.put("http://127.0.0.1:8000/api/admin/couponusages/"+this.id, addData)
                 .then((response) => {
