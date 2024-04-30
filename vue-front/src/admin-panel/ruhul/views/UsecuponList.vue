@@ -64,8 +64,9 @@ export default {
                         <td>{{ c.cupon.code }}</td>
                         <td>{{ c.usage_count }}</td>
                         <td>
-                          <button @click="update(c.id)" class="btn btn-info">Edit</button>
-                          <button @click="deletecupons(c.id)" class="btn btn-danger">Delete</button>
+                          <button @click="update(c.id)" class="btn btn-info"><i class='bx bxs-edit'></i></button> 
+                            &nbsp;
+                          <button @click="deletecupons(c.id)" class="btn btn-danger"><i class='bx bxs-trash'></i></button>
                         </td>
                         <!-- <td>
                             <router-link :to="{ name: 'cartUpdate', params: { id: c.id } }" class="btn btn-info mr-2">Edit</router-link>

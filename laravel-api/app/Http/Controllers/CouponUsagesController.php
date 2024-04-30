@@ -83,7 +83,7 @@ class CouponUsagesController extends Controller
         $validator = Validator::make($request->all(), [
             'usage_count' => 'required',
             'user_id' => 'required',
-            'cupons_id' => 'required',
+            'cupon_id' => 'required',
         ]);
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors(), 422);

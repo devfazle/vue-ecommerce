@@ -76,7 +76,7 @@ export default {
       <label class="form-label" for="valid-from">Valid From</label>
       <input
         v-model="valid_from"
-        type="datetime-local"
+        type="date"
         class="form-control"
         id="valid-from"
         placeholder="YYYY-MM-DD"
@@ -87,7 +87,7 @@ export default {
       <label class="form-label" for="valid-to">Valid To</label>
       <input
         v-model="valid_to"
-        type="datetime-local"
+        type="date"
         class="form-control"
         id="valid-to"
         placeholder="YYYY-MM-DD"

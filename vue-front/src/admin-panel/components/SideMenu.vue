@@ -324,7 +324,20 @@
                     <div data-i18n="Boxicons">Boxicons</div>
                 </a>
             </li>
-
+            <li class="menu-item">
+                <router-link :to="{name: 'couponsshow'}"
+                     class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file"></i>
+                    <div data-i18n="Documentation">Coupons</div>
+                </router-link>
+            </li>
+            <li class="menu-item">
+                <router-link :to="{name: 'couponsUselist'}"
+                     class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file"></i>
+                    <div data-i18n="Documentation">Use Coupons</div>
+                </router-link>
+            </li>
             <!-- Forms & Tables -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
             <!-- Forms -->
