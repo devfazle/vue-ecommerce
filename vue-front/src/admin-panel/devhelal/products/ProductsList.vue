@@ -5,7 +5,7 @@ export default {
   data() {
     return {
       url: "http://127.0.0.1:8000/api/admin/products",
-      productlist: "",
+      productlist: [],
     };
   },
   methods: {
@@ -17,7 +17,7 @@ export default {
     },
     deleteProduct(id) {
       axios.delete(`${this.url}/${id}`);
-      this.getProductList;
+      this.getProductList();
     },
   },
   mounted() {
@@ -66,8 +66,7 @@ export default {
               <div class="col-md-5"></div>
               <div class="col-md-4">
                 <button class="col-md-6 btn btn-dark">Export</button>
-                <router-link :to="{ name: 'addproducts' }" class="col-md-6 btn btn-primary">Add Products</router-link>
-
+                <router-link :to="{ name: 'addproducts' }" class="col-md-6 btn btn-primary">Add Product</router-link>
               </div>
             </div>
           </div>
@@ -101,8 +100,8 @@ export default {
                     <div class="mb-3" style="max-width: 200px">
                       <div class="row g-0">
                         <div class="col-md-4">
-                          
-                          <img :src="`http://127.0.0.1:8000/photos/products/${data.photo.path}`" class="img-fluid rounded-start" alt="..." />
+                          <img :src="`http://127.0.0.1:8000/photos/products/${data.photo.path}`"
+                            class="img-fluid rounded-start" alt="loading" />
                         </div>
                         <div class="col-md-8">
                           <div class="">
