@@ -23,8 +23,8 @@
                 <tbody class="table-border-bottom-0">
                     <tr v-for="(w, i) in wishlists" :key="i">
                         <td>{{ i + 1 }}</td>
-                        <td>{{ w.product.name }}</td>
-                        <td>{{ w.user.name }}</td>
+                        <td>{{ w.product.name}}</td>
+                        <td>{{ w.user.name}}</td>
                         <td>
                          <router-link :to="{ name: 'wishlistupdate', params: { id: w.id } }" class="btn btn-info mr-2">Edit</router-link> 
                             <button @click="deleteWishlist(w.id)" class="btn btn-danger">Delete</button>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wishlist;
+use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,11 +26,9 @@ class WishlistController extends Controller
      */
     public function create()
     {
-        $users = User::where('role_id', 2)
-            ->orderBy('id', 'desc')
-            ->get();
+        $users=User::where('role_id',2)->get();
 
-        $products = Product::orderBy('id', 'desc')->get();
+        $products=Product::get();
 
         $data = [
             'users' => $users,
@@ -60,7 +60,7 @@ class WishlistController extends Controller
      */
     public function show(string $id)
     {
-        $wishlists=Wishlist::with('user','product')->find($id);
+        $wishlists=Wishlist::find($id);
         return $this->sendResponse($wishlists,'Wishlist fetched successfully!');
     }
 

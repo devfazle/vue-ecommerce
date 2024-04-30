@@ -12,27 +12,12 @@ export default {
     },
 
     methods: {
-        getuse() {
-            axios.get('http://127.0.0.1:8000/api/admin/products')
-                .then((result) => {
-                    this.product = result.data.data;
-                    //this.users = result.data.data;
-                    console.log(result.data.data);
-                    //console.log(result.data.data[0]);
-                })
-            axios.get('http://127.0.0.1:8000/api/admin/users/create')
-                .then((result) => {
-                   // this.cupons = result.data.data;
-                    this.users = result.data.data;
-                    console.log(result.data.data);
-                   // console.log(result.data.data[0].user.name);
-                })
-        },
         getWishlist() {
-            axios.get('http://127.0.0.1:8000/api/admin/wishlists')
+            axios.get('http://127.0.0.1:8000/api/admin/wishlists/create')
                 .then((result) => {
-                    //this.cupons = result.data.data.cupons;
-                    console.log(result);
+                    this.product = result.data.data.products;
+                    this.users = result.data.data.users;
+                    console.log(result.data.data.users);
                 })
         },
         storeWishlist() {
@@ -41,22 +26,20 @@ export default {
                 product_id: this.product_id, 
             }
 
-            console.log('ok');
+           // console.log(wishdata);
 
             axios.post("http://127.0.0.1:8000/api/admin/wishlists", wishdata)
                 .then((response) => {
                     console.log(response)
-
+                   this.$router.push({name:"wishlisttable"})
                 });
-                // this.$router.push('/admin/wishlist/wishlisttable');
+               
 
         }
 
     },
-
     mounted() {
-        this.getuse()
-        this.storeWishlist()
+        this.getWishlist()
     }
 }
 

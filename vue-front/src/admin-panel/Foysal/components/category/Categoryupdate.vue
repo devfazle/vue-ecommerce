@@ -50,13 +50,15 @@ export default {
             axios.put("http://127.0.0.1:8000/api/admin/categorys/"+this.id, categoryData)
                 .then((response) => {
                     console.log(response);
+                    this.$router.push('/admin/categorylist');
+
                 });
         }
         
         },
         mounted() {
              this.getCategory();
-             this.updateCategory();
+            
         }
     }
 

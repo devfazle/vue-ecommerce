@@ -23,36 +23,47 @@
 import axios from 'axios';
 
 export default {
-     data() {
+    data() {
         return {
-            sub_categorys:[],
-            category_id:0,
-            name:'' , 
-            id:this.$route.params.id,
+            sub_categorys: [],
+            category_id: 0,
+            name: '',
+            id: this.$route.params.id,
+            category: []
         }
     },
     methods: {
-        getsubcategorys(){
-            axios.get("http://127.0.0.1:8000/api/admin/subcategorys/" + this.id + '/edit').then((res) => {
-                const subcategorys = res.data.data;
-                this.name =subcategorys.name                   
-                this.category_id =subcategorys.category_id                   
-                
-            });
+        getsubcategorys() {
+            axios.get("http://127.0.0.1:8000/api/admin/subcategorys/" + this.id + '/edit')
+                .then((res) => {
+                    const subcategorys = res.data.data;
+                    this.name = subcategorys.name
+                    this.category_id = subcategorys.category_id
+                });
         },
-        updateSub_category(){
+        getCategory() {
+            axios.get("http://127.0.0.1:8000/api/admin/categorys")
+                .then((result) => {
+                    this.category = result.data.data;
+                    console.log(this.category)
+                })
+        },
+        updateSub_category() {
             const subcategorysData = {
-                 name: this.name,
+                name: this.name,
             }
-            axios.put("http://127.0.0.1:8000/api/admin/subcategorys/"+this.id, subcategorysData)
+            axios.put("http://127.0.0.1:8000/api/admin/subcategorys/" + this.id, subcategorysData)
                 .then((response) => {
                     console.log(response);
+                    this.$router.push('/admin/sub_category/sub_list');
+
                 });
         }
     },
-    mounted(){
+    mounted() {
         this.getsubcategorys();
-        this.updateSub_category();
+        this.getCategory();
+
     }
 }
 </script>
