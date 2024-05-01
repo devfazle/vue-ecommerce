@@ -1,12 +1,13 @@
 <script>
 import axios from 'axios';
 import QuickView from '../components/Modal.vue';
+import { mapActions } from 'vuex';
 export default {
 	data() {
 		return {
 			products: [],
 			url: 'http://127.0.0.1:8000/api/admin/',
-			id: 3,
+			id: 0,
 			modalclass: ''
 		}
 	},
@@ -26,7 +27,29 @@ export default {
 		},
 		updateId(newId) {
 			this.id = newId;
-		}
+		},
+
+		// cart functionality
+		...mapActions({
+            addtocart: 'addcart',
+            revcart: 'deleteCart'
+        }),
+        cartadd(id) {
+            // Define the id you want to filter by
+            const filterById = id;
+
+            // Filter the products array based on the id
+            const filteredProducts = this.products.find(product => product.id === filterById);
+
+            // let product = this.products[id]
+            // product.qty = 1
+            this.addtocart(filteredProducts)
+            console.log(filteredProducts);
+			console.log(this.$store.state.cart.product);
+        },
+        rev(id){
+            this.revcart(id);
+        }
 	},
 	mounted() {
 		this.getProducts();
@@ -39,7 +62,7 @@ export default {
 
 
 <template>
-	<QuickView :id="id" :url="url" :modalclass="modalclass" @update:modalclass="updateModalClass" @update:id="updateId" />
+	<QuickView :id="id" :url="url" :modalclass="modalclass" @update:modalclass="updateModalClass" />
 	<div class="bg0 m-t-23 p-b-140">
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
@@ -303,6 +326,7 @@ export default {
 								class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Quick View
 							</a>
+							<!-- <a @click="cartadd(p.id)" href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">add</a> -->
 						</div>
 
 						<div class="block2-txt flex-w flex-t p-t-14">

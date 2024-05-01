@@ -1,11 +1,12 @@
 <script>
 import axios from 'axios'
+import { mapActions } from 'vuex';
 export default {
 	data() {
 		return {
 			product: [],
 			mclass: '',
-			idx: 3
+			idx: 0
 		}
 	},
 	props: {
@@ -15,18 +16,31 @@ export default {
 	},
 	methods: {
 		getProduct() {
-			axios.get(this.url + 'products/' + this.idx)
-				.then((result) => {
-					this.product = result.data.data;
-					console.log(this.product);
-				})
+			if (this.idx !== 0) {
+				axios.get(this.url + 'products/' + this.idx)
+					.then((result) => {
+						this.product = result.data.data;
+						console.log(this.product);
+					})
+			}
 		},
 		closeModal() {
 			this.mclass = ''
 		},
 		updateModalClass() {
 			this.$emit('update:modalclass', '');
-		}
+		},
+
+		//add product to cart
+		...mapActions({
+			addtocart: 'addcart',
+		}),
+		cartAdd() {
+			let productNew = this.product
+			productNew.quantity = 1
+			this.addtocart(productNew)
+			console.log(this.$store.state.cart.products);
+		},
 	},
 	mounted() {
 		this.getProduct()
@@ -150,7 +164,7 @@ export default {
 											</div>
 										</div>
 
-										<button
+										<button @click="cartAdd"
 											class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 											Add to cart
 										</button>
