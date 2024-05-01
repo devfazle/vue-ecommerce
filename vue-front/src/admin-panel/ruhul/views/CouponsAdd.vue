@@ -13,7 +13,6 @@ export default {
       use_count: "",
     };
   },
-
   methods: {
     getCupons() {
       axios.get("http://127.0.0.1:8000/api/admin/cupons").then((result) => {
@@ -22,31 +21,61 @@ export default {
       });
     },
     storeCupons() {
-      const cuponsData = {
-        code: this.code,
-        percentage: this.percentage,
-        valid_from: this.valid_from,
-        valid_to: this.valid_to,
-        max_uses: this.max_uses,
-        use_count: this.use_count,
-      };
+      if (this.validateForm()) {
+        const cuponsData = {
+          code: this.code,
+          percentage: this.percentage,
+          valid_from: this.valid_from,
+          valid_to: this.valid_to,
+          max_uses: this.max_uses,
+          use_count: this.use_count,
+        };
 
-      console.log("ok");
+        console.log("ok");
 
-      axios
-        .post("http://127.0.0.1:8000/api/admin/cupons", cuponsData)
-        .then((response) => {
-          console.log(response);
-          this.$router.push('/admin/coupons/coupons-list')
-        });
+        axios
+          .post("http://127.0.0.1:8000/api/admin/cupons", cuponsData)
+          .then((response) => {
+            console.log(response);
+            this.$router.push("/admin/coupons/coupons-list");
+          });
+      }
+    },
+    validateCode() {
+      return this.code.trim() !== "";
+    },
+    validatePercentage() {
+      return this.percentage !== "";
+    },
+    validateValidFrom() {
+      return this.valid_from.trim() !== "";
+    },
+    validateValidTo() {
+      return this.valid_to.trim() !== "";
+    },
+    validateMaxUses() {
+      return this.max_uses.trim() !== "";
+    },
+    validateUseCount() {
+      return this.use_count.trim() !== "";
+    },
+    validateForm() {
+      return (
+        this.validateCode() &&
+        this.validatePercentage() &&
+        this.validateValidFrom() &&
+        this.validateValidTo() &&
+        this.validateMaxUses() &&
+        this.validateUseCount()
+      );
     },
   },
-
   mounted() {
     this.getCupons();
   },
 };
 </script>
+
 <template>
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="mb-0">Add Coupons</h5>
@@ -59,8 +88,12 @@ export default {
         type="text"
         class="form-control"
         id="basic-default-fullname"
-        placeholder="coupons code here"
+        placeholder="Coupon code here"
+        :class="{ 'is-invalid': !validateCode() }"
       />
+      <span v-if="!validateCode()" class="invalid-feedback"
+        >Code is required</span
+      >
     </div>
     <div class="mb-3">
       <label class="form-label" for="basic-default-fullname">Percentage</label>
@@ -69,8 +102,12 @@ export default {
         type="number"
         class="form-control"
         id="basic-default-fullname"
-        placeholder="percentage"
+        placeholder="Percentage"
+        :class="{ 'is-invalid': !validatePercentage() }"
       />
+      <span v-if="!validatePercentage()" class="invalid-feedback"
+        >Percentage is required</span
+      >
     </div>
     <div class="mb-3">
       <label class="form-label" for="valid-from">Valid From</label>
@@ -80,8 +117,11 @@ export default {
         class="form-control"
         id="valid-from"
         placeholder="YYYY-MM-DD"
+        :class="{ 'is-invalid': !validateValidFrom() }"
       />
-      <input type="hidden" v-model="formattedValidFrom" />
+      <span v-if="!validateValidFrom()" class="invalid-feedback"
+        >Valid from date is required</span
+      >
     </div>
     <div class="mb-3">
       <label class="form-label" for="valid-to">Valid To</label>
@@ -91,8 +131,11 @@ export default {
         class="form-control"
         id="valid-to"
         placeholder="YYYY-MM-DD"
+        :class="{ 'is-invalid': !validateValidTo() }"
       />
-      <input type="hidden" v-model="formattedValidTo" />
+      <span v-if="!validateValidTo()" class="invalid-feedback"
+        >Valid to date is required</span
+      >
     </div>
 
     <div class="mb-3">
@@ -102,8 +145,12 @@ export default {
         type="text"
         class="form-control"
         id="basic-default-fullname"
-        placeholder="max_uses"
+        placeholder="Max uses"
+        :class="{ 'is-invalid': !validateMaxUses() }"
       />
+      <span v-if="!validateMaxUses()" class="invalid-feedback"
+        >Max uses is required</span
+      >
     </div>
     <div class="mb-3">
       <label class="form-label" for="basic-default-fullname">Use Count</label>
@@ -112,11 +159,17 @@ export default {
         type="text"
         class="form-control"
         id="basic-default-fullname"
-        placeholder="use count"
+        placeholder="Use count"
+        :class="{ 'is-invalid': !validateUseCount() }"
       />
+      <span v-if="!validateUseCount()" class="invalid-feedback"
+        >Use count is required</span
+      >
     </div>
     <button @click="storeCupons" type="submit" class="btn btn-primary">
       Submit
     </button>
   </div>
 </template>
+
+
