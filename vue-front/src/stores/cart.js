@@ -59,6 +59,11 @@ const cart = {
         return total + product.price * product.quantity;
       }, 0);
     },
+    totalItems(state) {
+        return state.products.reduce((total, product) => {
+          return total + product.quantity;
+        }, 0);
+      },
   },
 };
 export default cart;

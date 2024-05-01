@@ -1,4 +1,5 @@
 <script>
+import { mapGetters } from 'vuex';
 export default {
 	props: {
 		cartShow: String,
@@ -8,6 +9,9 @@ export default {
 			this.$emit('update-shared-data', ' show-header-cart');
 		},
 	},
+	computed: {
+		...mapGetters(['totalItems'])
+	}
 }
 </script>
 
@@ -61,7 +65,7 @@ export default {
 						</div>
 
 						<div @click="updateSharedData" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-							data-notify="2">
+							:data-notify="totalItems">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
