@@ -52,19 +52,17 @@ const router = createRouter({
           path: "productlist",
           name: "productslist",
           component: ProductsList,
-          children: [
+        },  
+        {
+          path: "addproduct",
+          name: "addproducts",
+          component: AddProduct,
+        },
             {
-              path: "addproduct",
-              name: "addproducts",
-              component: AddProduct,
-            },
-            {
-              path: "updateproduct",
+              path: "updateproduct/:id",
               name: "updateproduct",
               component: UpdateProduct,
             },
-          ]
-        },
         {
           path: "product",
           name: "products",

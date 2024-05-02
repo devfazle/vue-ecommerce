@@ -28,11 +28,15 @@ export default {
             });
         },
         getProduct() {
-            axios.get(this.url+this.id+'/edit').then((response) => {
-                const product = response.data.data[0];
-                const category = response.data.data[1];
-                this.productlist = product;
-                this.categorylist = category;
+            axios.get(this.url+'/'+this.id+'/edit').then((response) => {
+               const alldata= response.data.data;
+               console.log(alldata)
+             this.id=this.$route.params.id;
+             this.category_id=alldata.category.id;
+             this.name=alldata.name;
+             this.price=alldata.price;
+             this.description=alldata.description;
+             this.sub_category_id=alldata.sub_category.id;
             });
         },
         setCategory() {
@@ -61,7 +65,7 @@ export default {
                 sub_category_id: this.sub_category_id,
                 path: this.path
             }
-            axios.put(this.url+this.id, alldata, {
+            axios.put(this.url+'/'+this.id, alldata, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -73,7 +77,8 @@ export default {
         },
     },
     mounted() {
-        this.getProductList();
+        this.getProductList(),
+        this.getProduct();
     },
 }
 </script>
@@ -81,13 +86,13 @@ export default {
     <div class="container-xxl flex-grow-1 container-p-y text-dark">
         <div class="col-md-12 row">
             <div class="col-md-4 ">
-                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Add a New Product</h4>
+                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Update Product</h4>
             </div>
             <div class="col-md-3 "></div>
             <div class="col-md-5 ">
                 <router-link :to="{ name: 'productslist' }" class="btn btn-outline-danger">Discard</router-link>
                 <button class="btn btn-dark ml-2"> Save Draft</button>
-                <button class="btn btn-primary ml-2" @click="save()"> Publish Product</button>
+                <button class="btn btn-primary ml-2" @click="update()"> Update Product</button>
             </div>
 
         </div>
@@ -171,7 +176,7 @@ export default {
                         <div class="row">
                             <div class="col-md-10 mt-2">
                                 <select class="form-select col-md-10 mt-2" v-model="sub_category_id"
-                                    :disabled="sub_categorylist == ''">
+                                    :disabled="category_id == ''">
                                     <option value="0">Sub Category</option>
                                     <option v-for="(scdata, i) in sub_categorylist" :key="i" :value="scdata.id">{{
                                         scdata.name }}</option>
