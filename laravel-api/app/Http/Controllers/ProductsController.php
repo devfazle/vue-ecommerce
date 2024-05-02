@@ -78,7 +78,7 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        $products = Product::find($id);
+        $products = Product::with('category','sub_category','wishlist','order_item','purchase','cart')->find($id);
         return $this->sendResponse($products, 'Product fetched successfully!');
     }
 

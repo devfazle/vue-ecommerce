@@ -5,6 +5,7 @@ export default {
         return {
             url: "http://127.0.0.1:8000/api/admin/products",
             category_url: "http://127.0.0.1:8000/api/admin/categorys",
+            id:this.$route.params.id,
             category_id: 0,
             name: "",
             price: "",
@@ -26,6 +27,14 @@ export default {
                 this.categorylist = category;
             });
         },
+        getProduct() {
+            axios.get(this.url+this.id+'/edit').then((response) => {
+                const product = response.data.data[0];
+                const category = response.data.data[1];
+                this.productlist = product;
+                this.categorylist = category;
+            });
+        },
         setCategory() {
             const id = ("dev Helal:", this.category_id);
             this.category_id_null = id;
@@ -41,7 +50,7 @@ export default {
         onFileSelected(event) {
             this.path = event.target.files[0];
         },
-        save() {
+        update() {
             const formData = new FormData();
             formData.append('photo', this.path);
             const alldata = {
@@ -52,7 +61,7 @@ export default {
                 sub_category_id: this.sub_category_id,
                 path: this.path
             }
-            axios.post(this.url, alldata, {
+            axios.put(this.url+this.id, alldata, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

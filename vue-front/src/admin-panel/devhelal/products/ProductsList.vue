@@ -128,9 +128,10 @@ export default {
                     <button class="btn btn-primary btn-sm" @click="view(data.id)">
                       View
                     </button>
-                    <button class="btn btn-success btn-sm" @click="edit(data.id)">
+                    <!-- <button class="btn btn-success btn-sm" @click="edit(data.id)">
                       Edit
-                    </button>
+                    </button> -->
+                    <router-link :to="{ name: 'updateproduct', params: { id: data.id } }" class="btn btn-success btn-sm mr-2">Edit</router-link>
                     <button class="btn btn-danger btn-sm" @click="deleteProduct(data.id)" >
                       Delete
                     </button>

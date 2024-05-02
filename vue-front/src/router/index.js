@@ -23,6 +23,7 @@ import RoleEdit from '@/admin-panel/nazad/Roles/RoleEdit.vue'
 import Payment from '@/admin-panel/nazad/Payment/Payment.vue'
 import PaytmentCreate from '@/admin-panel/nazad/Payment/PaytmentCreate.vue'
 import PaymentEdit from '@/admin-panel/nazad/Payment/PaymentEdit.vue'
+import UpdateProduct from "@/admin-panel/devhelal/products/UpdateProduct.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,11 +52,18 @@ const router = createRouter({
           path: "productlist",
           name: "productslist",
           component: ProductsList,
-        },
-        {
-          path: "addproduct",
-          name: "addproducts",
-          component: AddProduct,
+          children: [
+            {
+              path: "addproduct",
+              name: "addproducts",
+              component: AddProduct,
+            },
+            {
+              path: "updateproduct",
+              name: "updateproduct",
+              component: UpdateProduct,
+            },
+          ]
         },
         {
           path: "product",
