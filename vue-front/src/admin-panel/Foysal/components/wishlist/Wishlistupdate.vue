@@ -16,13 +16,14 @@ export default {
     methods: {
 
         getInfo() {
-            axios.get('http://127.0.0.1:8000/api/admin/wishlists')
-                .then((res) => {
-                    this.users = res.data.data.users;
-                    this.products = res.data.data.products;
-                    console.log(this.users);
+            axios.get('http://127.0.0.1:8000/api/admin/wishlists/create')
+                .then((result) => {
+                    this.products = result.data.data.products;
+                    this.users = result.data.data.users;
+                    console.log(result.data.data.users);
                 })
         },
+           
 
         getwishlist() {
             axios.get("http://127.0.0.1:8000/api/admin/wishlists/" + this.id + '/edit')
@@ -41,9 +42,10 @@ export default {
                 quantity: this.quantity
             }
 
-            axios.put("http://127.0.0.1:8000/api/admin/carts/"+this.id, wishlistData)
+            axios.put("http://127.0.0.1:8000/api/admin/wishlists/" +this.id, wishlistData)
                 .then((response) => {
                     console.log(response);
+                    this.$router.push({name:"wishlisttable"})
                 });
         }
 
