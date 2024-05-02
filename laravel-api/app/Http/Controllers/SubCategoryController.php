@@ -32,7 +32,7 @@ class SubCategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'categories_id' => 'required',
+            'category_id' => 'required',
         ]);
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors(),422);

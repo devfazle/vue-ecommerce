@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wishlist;
+use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,7 +26,16 @@ class WishlistController extends Controller
      */
     public function create()
     {
-        //
+        $users=User::where('role_id',2)->get();
+
+        $products=Product::get();
+
+        $data = [
+            'users' => $users,
+            'products' => $products
+        ];
+
+        return $this->sendResponse($data, 'Wish list fetched successfully!');
     }
 
     /**
@@ -49,7 +60,7 @@ class WishlistController extends Controller
      */
     public function show(string $id)
     {
-        $wishlists=Wishlist::with('user','product')->find($id);
+        $wishlists=Wishlist::find($id);
         return $this->sendResponse($wishlists,'Wishlist fetched successfully!');
     }
 
@@ -67,13 +78,14 @@ class WishlistController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'product_id' => 'required',
-            'user_id' => 'required'
-        ]);
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors(),422);
-        }
+        // $validator = Validator::make($request->all(), [
+        //     'product_id' => 'required',
+        //     'user_id' => 'required'
+        // ]);
+        // if($validator->fails()){
+        //     return $this->sendError('Validation Error.', $validator->errors(),422);
+        // }
+        
         $input = $request->all();
         $wishlists = Wishlist::find($id)->update($input);
         return $this->sendResponse($wishlists, 'Wishlist updated successfully!');
