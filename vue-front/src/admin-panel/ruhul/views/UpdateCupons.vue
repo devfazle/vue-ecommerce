@@ -11,12 +11,12 @@ export default {
       max_uses: "",
       use_count: "",
       id: this.$route.params.id,
+      selectedDate:"",
     };
   },
   methods: {
     getcupons(id) {
       axios.get(`${this.url}/${id}/edit`).then((result) => {
-        console.log(result);
         this.code = result.data.data.code;
         this.percentage = result.data.data.percentage;
         this.valid_from = result.data.data.valid_from;
@@ -45,7 +45,7 @@ export default {
             console.log(error);
           }
         );
-      console.log(this.url + "/" + this.$route.params.id);
+      //console.log(this.url + "/" + this.$route.params.id);
     }
   },
   mounted() {
@@ -69,31 +69,31 @@ export default {
           <form v-on:submit.prevent="save">
             <div class="mb-3">
               <label class="form-label" for="basic-default-fullname">Code</label>
-              <input type="text" v-model="code" class="form-control" id="basic-default-fullname" placeholder="code" />
+              <input type="text" v-model="code" class="form-control"  placeholder="code" />
             </div>
             <div class="mb-3">
               <label class="form-label" for="basic-default-fullname">Percentage</label>
-              <input type="text" v-model="percentage" class="form-control" id="basic-default-fullname"
+              <input type="text" v-model="percentage" class="form-control" 
                 placeholder="30%" />
             </div>
             <div class="mb-3">
               <label class="form-label" for="basic-default-fullname">Valid_from</label>
-              <input type="date" v-model="valid_from" class="form-control" id="basic-default-fullname"
+              <input type="datetime-local" v-model="valid_from" class="form-control" 
                 placeholder="valid_from" />
             </div>
             <div class="mb-3">
               <label class="form-label" for="basic-default-fullname">Valid_to</label>
-              <input type="date" v-model="valid_to" class="form-control" id="basic-default-fullname"
+              <input type="datetime-local" v-model="valid_to" class="form-control" 
                 placeholder="valid_to" />
             </div>
             <div class="mb-3">
               <label class="form-label" for="basic-default-fullname">max_uses</label>
-              <input type="number" v-model="max_uses" class="form-control" id="basic-default-fullname"
+              <input type="number" v-model="max_uses" class="form-control" 
                 placeholder="max_uses" />
             </div>
             <div class="mb-3">
               <label class="form-label" for="basic-default-fullname">use_count</label>
-              <input type="number" v-model="use_count" class="form-control" id="basic-default-fullname"
+              <input type="number" v-model="use_count" class="form-control" 
                 placeholder="use_count" />
             </div>
             <button type="submit" class="btn btn-primary">Update</button>

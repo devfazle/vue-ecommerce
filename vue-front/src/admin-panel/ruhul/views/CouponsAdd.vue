@@ -42,22 +42,22 @@ export default {
       }
     },
     validateCode() {
-      return this.code.trim() !== "";
+      return this.code.trim() !== "0";
     },
     validatePercentage() {
-      return this.percentage !== "";
+      return this.percentage !== "0";
     },
     validateValidFrom() {
-      return this.valid_from.trim() !== "";
+      return this.valid_from.trim() !== "0";
     },
     validateValidTo() {
-      return this.valid_to.trim() !== "";
+      return this.valid_to.trim() !== "0";
     },
     validateMaxUses() {
-      return this.max_uses.trim() !== "";
+      return this.max_uses.trim() !== "0";
     },
     validateUseCount() {
-      return this.use_count.trim() !== "";
+      return this.use_count.trim() !== "0";
     },
     validateForm() {
       return (
@@ -113,7 +113,7 @@ export default {
       <label class="form-label" for="valid-from">Valid From</label>
       <input
         v-model="valid_from"
-        type="date"
+        type="datetime-local"
         class="form-control"
         id="valid-from"
         placeholder="YYYY-MM-DD"
@@ -127,7 +127,7 @@ export default {
       <label class="form-label" for="valid-to">Valid To</label>
       <input
         v-model="valid_to"
-        type="date"
+        type="datetime-local"
         class="form-control"
         id="valid-to"
         placeholder="YYYY-MM-DD"

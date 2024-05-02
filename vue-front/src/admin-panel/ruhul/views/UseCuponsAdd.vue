@@ -79,7 +79,7 @@ export default {
                 <option disabled value="">Select a user</option>
                 <option v-for="(u, i) in users" :key="i" :value="u.id">{{ u.name }}</option>
             </select>
-            <small v-if="!user_id" class="text-danger">Please select a user.</small>
+            <small v-if="!user_id" class="">Please select a user.</small>
         </div>
         <div class="mb-3">
             <label class="form-label" for="code-select">Code</label>
@@ -87,12 +87,12 @@ export default {
                 <option disabled value="">Select a code</option>
                 <option v-for="(p, i) in cupons" :key="i" :value="p.id">{{ p.code }}</option>
             </select>
-            <small v-if="!cupon_id" class="text-danger">Please select a code.</small>
+            <small v-if="!cupon_id" class="">Please select a code.</small>
         </div>
         <div class="mb-3">
             <label class="form-label" for="usage-count-input">Usage Count</label>
             <input v-model="usage_count" type="number" class="form-control" id="usage-count-input" placeholder="Enter usage count" />
-            <small v-if="!usage_count" class="text-danger">Please enter usage count.</small>
+            <small v-if="!usage_count" class="">Please enter usage count.</small>
         </div>
         <button @click="storeUsesCupons" type="submit" class="btn btn-primary">Submit</button>
     </div>
