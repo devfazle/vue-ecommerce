@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('address', 100);
             $table->string('phone_number',100);
             $table->string('bank_info');
-            $table->unsignedBigInteger('role_id');
+            $table->foreignId('role_id')->constrained('roles');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

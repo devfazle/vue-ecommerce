@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 class CartsController extends Controller
 {
     use ApiResponse;
@@ -13,9 +16,8 @@ class CartsController extends Controller
      */
     public function index()
     {
-        $carts=Cart::orderBy('id','desc')->with('product','user')->get();
-        return $this->sendResponse($carts,'Cart list fetched successfully!');
-    
+        $carts = Cart::orderBy('id', 'desc')->with('product', 'user')->get();
+        return $this->sendResponse($carts, 'Cart list fetched successfully!');
     }
 
     /**
@@ -23,7 +25,18 @@ class CartsController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::where('role_id', 2)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $products = Product::orderBy('id', 'desc')->get();
+
+        $data = [
+            'users' => $users,
+            'products' => $products
+        ];
+
+        return $this->sendResponse($data, 'Cart list fetched successfully!');
     }
 
     /**
@@ -32,13 +45,13 @@ class CartsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required'
+            'quantity' => 'required'
         ]);
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors(),422);
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors(), 422);
         }
         $input = $request->all();
-        $carts=Cart::create($input);
+        $carts = Cart::create($input);
         return $this->sendResponse($carts, 'Cart created successfully!');
     }
 
@@ -47,8 +60,8 @@ class CartsController extends Controller
      */
     public function show(string $id)
     {
-        $carts=Cart::with('product','user')->find($id);
-        return $this->sendResponse($carts,'Cart fetched successfully!');
+        $carts = Cart::with('product', 'user')->find($id);
+        return $this->sendResponse($carts, 'Cart fetched successfully!');
     }
 
     /**
@@ -56,8 +69,8 @@ class CartsController extends Controller
      */
     public function edit(string $id)
     {
-        $carts=Cart::find($id);
-        return $this->sendResponse($carts,'Cart fetched successfully!');
+        $carts = Cart::find($id);
+        return $this->sendResponse($carts, 'Cart fetched successfully!');
     }
 
     /**
@@ -65,12 +78,12 @@ class CartsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required'
-        ]);
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors(),422);
-        }
+        // $validator = Validator::make($request->all(), [
+        //     'name' => 'required'
+        // ]);
+        // if ($validator->fails()) {
+        //     return $this->sendError('Validation Error.', $validator->errors(), 422);
+        // }
         $input = $request->all();
         $carts = Cart::find($id)->update($input);
         return $this->sendResponse($carts, 'Cart updated successfully!');
@@ -82,6 +95,6 @@ class CartsController extends Controller
     public function destroy(string $id)
     {
         $carts = Cart::find($id)->delete();
-        return $this->sendResponse($carts,'Cart deleted successfully!');
+        return $this->sendResponse($carts, 'Cart deleted successfully!');
     }
 }
