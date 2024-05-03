@@ -33,17 +33,18 @@ import Payment from '@/admin-panel/nazad/Payment/Payment.vue'
 import PaytmentCreate from '@/admin-panel/nazad/Payment/PaytmentCreate.vue'
 import PaymentEdit from '@/admin-panel/nazad/Payment/PaymentEdit.vue'
 
-import Categorylist from '@/admin-panel/foysal/components/category/Categorylist.vue'
-import Categoryadd from '@/admin-panel/foysal/components/category/Categoryadd.vue'
-import Sub_categoryAdd from '@/admin-panel/foysal/components/category/sub_category/Sub_categoryAdd.vue'
-import Sub_categoryLayout from '@/admin-panel/foysal/components/category/sub_category/Sub_categoryLayout.vue'
-import Categoryupdate from '@/admin-panel/foysal/components/category/Categoryupdate.vue'
-import Sub_categorylist from '@/admin-panel/foysal/components/category/sub_category/Sub_categorylist.vue'
-import Sub_categoryupdate from '@/admin-panel/foysal/components/category/sub_category/Sub_categoryupdate.vue'
-import Wishlistlayout from '@/admin-panel/foysal/components/wishlist/Wishlistlayout.vue'
-import Wishlistadd from '@/admin-panel/foysal/components/wishlist/Wishlistadd.vue'
-import Wishlisttable from '@/admin-panel/foysal/components/wishlist/Wishlisttable.vue'
-import Wishlistupdate from '@/admin-panel/foysal/components/wishlist/Wishlistupdate.vue'
+
+import Categorylist from '@/admin-panel/Foysal/components/category/Categorylist.vue'
+import Categoryadd from '@/admin-panel/Foysal/components/category/Categoryadd.vue';
+import Sub_categoryAdd from '@/admin-panel/Foysal/components/category/sub_category/Sub_categoryAdd.vue'
+import Sub_categoryLayout from '@/admin-panel/Foysal/components/category/sub_category/Sub_categoryLayout.vue'
+import Categoryupdate from '@/admin-panel/Foysal/components/category/Categoryupdate.vue'
+import Sub_categorylist from '@/admin-panel/Foysal/components/category/sub_category/Sub_categorylist.vue'
+import Sub_categoryupdate from '@/admin-panel/Foysal/components/category/sub_category/Sub_categoryupdate.vue'
+import Wishlistlayout from '@/admin-panel/Foysal/components/wishlist/Wishlistlayout.vue'
+import Wishlistadd from '@/admin-panel/Foysal/components/wishlist/Wishlistadd.vue'
+import Wishlisttable from '@/admin-panel/Foysal/components/wishlist/Wishlisttable.vue'
+import Wishlistupdate from '@/admin-panel/Foysal/components/wishlist/Wishlistupdate.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -119,6 +120,8 @@ const router = createRouter({
               component: UpdateUseCoupon,
             },
           ],
+        },
+          
         {
           path: 'categorylist',
           name: 'categorylist',
