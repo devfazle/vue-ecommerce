@@ -1,5 +1,5 @@
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
@@ -9,17 +9,15 @@ export default {
     props: {
         cartShow: String,
     },
-    methods: {
-        updateSharedData(newValue) {
-            this.$emit('update-shared-data', '');
-        },
-    },
     computed: {
         // Compute the products in the cart from the Vuex store
         productsInCart() {
             return this.$store.state.cart.products;
         },
         ...mapGetters(['totalPrice'])
+    },
+    methods: {
+        ...mapActions(['incrementQuantity', 'decrementQuantity'])
     },
 }
 </script>
@@ -56,29 +54,32 @@ export default {
                                     <th class="column-5">Total</th>
                                 </tr>
 
-                                <tr v-for="(p,i) in productsInCart" :key="i" class="table_row">
+                                <tr v-for="(p, i) in productsInCart" :key="i" class="table_row">
                                     <td class="column-1">
                                         <div class="how-itemcart1">
-                                            <img :src="'http://127.0.0.1:8000/photos/products/' + p.photo.path" alt="IMG">
+                                            <img :src="'http://127.0.0.1:8000/photos/products/' + p.photo.path"
+                                                alt="IMG">
                                         </div>
                                     </td>
                                     <td class="column-2">{{ p.name }}</td>
                                     <td class="column-3">{{ p.price }}</td>
                                     <td class="column-4">
                                         <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                            <div @click="decrementQuantity(p)"
+                                                class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-minus"></i>
                                             </div>
 
                                             <input class="mtext-104 cl3 txt-center num-product" type="number"
                                                 name="num-product1" :value="p.quantity">
 
-                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                            <div @click="incrementQuantity(p)"
+                                                class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-plus"></i>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="column-5">৳ {{ p.price*p.quantity }}</td>
+                                    <td class="column-5">৳ {{ p.price * p.quantity }}</td>
                                 </tr>
 
 

@@ -6,7 +6,8 @@ export default {
 		return {
 			product: [],
 			mclass: '',
-			idx: 0
+			idx: 0,
+			qty: 1,
 		}
 	},
 	props: {
@@ -37,10 +38,17 @@ export default {
 		}),
 		cartAdd() {
 			let productNew = this.product
-			productNew.quantity = 1
+			productNew.quantity = this.qty
 			this.addtocart(productNew)
+			this.qty = 1;
 			console.log(this.$store.state.cart.products);
 		},
+		qtyInc() {
+			this.qty++;
+		},
+		qtyDec() {
+			this.qty > 1 ? this.qty-- : this.qty;
+		}
 	},
 	mounted() {
 		this.getProduct()
@@ -152,14 +160,14 @@ export default {
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-204 flex-w flex-m respon6-next">
 										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+											<div @click="qtyDec" class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
 											<input class="mtext-104 cl3 txt-center num-product" type="number"
-												name="num-product" value="1">
+												name="num-product" v-model="qty">
 
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+											<div @click="qtyInc" class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-plus"></i>
 											</div>
 										</div>

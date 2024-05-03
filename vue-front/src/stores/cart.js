@@ -8,26 +8,26 @@ const cart = {
   mutations: {
     addToCart(state, data) {
       // Define the product to search for
-    const productToUpdate = data;
+      const productToUpdate = data;
 
-    // Find the product with the specified ID
-    const foundProduct = state.products.find(
+      // Find the product with the specified ID
+      const foundProduct = state.products.find(
         (product) => product.id === productToUpdate.id
-    );
-    
-    // If the product is found, update its quantity
-    if (foundProduct) {
+      );
+
+      // If the product is found, update its quantity
+      if (foundProduct) {
         // Create a copy of the found product and update its quantity
         const updatedProduct = { ...foundProduct };
-        updatedProduct.quantity += 1;
+        updatedProduct.quantity += productToUpdate.quantity;
 
         // Replace the existing product in the array with the updated one
-        state.products = state.products.map(product =>
-            product.id === updatedProduct.id ? updatedProduct : product
+        state.products = state.products.map((product) =>
+          product.id === updatedProduct.id ? updatedProduct : product
         );
-    } else {
+      } else {
         state.products.push(data);
-    }
+      }
     },
     removecart(state, data) {
       const idToDelete = data;
@@ -44,6 +44,20 @@ const cart = {
         state.products.splice(indexToDelete, 1);
       }
     },
+
+    //cart inc and dec
+    INCREMENT_QUANTITY(state, product) {
+      const foundProduct = state.products.find((p) => p.id === product.id);
+      if (foundProduct) {
+        foundProduct.quantity++;
+      }
+    },
+    DECREMENT_QUANTITY(state, product) {
+      const foundProduct = state.products.find((p) => p.id === product.id);
+      if (foundProduct && foundProduct.quantity > 1) {
+        foundProduct.quantity--;
+      }
+    },
   },
   actions: {
     addcart({ commit, state }, payload) {
@@ -51,6 +65,13 @@ const cart = {
     },
     deleteCart({ commit, state }, payload) {
       commit("removecart", payload);
+    },
+    // inc & dec
+    incrementQuantity({ commit }, product) {
+      commit("INCREMENT_QUANTITY", product);
+    },
+    decrementQuantity({ commit }, product) {
+      commit("DECREMENT_QUANTITY", product);
     },
   },
   getters: {
@@ -60,10 +81,10 @@ const cart = {
       }, 0);
     },
     totalItems(state) {
-        return state.products.reduce((total, product) => {
-          return total + product.quantity;
-        }, 0);
-      },
+      return state.products.reduce((total, product) => {
+        return total + product.quantity;
+      }, 0);
+    },
   },
 };
 export default cart;

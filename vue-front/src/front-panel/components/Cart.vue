@@ -49,7 +49,7 @@ export default {
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
 					<li v-for="(p,i) in productsInCart" :key="i" class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
+						<div @click="rev(p.id)" class="header-cart-item-img">
 							<img :src="'http://127.0.0.1:8000/photos/products/' + p.photo.path" alt="IMG">
 						</div>
 
@@ -61,7 +61,6 @@ export default {
 							<span class="header-cart-item-info">
 								{{ p.quantity }} x {{ p.price }}
 							</span>
-							<button @click="rev(p.id)" class="btn btn-danger">Delete</button>
 						</div>
 					</li>
 				</ul>
