@@ -135,9 +135,9 @@
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <!-- <router-link :to="{name: 'cartTable'}" class="menu-link">
+                        <router-link :to="{name: 'cartTable'}" class="menu-link">
                             <div data-i18n="Account">Cart</div>
-                        </router-link> -->
+                        </router-link>
                     </li>
                     <li class="menu-item">
                         <a href="pages-account-settings-notifications.html" class="menu-link">

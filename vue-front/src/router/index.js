@@ -108,8 +108,8 @@ const router = createRouter({
           component: PaymentEdit
         },
         {
-          path: "cart",
-          name: "cart",
+          path: "cart1",
+          name: "cartOne",
           component: CartLayout,
           children: [
             {

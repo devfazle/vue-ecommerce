@@ -1,9 +1,14 @@
 <script>
+import axios from 'axios';
 import { mapState, mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
-            num: 0
+            num: 0,
+            total: 0,
+            coupon_persentage: 0,
+            coupon_code: '',
+            coupon_info: '',
         }
     },
     props: {
@@ -14,10 +19,29 @@ export default {
         productsInCart() {
             return this.$store.state.cart.products;
         },
-        ...mapGetters(['totalPrice'])
+        ...mapGetters(['totalPrice']),
+        finalTotal() {
+            this.total = this.totalPrice - (this.totalPrice * (this.coupon_persentage / 100))
+            return this.total
+        }
     },
     methods: {
-        ...mapActions(['incrementQuantity', 'decrementQuantity'])
+        ...mapActions(['incrementQuantity', 'decrementQuantity']),
+        applyCoupon() {
+            axios.post('http://127.0.0.1:8000/api/admin/checkcoupon', {
+                code: this.coupon_code
+            })
+                .then((response) => {
+                    this.coupon_persentage = response.data.data.percentage;
+                    this.coupon_info = "Your coupon applied successfully. You have got " + this.coupon_persentage + "% discount on your products."
+                    console.log(response.data.data.percentage);
+                })
+                .catch((error) => {
+                    this.coupon_info = "Coupon not found!";
+                    this.coupon_persentage = 0;
+                    console.log(error);
+                });
+        }
     },
 }
 </script>
@@ -62,7 +86,7 @@ export default {
                                         </div>
                                     </td>
                                     <td class="column-2">{{ p.name }}</td>
-                                    <td class="column-3">{{ p.price }}</td>
+                                    <td class="column-3">৳ {{ p.price }}</td>
                                     <td class="column-4">
                                         <div class="wrap-num-product flex-w m-l-auto m-r-0">
                                             <div @click="decrementQuantity(p)"
@@ -88,10 +112,10 @@ export default {
 
                         <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
                             <div class="flex-w flex-m m-r-20 m-tb-5">
-                                <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
+                                <input v-model="coupon_code"
+                                    class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
                                     name="coupon" placeholder="Coupon Code">
-
-                                <div
+                                <div @click="applyCoupon"
                                     class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
                                     Apply coupon
                                 </div>
@@ -101,6 +125,7 @@ export default {
                                 class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
                                 Update Cart
                             </div>
+                            <p :class="coupon_info=='Coupon not found!'? 'text-danger':'text-success'">{{ coupon_info }}</p>
                         </div>
                     </div>
                 </div>
@@ -182,7 +207,7 @@ export default {
 
                             <div class="size-209 p-t-1">
                                 <span class="mtext-110 cl2">
-                                    ৳ 79.65
+                                    ৳ {{ finalTotal }}
                                 </span>
                             </div>
                         </div>
