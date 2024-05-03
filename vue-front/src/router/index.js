@@ -8,6 +8,15 @@ import FrontPage from "@/front-panel/views/FrontPage.vue";
 import CartsAdd from "@/admin-panel/fazle/views/CartsAdd.vue";
 import CartLayout from "@/admin-panel/fazle/views/CartLayout.vue";
 
+import CouponsAdd from "@/admin-panel/ruhul/views/CouponsAdd.vue";
+import CouponsLaout from "@/admin-panel/ruhul/views/CouponsLaout.vue";
+import CouponsList from "@/admin-panel/ruhul/views/CouponsList.vue";
+import UpdateCupons from "@/admin-panel/ruhul/views/UpdateCupons.vue";
+import UseCuponsAdd from "@/admin-panel/ruhul/views/UseCuponsAdd.vue";
+import UsecuponList from "@/admin-panel/ruhul/views/UsecuponList.vue";
+import UpdateUseCoupon from "@/admin-panel/ruhul/views/UpdateUseCoupon.vue";
+
+
 import CartTable from "@/admin-panel/fazle/views/CartTable.vue";
 import UpdateCart from "@/admin-panel/fazle/views/UpdateCart.vue";
 
@@ -74,6 +83,42 @@ const router = createRouter({
           name: "products",
           component: Products,
         },
+        {
+          path: "coupons",
+          name: "coupons",
+          component: CouponsLaout,
+          children: [
+            {
+              path: "coupons-add",
+              name: "couponsAdd",
+              component: CouponsAdd,
+            },
+            {
+              path: "coupons-list",
+              name: "couponsshow",
+              component: CouponsList,
+            },
+            {
+              path: "coupons-update/:id",
+              name: "couponsUpdate",
+              component: UpdateCupons,
+            },
+            {
+              path: "coupons-use",
+              name: "couponsUse",
+              component: UseCuponsAdd,
+            },
+            {
+              path: "coupons-uselist",
+              name: "couponsUselist",
+              component: UsecuponList,
+            },
+            {
+              path: "coupons-useupdate/:id",
+              name: "couponsUseUpdate",
+              component: UpdateUseCoupon,
+            },
+          ],
         {
           path: 'categorylist',
           name: 'categorylist',
