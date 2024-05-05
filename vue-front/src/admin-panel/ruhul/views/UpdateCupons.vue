@@ -78,12 +78,12 @@ export default {
             </div>
             <div class="mb-3">
               <label class="form-label" for="basic-default-fullname">Valid_from</label>
-              <input type="datetime-local" v-model="valid_from" class="form-control" 
+              <input type="datetime" v-model="valid_from" class="form-control" 
                 placeholder="valid_from" />
             </div>
             <div class="mb-3">
               <label class="form-label" for="basic-default-fullname">Valid_to</label>
-              <input type="datetime-local" v-model="valid_to" class="form-control" 
+              <input type="datetime" v-model="valid_to" class="form-control" 
                 placeholder="valid_to" />
             </div>
             <div class="mb-3">
