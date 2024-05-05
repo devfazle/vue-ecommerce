@@ -28,7 +28,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(data, k) in list">
+                                        <tr v-for="(data, k) in list" :key="k">
                                             <td>{{++k}}</td>
                                             <td>{{ data.date }}</td>
                                             <td>{{ data.method }}</td>

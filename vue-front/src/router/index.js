@@ -151,6 +151,11 @@ const router = createRouter({
           name: "cart",
           component: () => import('@/front-panel/views/ShoppingCart.vue'),
         },
+        {
+          path: 'testone',
+          name: 'testone',
+          component: () => import('@/front-panel/views/TestOne.vue'),
+        },
       ],
     },
   ],

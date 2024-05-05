@@ -9,6 +9,8 @@ export default {
             coupon_persentage: 0,
             coupon_code: '',
             coupon_info: '',
+            pay: 0,
+            paymentMethod: 'null'
         }
     },
     props: {
@@ -41,8 +43,21 @@ export default {
                     this.coupon_persentage = 0;
                     console.log(error);
                 });
+        },
+        payNext() {
+            this.pay++;
+            if (this.pay == 4) {
+                setTimeout(() => {
+                    this.pay = 0;
+                }, 10000);
+            }
         }
     },
+    watch: {
+        paymentMethod(newVal) {
+            this.paymentMethod === 'bkash' ? this.pay = 1 : this.pay = 0;
+        }
+    }
 }
 </script>
 
@@ -63,7 +78,7 @@ export default {
 
 
     <!-- Shoping Cart -->
-    <form class="bg0 p-t-75 p-b-85">
+    <div class="bg0 p-t-75 p-b-85">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -125,7 +140,9 @@ export default {
                                 class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
                                 Update Cart
                             </div>
-                            <p :class="coupon_info=='Coupon not found!'? 'text-danger':'text-success'">{{ coupon_info }}</p>
+                            <p :class="coupon_info == 'Coupon not found!' ? 'text-danger' : 'text-success'">{{
+                                coupon_info }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -158,46 +175,84 @@ export default {
                             </div>
 
                             <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-                                <p class="stext-111 cl6 p-t-2">
-                                    There are no shipping methods available. Please double check your address, or
-                                    contact us if you need any help.
-                                </p>
-
-                                <div class="p-t-15">
-                                    <span class="stext-112 cl8">
-                                        Calculate Shipping
-                                    </span>
-
-                                    <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                                        <select class="js-select2" name="time">
-                                            <option>Select a country...</option>
-                                            <option>USA</option>
-                                            <option>UK</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
+                                <div class="">
 
                                     <div class="bor8 bg0 m-b-12">
                                         <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state"
-                                            placeholder="State /  country">
+                                            placeholder="Phone">
                                     </div>
 
                                     <div class="bor8 bg0 m-b-22">
                                         <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode"
-                                            placeholder="Postcode / Zip">
-                                    </div>
-
-                                    <div class="flex-w">
-                                        <div
-                                            class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-                                            Update Totals
-                                        </div>
+                                            placeholder="Address">
                                     </div>
 
                                 </div>
                             </div>
                         </div>
+                        <!-- this will change -->
+                        <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                            <div class="size-208 w-full-ssm">
+                                <span class="stext-110 cl2">
+                                    Payment:
+                                </span>
+                            </div>
 
+                            <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
+                                <div class="">
+                                    <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12">
+                                        <select v-model="paymentMethod" class="js-select2" name="time">
+                                            <option value="null">Select a country...</option>
+                                            <option value="bkash">Bkash</option>
+                                            <option value="cash">Cash On Delivery</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-w flex-t bor12 p-t-15 p-b-30" v-show="pay > 0">
+                            <img class="img-fluid" src="@/assets/front-assets/images/bkash-payment.png" alt="">
+                            <div v-show="pay == 1">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Enter Your Bkash Number:</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
+                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                                    </div>
+                                </div>
+                                <button @click="payNext" class="btn btn-primary">Submit</button>
+                            </div>
+                            <div v-show="pay == 2">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Enter Your Pin Number:</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
+                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                                    </div>
+                                </div>
+                                <button @click="payNext" class="btn btn-primary">Submit</button>
+                            </div>
+                            <div v-show="pay == 3">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Enter Amount:</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
+                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                                    </div>
+                                </div>
+                                <button @click="payNext" class="btn btn-primary">Submit</button>
+                            </div>
+                            <div v-show="pay == 4">
+                                <div class="mb-3">
+                                    <h1
+                                        style="color: #F16522; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 30px; font-weight: 700; line-height: 34px; margin-bottom: 0; margin-top: 0;">
+                                        Payment received</h1>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ends here -->
                         <div class="flex-w flex-t p-t-27 p-b-33">
                             <div class="size-208">
                                 <span class="mtext-101 cl2">
@@ -215,9 +270,10 @@ export default {
                         <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
                             Proceed to Checkout
                         </button>
+
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </template>
