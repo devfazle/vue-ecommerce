@@ -24,7 +24,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('carts',CartsController::class)->names('carts');
     Route::resource('categorys',CategoryController::class)->names('categorys');
     Route::resource('cupons',CuponsController::class)->names('cupons');
-    Route::resource('couponusages',CouponUsagesController::class)->names('couponusages');
+    Route::post('checkcoupon',[CuponsController::class, 'checkCoupon'])->name('checkcoupon');
     Route::resource('orderitems',OrderItemsController::class)->names('orderitems');
     Route::resource('orders',OrdersController::class)->names('orders');
     Route::resource('payments',PaymentsController::class)->names('payments');

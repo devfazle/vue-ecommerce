@@ -40,6 +40,7 @@ export default {
             axios.post("http://127.0.0.1:8000/api/admin/carts", cartData)
                 .then((response) => {
                     console.log(response);
+                    this.$router.push({ name: 'cartTable' });
                 });
         }
 

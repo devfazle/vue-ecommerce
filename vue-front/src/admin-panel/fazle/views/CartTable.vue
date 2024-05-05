@@ -37,7 +37,7 @@ export default {
                     <h5 class="mb-0">Cart List</h5>
                 </div>
                 <div class="col-auto">
-                    <router-link :to="{name: 'cartAdd'}" class="btn btn-primary btn-lg">Add More</router-link>
+                    <router-link :to="{ name: 'cartAdd' }" class="btn btn-primary btn-lg">Add More</router-link>
                 </div>
             </div>
         </div>
@@ -59,8 +59,9 @@ export default {
                         <td>{{ c.quantity }}</td>
                         <td>{{ c.user.name }}</td>
                         <td>
-                            <router-link :to="{ name: 'cartUpdate', params: { id: c.id } }" class="btn btn-info mr-2">Edit</router-link>
-                            <button @click="deleteCart(c.id)" class="btn btn-danger">Delete</button>
+                            <router-link :to="{ name: 'cartUpdate', params: { id: c.id } }"
+                                class="btn btn-primary">Edit</router-link>
+                            <button @click="deleteCart(c.id)" class="btn btn-danger mx-2">Delete</button>
                         </td>
                     </tr>
                 </tbody>

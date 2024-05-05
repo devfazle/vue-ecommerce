@@ -226,8 +226,8 @@ const router = createRouter({
           component: PaymentEdit
         },
         {
-          path: "cart",
-          name: "cart",
+          path: "cart1",
+          name: "cartOne",
           component: CartLayout,
           children: [
             {
@@ -263,6 +263,16 @@ const router = createRouter({
           path: "products",
           name: "products",
           component: Product,
+        },
+        {
+          path: "shopping-cart",
+          name: "cart",
+          component: () => import('@/front-panel/views/ShoppingCart.vue'),
+        },
+        {
+          path: 'testone',
+          name: 'testone',
+          component: () => import('@/front-panel/views/TestOne.vue'),
         },
       ],
     },

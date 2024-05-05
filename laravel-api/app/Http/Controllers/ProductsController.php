@@ -16,7 +16,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('id', 'desc')->with('category','sub_category','wishlist','order_item','purchase','cart','photo')->get();
+        $products = Product::orderBy('id', 'desc')->with('category','sub_category','photo')->get();
         $category_id=Category::with('sub_category')->orderBy('id', 'desc')->get();
         $sub_category_id=Sub_category::orderBy('id', 'desc')->get();
         $tdata=( [$products,$category_id,$sub_category_id]);
@@ -68,7 +68,7 @@ class ProductsController extends Controller
      */
     public function show(string $id)
     {
-        $products = Product::with('category','sub_category','wishlist','order_item','purchase','cart')->find($id);
+        $products = Product::with('category','sub_category','photo')->find($id);
         return $this->sendResponse($products, 'Product list fetched successfully!');
 
     }
