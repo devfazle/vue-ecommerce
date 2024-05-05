@@ -119,6 +119,7 @@ const router = createRouter({
               component: UpdateUseCoupon,
             },
           ],
+        },
         {
           path: 'categorylist',
           name: 'categorylist',
