@@ -128,6 +128,7 @@
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Pages</span>
             </li>
+            <!-- coupons list start -->
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -151,6 +152,27 @@
                     </li>
                 </ul>
             </li>
+            <!-- coupons list end -->
+            <!-- coupons list start -->
+            <li class="menu-item">
+                <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="Account Settings">Coupons</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <router-link :to="{name: 'couponsshow'}" class="menu-link">
+                            <div data-i18n="Account">Coupon Show</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <router-link :to="{name: 'couponsUselist'}" class="menu-link">
+                            <div data-i18n="Account">Use Coupon Show</div>
+                        </router-link>
+                    </li>
+                </ul>
+            </li>
+            <!-- coupons list end -->
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
@@ -332,7 +354,6 @@
                     <div data-i18n="Boxicons">Boxicons</div>
                 </a>
             </li>
-
             <!-- Forms & Tables -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
             <!-- Forms -->

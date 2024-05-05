@@ -16,8 +16,11 @@ export default {
       });
     },
     deleteProduct(id) {
-      axios.delete(`${this.url}/${id}`);
-      this.getProductList();
+      axios.delete(`${this.url}/${id}`)
+      .then((response) => {
+                this.getProductList();
+            });
+      
     },
   },
   mounted() {
@@ -122,15 +125,18 @@ export default {
                   <td>10</td>
                   <td>Published</td>
                   <td>
-                    <button class="btn btn-primary" @click="view(data.id)">
+                    <button class="btn btn-primary btn-sm" @click="view(data.id)">
                       View
                     </button>
-                    <button class="btn btn-success" @click="edit(data.id)">
+                    <button class="btn btn-success btn-sm" @click="edit(data.id)">
                       Edit
                     </button>
-                    <button class="btn btn-danger" @click="deleteProduct(data.id)">
+                    <button class="btn btn-danger btn-sm" @click="deleteProduct(data.id)" >
                       Delete
                     </button>
+                    <!-- <span class="text-primary"><i class='bx bx-show' @click="showProduct(data.id)"></i></span>
+                    <span class="text-warning"><i class='bx bx-edit' @click="editProduct(data.id)"></i></span>
+                    <span class="text-danger"><i class='bx bx-trash ' @click="deleteProduct(data.id)"></i></span> -->
                   </td>
                 </tr>
               </tbody>
