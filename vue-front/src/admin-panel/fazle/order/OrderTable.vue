@@ -46,6 +46,7 @@ export default {
                 <thead>
                     <tr>
                         <th>SL</th>
+                        <th>Order ID</th>
                         <th>Price</th>
                         <th>Date</th>
                         <th>User ID</th>
@@ -54,6 +55,7 @@ export default {
                 <tbody class="table-border-bottom-0">
                     <tr v-for="(o, i) in orders" :key="i">
                         <td>{{ i + 1 }}</td>
+                        <td>{{ o.id }}</td>
                         <td>{{ o.total_price }}</td>
                         <td>{{ o.order_date }}</td>
                         <td>{{ o.user_id }}</td>
