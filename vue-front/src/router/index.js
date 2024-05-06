@@ -44,6 +44,9 @@ import Wishlistlayout from '@/admin-panel/foysal/components/wishlist/Wishlistlay
 import Wishlistadd from '@/admin-panel/foysal/components/wishlist/Wishlistadd.vue'
 import Wishlisttable from '@/admin-panel/foysal/components/wishlist/Wishlisttable.vue'
 import Wishlistupdate from '@/admin-panel/foysal/components/wishlist/Wishlistupdate.vue'
+import OrderTable from "@/admin-panel/fazle/order/OrderTable.vue";
+import OrderLayout from "@/admin-panel/fazle/order/OrderLayout.vue";
+import OrderDetails from "@/admin-panel/fazle/order/OrderDetails.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -128,55 +131,55 @@ const router = createRouter({
         {
           path: 'category',
           name: 'category',
-          component:Categoryadd,
+          component: Categoryadd,
         },
         {
           path: 'categoryupdate/:id',
           name: 'categoryupdate',
-          component:Categoryupdate,
+          component: Categoryupdate,
         },
         {
-          path:'sub_category',
-          name:'sub-category',
+          path: 'sub_category',
+          name: 'sub-category',
           component: Sub_categoryLayout,
           children: [
             {
               path: 'sub_add',
               name: 'sub_add',
-              component:Sub_categoryAdd,
+              component: Sub_categoryAdd,
             },
             {
               path: 'sub_list',
               name: 'sub_list',
-              component:Sub_categorylist,
+              component: Sub_categorylist,
             },
             {
               path: 'sub_update/:id',
               name: 'sub_update',
-              component:Sub_categoryupdate,
+              component: Sub_categoryupdate,
             },
-          
+
           ]
         },
         {
-          path:'wishlist',
-          name:'wishlist',
-          component:Wishlistlayout,
+          path: 'wishlist',
+          name: 'wishlist',
+          component: Wishlistlayout,
           children: [
             {
               path: 'wishlistadd',
               name: 'wishlistadd',
-              component:Wishlistadd,
+              component: Wishlistadd,
             },
             {
               path: 'wishlisttable',
               name: 'wishlisttable',
-              component:Wishlisttable,
+              component: Wishlisttable,
             },
             {
               path: 'wishlistupdate/:id',
               name: 'wishlistupdate',
-              component:Wishlistupdate,
+              component: Wishlistupdate,
             },
           ]
         },
@@ -246,6 +249,24 @@ const router = createRouter({
               component: UpdateCart,
             },
           ],
+        },
+        {
+          path: 'order-layout',
+          name: 'order-layout',
+          component: OrderLayout,
+          children: [
+            {
+              path: 'order-list',
+              name: 'order-list',
+              component: OrderTable
+            },
+            {
+              path: 'order-details/:id',
+              name: 'order-details',
+              component: OrderDetails
+            },
+
+          ]
         },
       ],
     },
