@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Sub_category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
@@ -16,10 +17,10 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('id', 'desc')->with('category','sub_category','wishlist','order_item','purchase','cart','photo')->get();
-        $category_id=Category::with('sub_category')->orderBy('id', 'desc')->get();
-        $sub_category_id=Sub_category::orderBy('id', 'desc')->get();
-        $tdata=( [$products,$category_id,$sub_category_id]);
+        $products = Product::orderBy('id', 'desc')->with('category', 'sub_category', 'wishlist', 'order_item', 'purchase', 'cart', 'photo')->get();
+        $category_id = Category::with('sub_category')->orderBy('id', 'desc')->get();
+        $sub_category_id = Sub_category::orderBy('id', 'desc')->get();
+        $tdata = ([$products, $category_id, $sub_category_id]);
         return $this->sendResponse($tdata, 'Product list fetched successfully!');
 
     }
@@ -54,9 +55,9 @@ class ProductsController extends Controller
         $input['description'] = $request->description;
         $input['sub_category_id'] = $request->sub_category_id;
 
-        $path['path']=$request->path;
+        $path['path'] = $request->path;
         $file = $request->path;
-        $filename = time().'.'.$file->getClientOriginalExtension();
+        $filename = time() . '.' . $file->getClientOriginalExtension();
         $request->path->move(public_path('photos/products'), $filename);
         $products = Product::create($input);
         $products->photo()->create(['path' => $filename]);
@@ -68,7 +69,7 @@ class ProductsController extends Controller
      */
     public function show(string $id)
     {
-        $products = Product::with('category','sub_category','wishlist','order_item','purchase','cart')->find($id);
+        $products = Product::with('category', 'sub_category', 'wishlist', 'order_item', 'purchase', 'cart', 'photo')->find($id);
         return $this->sendResponse($products, 'Product list fetched successfully!');
 
     }
@@ -78,14 +79,14 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        $products = Product::with('category','sub_category','wishlist','order_item','purchase','cart')->find($id);
+        $products = Product::with('category', 'sub_category', 'wishlist', 'order_item', 'purchase', 'cart', 'photo')->find($id);
         return $this->sendResponse($products, 'Product fetched successfully!');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
@@ -93,13 +94,30 @@ class ProductsController extends Controller
             'price' => 'required',
             'description' => 'required',
             'sub_category_id' => 'required',
+            'path' => 'required',
+            // 'path' is not required if you are not updating the image every time
         ]);
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors(), 422);
         }
+        $product = Product::find($id);
+        if (is_null($product)) {
+            return $this->sendError('Product not found.');
+        }
         $input = $request->all();
-        $products = Product::find($id)->update($input);
-        return $this->sendResponse($products, 'Product updated successfully!');
+        // If there's a file (image) included in the request, handle the file upload
+        if ($request->path) {
+            // Delete the old photo if it exists
+            $oldFilename = $product->photo->path;
+            Storage::delete('photos/products/' . $oldFilename);
+            $file = $request->path;
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('photos/products'), $filename);
+            // Update the product's photo path
+            $product->photo()->update(['path' => $filename]);
+        }
+        $product->update($input);
+        return $this->sendResponse($input, 'Product updated successfully!');
     }
 
     /**

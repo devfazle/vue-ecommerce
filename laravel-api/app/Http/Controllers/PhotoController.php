@@ -68,9 +68,17 @@ class PhotoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Photo $photo)
+    public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'path' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors(), 422);
+        }
+        $input = $request->all();
+        $photos = Photo::find($id)->update($input);
+        return $this->sendResponse($photos, 'Photo updated successfully!');
     }
 
     /**

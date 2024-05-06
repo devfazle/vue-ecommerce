@@ -5,7 +5,7 @@ export default {
         return {
             url: "http://127.0.0.1:8000/api/admin/products",
             category_url: "http://127.0.0.1:8000/api/admin/categorys",
-            id:this.$route.params.id,
+            id: this.$route.params.id,
             category_id: 0,
             name: "",
             price: "",
@@ -28,15 +28,16 @@ export default {
             });
         },
         getProduct() {
-            axios.get(this.url+'/'+this.id+'/edit').then((response) => {
-               const alldata= response.data.data;
-               console.log(alldata)
-             this.id=this.$route.params.id;
-             this.category_id=alldata.category.id;
-             this.name=alldata.name;
-             this.price=alldata.price;
-             this.description=alldata.description;
-             this.sub_category_id=alldata.sub_category.id;
+            axios.get(this.url + '/' + this.id + '/edit').then((response) => {
+                const alldata = response.data.data;
+                //console.log(alldata)
+                this.id = this.$route.params.id;
+                this.category_id = alldata.category.id;
+                this.name = alldata.name;
+                this.price = alldata.price;
+                this.description = alldata.description;
+                this.sub_category_id = alldata.sub_category.id;
+                this.path = alldata.photo.path;
             });
         },
         setCategory() {
@@ -54,31 +55,60 @@ export default {
         onFileSelected(event) {
             this.path = event.target.files[0];
         },
+        // update() {
+        //     const formData = new FormData();
+        //     formData.append('photo', this.path);
+        //     const alldata = {
+        //         category_id: this.category_id,
+        //         name: this.name,
+        //         price: this.price,
+        //         description: this.description,
+        //         sub_category_id: this.sub_category_id,
+        //         path: this.path
+        //     }
+        //     axios.put(this.url + '/' + this.id, alldata)
+        //         .then((response) => {
+        //             console.log(response)
+        //             // this.$router.push({ name: 'productslist' });
+        //         });
+        //         //console.log(formData);
+        // },
         update() {
             const formData = new FormData();
-            formData.append('photo', this.path);
-            const alldata = {
-                category_id: this.category_id,
-                name: this.name,
-                price: this.price,
-                description: this.description,
-                sub_category_id: this.sub_category_id,
-                path: this.path
+            if (this.path) {
+                formData.append('path', this.path);
             }
-            axios.put(this.url+'/'+this.id, alldata, {
+            formData.append('category_id', this.category_id);
+            formData.append('name', this.name);
+            formData.append('price', this.price);
+            formData.append('description', this.description);
+            formData.append('sub_category_id', this.sub_category_id);
+
+                //Assuming you have a product ID to update
+            axios.post(this.url + '/' + this.id + '?_method=PUT', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             })
             .then((response) => {
-                this.$router.push({ name: 'productslist' });
-            });
-            
+                    console.log(response)
+                    // this.$router.push({ name: 'productslist' });
+                });
+            for (let [key, value] of formData.entries()) {
+                console.log(value);
+            }
+            //console.log(formData);
+            // axios.put(this.url + '/' + this.id, alldata)
+            //     .then((response) => {
+            //         console.log(response)
+            //         // this.$router.push({ name: 'productslist' });
+            //     });
+            // //console.log(formData);
         },
     },
     mounted() {
         this.getProductList(),
-        this.getProduct();
+            this.getProduct();
     },
 }
 </script>
@@ -125,6 +155,10 @@ export default {
                                 <div class="input-group">
                                     <input type="file" class="form-control" @change="onFileSelected" />
                                 </div>
+                            </div>
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" :src="`http://127.0.0.1:8000/photos/products/${path}`"
+                                    alt="No image find">
                             </div>
                         </div>
                     </div>
