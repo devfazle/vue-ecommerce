@@ -16,6 +16,7 @@ export default {
             categorylist: [],
             sub_categorylist: [],
             category_id_null: 0,
+            imagePreview: null,
         }
     },
     methods: {
@@ -53,7 +54,18 @@ export default {
         },
         onFileSelected(event) {
             this.path = event.target.files[0];
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+        this.createImagePreview(file);
+      }
         },
+        createImagePreview(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imagePreview = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
         update() {
             const formData = new FormData();
             if (this.path) {
@@ -126,9 +138,9 @@ export default {
                                     <input type="file" class="form-control" @change="onFileSelected" />
                                 </div>
                             </div>
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" :src="`http://127.0.0.1:8000/photos/products/${path}`"
-                                    alt="No image find">
+                            <div class="card" style="width: 18rem;" >
+                            <img class="card-img-top" :src="`http://127.0.0.1:8000/photos/products/${path}`">
+                            <img v-if="imagePreview" :src="imagePreview" class="preview-image"/>
                             </div>
                         </div>
                     </div>

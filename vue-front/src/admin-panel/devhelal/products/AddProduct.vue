@@ -15,6 +15,7 @@ export default {
             categorylist: [],
             sub_categorylist: [],
             category_id_null: 0,
+            imagePreview: null,
         }
     },
     methods: {
@@ -40,7 +41,18 @@ export default {
         },
         onFileSelected(event) {
             this.path = event.target.files[0];
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+        this.createImagePreview(file);
+      }
         },
+        createImagePreview(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imagePreview = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
         save() {
             const formData = new FormData();
             formData.append('photo', this.path);
@@ -111,6 +123,9 @@ export default {
                                 <div class="input-group">
                                     <input type="file" class="form-control" @change="onFileSelected" />
                                 </div>
+                                <div class="card" style="width: 18rem;">
+                                    <img v-if="imagePreview" :src="imagePreview" class="preview-image"/>
+                            </div>
                             </div>
                         </div>
                     </div>
