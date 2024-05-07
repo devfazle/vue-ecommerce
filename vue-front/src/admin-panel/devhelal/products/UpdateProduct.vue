@@ -5,6 +5,7 @@ export default {
         return {
             url: "http://127.0.0.1:8000/api/admin/products",
             category_url: "http://127.0.0.1:8000/api/admin/categorys",
+            id: this.$route.params.id,
             category_id: 0,
             name: "",
             price: "",
@@ -26,6 +27,18 @@ export default {
                 this.categorylist = category;
             });
         },
+        getProduct() {
+            axios.get(this.url + '/' + this.id + '/edit').then((response) => {
+                const alldata = response.data.data;
+                this.id = this.$route.params.id;
+                this.category_id = alldata.category.id;
+                this.name = alldata.name;
+                this.price = alldata.price;
+                this.description = alldata.description;
+                this.sub_category_id = alldata.sub_category.id;
+                this.path = alldata.photo.path;
+            });
+        },
         setCategory() {
             const id = ("dev Helal:", this.category_id);
             this.category_id_null = id;
@@ -41,30 +54,31 @@ export default {
         onFileSelected(event) {
             this.path = event.target.files[0];
         },
-        save() {
+        update() {
             const formData = new FormData();
-            formData.append('photo', this.path);
-            const alldata = {
-                category_id: this.category_id,
-                name: this.name,
-                price: this.price,
-                description: this.description,
-                sub_category_id: this.sub_category_id,
-                path: this.path
+            if (this.path) {
+                formData.append('photo', this.path);
             }
-            axios.post(this.url, alldata, {
+            formData.append('category_id', this.category_id);
+            formData.append('name', this.name);
+            formData.append('price', this.price);
+            formData.append('description', this.description);
+            formData.append('sub_category_id', this.sub_category_id);
+
+            axios.post(this.url + '/' + this.id + '?_method=PUT', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            .then((response) => {
-                this.$router.push({ name: 'productslist' });
-            });
-            
+                .then((response) => {
+                    console.log(response)
+                    this.$router.push({ name: 'productslist' });
+                });
         },
     },
     mounted() {
-        this.getProductList();
+        this.getProductList(),
+            this.getProduct();
     },
 }
 </script>
@@ -72,13 +86,13 @@ export default {
     <div class="container-xxl flex-grow-1 container-p-y text-dark">
         <div class="col-md-12 row">
             <div class="col-md-4 ">
-                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Add a New Product</h4>
+                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Update Product</h4>
             </div>
             <div class="col-md-3 "></div>
             <div class="col-md-5 ">
                 <router-link :to="{ name: 'productslist' }" class="btn btn-outline-danger">Discard</router-link>
                 <button class="btn btn-dark ml-2"> Save Draft</button>
-                <button class="btn btn-primary ml-2" @click="save()"> Publish Product</button>
+                <button class="btn btn-primary ml-2" @click="update()"> Update Product</button>
             </div>
 
         </div>
@@ -111,6 +125,10 @@ export default {
                                 <div class="input-group">
                                     <input type="file" class="form-control" @change="onFileSelected" />
                                 </div>
+                            </div>
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" :src="`http://127.0.0.1:8000/photos/products/${path}`"
+                                    alt="No image find">
                             </div>
                         </div>
                     </div>
@@ -162,7 +180,7 @@ export default {
                         <div class="row">
                             <div class="col-md-10 mt-2">
                                 <select class="form-select col-md-10 mt-2" v-model="sub_category_id"
-                                    :disabled="sub_categorylist == ''">
+                                    :disabled="category_id == ''">
                                     <option value="0">Sub Category</option>
                                     <option v-for="(scdata, i) in sub_categorylist" :key="i" :value="scdata.id">{{
                                         scdata.name }}</option>

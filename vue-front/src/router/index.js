@@ -32,6 +32,7 @@ import RoleEdit from '@/admin-panel/nazad/Roles/RoleEdit.vue'
 import Payment from '@/admin-panel/nazad/Payment/Payment.vue'
 import PaytmentCreate from '@/admin-panel/nazad/Payment/PaytmentCreate.vue'
 import PaymentEdit from '@/admin-panel/nazad/Payment/PaymentEdit.vue'
+import UpdateProduct from "@/admin-panel/devhelal/products/UpdateProduct.vue";
 
 import Categorylist from '@/admin-panel/foysal/components/category/Categorylist.vue'
 import Categoryadd from '@/admin-panel/foysal/components/category/Categoryadd.vue'
@@ -75,12 +76,17 @@ const router = createRouter({
           path: "productlist",
           name: "productslist",
           component: ProductsList,
-        },
+        },  
         {
           path: "addproduct",
           name: "addproducts",
           component: AddProduct,
         },
+            {
+              path: "updateproduct/:id",
+              name: "updateproduct",
+              component: UpdateProduct,
+            },
         {
           path: "product",
           name: "products",
