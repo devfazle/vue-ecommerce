@@ -86,7 +86,7 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
@@ -114,7 +114,7 @@ class ProductsController extends Controller
              $product->photo()->update(['path' => $filename]);
         }
         $product->update($input);
-        return $this->sendResponse($input, 'Product updated successfully!');
+        return $this->sendResponse($product, 'Product updated successfully!');
     }
 
     /**
