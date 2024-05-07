@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Sub_category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
@@ -94,23 +95,20 @@ class ProductsController extends Controller
             'price' => 'required',
             'description' => 'required',
             'sub_category_id' => 'required',
-            'path' => 'required',
-            // 'path' is not required if you are not updating the image every time
         ]);
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors(), 422);
         }
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         if (is_null($product)) {
             return $this->sendError('Product not found.');
         }
         $input = $request->all();
-        // If there's a file (image) included in the request, handle the file upload
-        if ($request->path) {
-            // Delete the old photo if it exists
+        if ($request->hasFile('photo')) {
+                // Delete the old photo if it exists
             $oldFilename = $product->photo->path;
-            Storage::delete('photos/products/' . $oldFilename);
-            $file = $request->path;
+            File::delete('photos/products/' . $oldFilename);
+            $file = $request->photo;
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('photos/products'), $filename);
             // Update the product's photo path

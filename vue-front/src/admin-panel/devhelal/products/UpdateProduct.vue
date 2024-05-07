@@ -30,7 +30,6 @@ export default {
         getProduct() {
             axios.get(this.url + '/' + this.id + '/edit').then((response) => {
                 const alldata = response.data.data;
-                //console.log(alldata)
                 this.id = this.$route.params.id;
                 this.category_id = alldata.category.id;
                 this.name = alldata.name;
@@ -55,28 +54,10 @@ export default {
         onFileSelected(event) {
             this.path = event.target.files[0];
         },
-        // update() {
-        //     const formData = new FormData();
-        //     formData.append('photo', this.path);
-        //     const alldata = {
-        //         category_id: this.category_id,
-        //         name: this.name,
-        //         price: this.price,
-        //         description: this.description,
-        //         sub_category_id: this.sub_category_id,
-        //         path: this.path
-        //     }
-        //     axios.put(this.url + '/' + this.id, alldata)
-        //         .then((response) => {
-        //             console.log(response)
-        //             // this.$router.push({ name: 'productslist' });
-        //         });
-        //         //console.log(formData);
-        // },
         update() {
             const formData = new FormData();
             if (this.path) {
-                formData.append('path', this.path);
+                formData.append('photo', this.path);
             }
             formData.append('category_id', this.category_id);
             formData.append('name', this.name);
@@ -84,26 +65,15 @@ export default {
             formData.append('description', this.description);
             formData.append('sub_category_id', this.sub_category_id);
 
-                //Assuming you have a product ID to update
             axios.post(this.url + '/' + this.id + '?_method=PUT', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-            .then((response) => {
+                .then((response) => {
                     console.log(response)
-                    // this.$router.push({ name: 'productslist' });
+                    this.$router.push({ name: 'productslist' });
                 });
-            for (let [key, value] of formData.entries()) {
-                console.log(value);
-            }
-            //console.log(formData);
-            // axios.put(this.url + '/' + this.id, alldata)
-            //     .then((response) => {
-            //         console.log(response)
-            //         // this.$router.push({ name: 'productslist' });
-            //     });
-            // //console.log(formData);
         },
     },
     mounted() {
