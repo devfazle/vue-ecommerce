@@ -50,7 +50,10 @@ class OrderItemsController extends Controller
      */
     public function show(string $id)
     {
-        $order_items = Order_item::with('product', 'order')->find($id);
+        $order_items = Order_item::with('product', 'order')
+        ->where('order_id', $id)
+        ->get();
+        
         return $this->sendResponse($order_items, 'Order_item list fetched successfully!');
 
     }

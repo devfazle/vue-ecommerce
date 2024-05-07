@@ -21,6 +21,7 @@ class ProductsController extends Controller
         $category_id = Category::with('sub_category')->orderBy('id', 'desc')->get();
         $sub_category_id = Sub_category::orderBy('id', 'desc')->get();
         $tdata = ([$products, $category_id, $sub_category_id]);
+
         return $this->sendResponse($tdata, 'Product list fetched successfully!');
 
     }
@@ -71,7 +72,6 @@ class ProductsController extends Controller
     {
         $products = Product::with('category', 'sub_category', 'wishlist', 'order_item', 'purchase', 'cart', 'photo')->find($id);
         return $this->sendResponse($products, 'Product list fetched successfully!');
-
     }
 
     /**

@@ -62,7 +62,7 @@
                         </g>
                     </svg>
                 </span>
-                <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+                <span class="app-brand-text demo menu-text fw-bolder ms-2">vuemart</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -128,6 +128,7 @@
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Pages</span>
             </li>
+            <!-- coupons list start -->
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -140,9 +141,9 @@
                         </router-link>
                     </li>
                     <li class="menu-item">
-                        <a href="pages-account-settings-notifications.html" class="menu-link">
-                            <div data-i18n="Notifications">Notifications</div>
-                        </a>
+                        <router-link :to="{name: 'order-list'}" class="menu-link">
+                            <div data-i18n="Notifications">Orders</div>
+                        </router-link>
                     </li>
                     <li class="menu-item">
                         <a href="pages-account-settings-connections.html" class="menu-link">
@@ -151,16 +152,37 @@
                     </li>
                 </ul>
             </li>
+            <!-- coupons list end -->
+            <!-- coupons list start -->
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                    <div data-i18n="Authentications">Authentications</div>
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="Account Settings">Coupons</div>
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <a href="auth-login-basic.html" class="menu-link" target="_blank">
-                            <div data-i18n="Basic">Login</div>
-                        </a>
+                        <router-link :to="{name: 'couponsshow'}" class="menu-link">
+                            <div data-i18n="Account">Coupon Show</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <router-link :to="{name: 'couponsUselist'}" class="menu-link">
+                            <div data-i18n="Account">Use Coupon Show</div>
+                        </router-link>
+                    </li>
+                </ul>
+            </li>
+            <!-- coupons list end -->
+            <li class="menu-item">
+                <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                    <div data-i18n="Authentications">Product</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <router-link :to="{name: 'productslist'}" class="menu-link">
+                            <div data-i18n="Basic">Product</div>
+                        </router-link>
                     </li>
                     <li class="menu-item">
                         <a href="auth-register-basic.html" class="menu-link" target="_blank">
@@ -177,18 +199,18 @@
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                    <div data-i18n="Misc">Misc</div>
+                    <div data-i18n="Misc">Categories</div>
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <a href="pages-misc-error.html" class="menu-link">
-                            <div data-i18n="Error">Error</div>
-                        </a>
+                        <router-link :to="{name: 'categorylist'}" class="menu-link">
+                            <div data-i18n="Error">Category</div>
+                        </router-link>
                     </li>
                     <li class="menu-item">
-                        <a href="pages-misc-under-maintenance.html" class="menu-link">
-                            <div data-i18n="Under Maintenance">Under Maintenance</div>
-                        </a>
+                        <router-link :to="{name: 'sub_list'}" class="menu-link">
+                            <div data-i18n="Under Maintenance">Sub Category</div>
+                        </router-link>
                     </li>
                 </ul>
             </li>
@@ -332,7 +354,6 @@
                     <div data-i18n="Boxicons">Boxicons</div>
                 </a>
             </li>
-
             <!-- Forms & Tables -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
             <!-- Forms -->

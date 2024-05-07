@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Cupon;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;

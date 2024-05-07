@@ -16,7 +16,6 @@ class CuponsController extends Controller
     {
         $cupons = Cupon::orderBy('id', 'desc')->with('cupon_usege')->get();
         return $this->sendResponse($cupons, 'Cupon list fetched successfully!');
-
     }
 
     /**
@@ -71,17 +70,17 @@ class CuponsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'code' => 'required',
-            'percentage' => 'required',
-            'valid_from' => 'required',
-            'valid_to' => 'required',
-            'max_uses' => 'required',
-            'use_count' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors(), 422);
-        }
+        // $validator = Validator::make($request->all(), [
+        //     'code' => 'required',
+        //     'percentage' => 'required',
+        //     'valid_from' => 'required',
+        //     'valid_to' => 'required',
+        //     'max_uses' => 'required',
+        //     'use_count' => 'required',
+        // ]);
+        // if ($validator->fails()) {
+        //     return $this->sendError('Validation Error.', $validator->errors(), 422);
+        // }
         $input = $request->all();
         $cupons = Cupon::find($id)->update($input);
         return $this->sendResponse($cupons, 'Cupon updated successfully!');
@@ -94,5 +93,17 @@ class CuponsController extends Controller
     {
         $cupons = Cupon::find($id)->delete();
         return $this->sendResponse($cupons, 'Cupon deleted successfully!');
+    }
+
+    // custom functions by fazle
+    public function checkCoupon(Request $r)
+    {
+        $coupon = Cupon::where('code', $r->code)->first();
+
+        if ($coupon) {
+            return $this->sendResponse($coupon, 'Coupon found successfully!');
+        } else {
+            return $this->sendError('Coupon Not Found!', 422);
+        }
     }
 }
