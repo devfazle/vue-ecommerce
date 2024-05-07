@@ -21,9 +21,7 @@ class ProductsController extends Controller
         $category_id = Category::with('sub_category')->orderBy('id', 'desc')->get();
         $sub_category_id = Sub_category::orderBy('id', 'desc')->get();
         $tdata = ([$products, $category_id, $sub_category_id]);
-
         return $this->sendResponse($tdata, 'Product list fetched successfully!');
-
     }
 
     /**
@@ -122,8 +120,15 @@ class ProductsController extends Controller
      */
     public function destroy(string $id)
     {
-        $products = Product::find($id)->delete();
-        return $this->sendResponse($products, 'Product deleted successfully!');
+        $products = Product::findOrFail($id);
+        if (is_null($products)) {
+            return $this->sendError('Product not found.');
+        }
+        $oldFilename = $products->photo->path;
+        File::delete('photos/products/' . $oldFilename);
+        $products->photo->delete();
+        $products->delete();
+        return $this->sendResponse($oldFilename, 'Product deleted successfully!');
     }
 }
 
