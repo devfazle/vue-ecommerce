@@ -32,6 +32,7 @@ import RoleEdit from '@/admin-panel/nazad/Roles/RoleEdit.vue'
 import Payment from '@/admin-panel/nazad/Payment/Payment.vue'
 import PaytmentCreate from '@/admin-panel/nazad/Payment/PaytmentCreate.vue'
 import PaymentEdit from '@/admin-panel/nazad/Payment/PaymentEdit.vue'
+import UpdateProduct from "@/admin-panel/devhelal/products/UpdateProduct.vue";
 
 import Categorylist from '@/admin-panel/foysal/components/category/Categorylist.vue'
 import Categoryadd from '@/admin-panel/foysal/components/category/Categoryadd.vue'
@@ -44,6 +45,9 @@ import Wishlistlayout from '@/admin-panel/foysal/components/wishlist/Wishlistlay
 import Wishlistadd from '@/admin-panel/foysal/components/wishlist/Wishlistadd.vue'
 import Wishlisttable from '@/admin-panel/foysal/components/wishlist/Wishlisttable.vue'
 import Wishlistupdate from '@/admin-panel/foysal/components/wishlist/Wishlistupdate.vue'
+import OrderTable from "@/admin-panel/fazle/order/OrderTable.vue";
+import OrderLayout from "@/admin-panel/fazle/order/OrderLayout.vue";
+import OrderDetails from "@/admin-panel/fazle/order/OrderDetails.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -72,12 +76,17 @@ const router = createRouter({
           path: "productlist",
           name: "productslist",
           component: ProductsList,
-        },
+        },  
         {
           path: "addproduct",
           name: "addproducts",
           component: AddProduct,
         },
+            {
+              path: "updateproduct/:id",
+              name: "updateproduct",
+              component: UpdateProduct,
+            },
         {
           path: "product",
           name: "products",
@@ -119,6 +128,7 @@ const router = createRouter({
               component: UpdateUseCoupon,
             },
           ],
+        },
         {
           path: 'categorylist',
           name: 'categorylist',
@@ -127,55 +137,55 @@ const router = createRouter({
         {
           path: 'category',
           name: 'category',
-          component:Categoryadd,
+          component: Categoryadd,
         },
         {
           path: 'categoryupdate/:id',
           name: 'categoryupdate',
-          component:Categoryupdate,
+          component: Categoryupdate,
         },
         {
-          path:'sub_category',
-          name:'sub-category',
+          path: 'sub_category',
+          name: 'sub-category',
           component: Sub_categoryLayout,
           children: [
             {
               path: 'sub_add',
               name: 'sub_add',
-              component:Sub_categoryAdd,
+              component: Sub_categoryAdd,
             },
             {
               path: 'sub_list',
               name: 'sub_list',
-              component:Sub_categorylist,
+              component: Sub_categorylist,
             },
             {
               path: 'sub_update/:id',
               name: 'sub_update',
-              component:Sub_categoryupdate,
+              component: Sub_categoryupdate,
             },
-          
+
           ]
         },
         {
-          path:'wishlist',
-          name:'wishlist',
-          component:Wishlistlayout,
+          path: 'wishlist',
+          name: 'wishlist',
+          component: Wishlistlayout,
           children: [
             {
               path: 'wishlistadd',
               name: 'wishlistadd',
-              component:Wishlistadd,
+              component: Wishlistadd,
             },
             {
               path: 'wishlisttable',
               name: 'wishlisttable',
-              component:Wishlisttable,
+              component: Wishlisttable,
             },
             {
               path: 'wishlistupdate/:id',
               name: 'wishlistupdate',
-              component:Wishlistupdate,
+              component: Wishlistupdate,
             },
           ]
         },
@@ -225,8 +235,8 @@ const router = createRouter({
           component: PaymentEdit
         },
         {
-          path: "cart",
-          name: "cart",
+          path: "cart1",
+          name: "cartOne",
           component: CartLayout,
           children: [
             {
@@ -246,6 +256,24 @@ const router = createRouter({
             },
           ],
         },
+        {
+          path: 'order-layout',
+          name: 'order-layout',
+          component: OrderLayout,
+          children: [
+            {
+              path: 'order-list',
+              name: 'order-list',
+              component: OrderTable
+            },
+            {
+              path: 'order-details/:id',
+              name: 'order-details',
+              component: OrderDetails
+            },
+
+          ]
+        },
       ],
     },
     {
@@ -262,6 +290,16 @@ const router = createRouter({
           path: "products",
           name: "products",
           component: Product,
+        },
+        {
+          path: "shopping-cart",
+          name: "cart",
+          component: () => import('@/front-panel/views/ShoppingCart.vue'),
+        },
+        {
+          path: 'testone',
+          name: 'testone',
+          component: () => import('@/front-panel/views/TestOne.vue'),
         },
       ],
     },

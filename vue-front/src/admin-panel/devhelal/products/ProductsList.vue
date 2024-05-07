@@ -12,7 +12,6 @@ export default {
     getProductList() {
       axios.get(this.url).then((response) => {
         this.productlist = response.data.data[0];
-        console.log(response.data.data[0]);
       });
     },
     deleteProduct(id) {
@@ -69,7 +68,7 @@ export default {
               <div class="col-md-5"></div>
               <div class="col-md-4">
                 <button class="col-md-6 btn btn-dark">Export</button>
-                <router-link :to="{ name: 'addproducts' }" class="col-md-6 btn btn-primary">Add Product</router-link>
+                <router-link :to="{ name: 'addproducts'}" class="col-md-6 btn btn-primary">Add Product</router-link>
               </div>
             </div>
           </div>
@@ -128,9 +127,7 @@ export default {
                     <button class="btn btn-primary btn-sm" @click="view(data.id)">
                       View
                     </button>
-                    <button class="btn btn-success btn-sm" @click="edit(data.id)">
-                      Edit
-                    </button>
+                    <router-link :to="{ name: 'updateproduct', params: { id: data.id } }" class="btn btn-success btn-sm mr-2">Edit</router-link>
                     <button class="btn btn-danger btn-sm" @click="deleteProduct(data.id)" >
                       Delete
                     </button>

@@ -1,4 +1,4 @@
-<script setup>
+<script>
 //css files
 import "@/assets/front-assets/vendor/bootstrap/css/bootstrap.min.css"
 import "@/assets/front-assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
@@ -36,19 +36,37 @@ import "@/assets/front-assets/js/main.js"
 import Header from "../components/Menu.vue"
 import Footer from "../components/Footer.vue"
 import Cart from "../components/Cart.vue"
-import Modal from "../components/Modal.vue"
+//import Modal from "../components/Modal.vue" //<<<<<<<<< here is modal >>>>>>>>>>>>>>>>>>>
 import Product from "./Product.vue"
 
+export default {
+	data() {
+		return {
+			cartShow: '',
+		};
+	},
+	methods: {
+		updateSharedData(newValue) {
+			this.cartShow = newValue;
+		},
+	},
+	components: {
+		Header,
+		Footer,
+		Cart,
+		Product
+	}
+};
 
 </script>
 
 
 <template>
 	<!-- Header -->
-	<Header />
+	<Header :cartShow="cartShow" @update-shared-data="updateSharedData" />
 
 	<!-- Cart -->
-	<Cart />
+	<Cart :cartShow="cartShow" @update-shared-data="updateSharedData" />
 
 
 	<!-- views -->
@@ -67,5 +85,5 @@ import Product from "./Product.vue"
 	</div>
 
 	<!-- Modal1 -->
-	<Modal />
+	<!-- <Modal /> -->
 </template>

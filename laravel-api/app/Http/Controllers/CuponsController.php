@@ -16,7 +16,6 @@ class CuponsController extends Controller
     {
         $cupons = Cupon::orderBy('id', 'desc')->with('cupon_usege')->get();
         return $this->sendResponse($cupons, 'Cupon list fetched successfully!');
-
     }
 
     /**
@@ -94,5 +93,17 @@ class CuponsController extends Controller
     {
         $cupons = Cupon::find($id)->delete();
         return $this->sendResponse($cupons, 'Cupon deleted successfully!');
+    }
+
+    // custom functions by fazle
+    public function checkCoupon(Request $r)
+    {
+        $coupon = Cupon::where('code', $r->code)->first();
+
+        if ($coupon) {
+            return $this->sendResponse($coupon, 'Coupon found successfully!');
+        } else {
+            return $this->sendError('Coupon Not Found!', 422);
+        }
     }
 }

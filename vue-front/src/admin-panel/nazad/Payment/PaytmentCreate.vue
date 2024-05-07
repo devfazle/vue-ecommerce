@@ -32,9 +32,8 @@
                                 <div class="input-group input-group-merge">
                                     <select class="form-control" v-model="method" @onchange="this.value" >
                                         <option >Select one</option>
-                                        <option value="Bikash">Bikash</option>
-                                        <option value="Rocket">Rocket</option>
-                                        <option value="Cash on">Cash On</option>
+                                        <option value="bkash">Bikash</option>
+                                        <option value="cash">Cash On</option>
                                     </select>
                                 </div>
                             </div>

@@ -4,27 +4,28 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            carts: []
+            order: [],
+            id: this.$route.params.id
         }
     },
 
     methods: {
-        getCarts() {
-            axios.get('http://127.0.0.1:8000/api/admin/carts')
+        getOrder() {
+            axios.get('http://127.0.0.1:8000/api/admin/orderitems/'+this.id)
                 .then((result) => {
-                    this.carts = result.data.data;
+                    this.order = result.data.data;
                     console.log(result);
                 })
         },
-        deleteCart(id) {
-            axios.delete("http://127.0.0.1:8000/api/admin/carts/" + id).then(() => {
-                this.getCarts()
-            });
-        }
+        // deleteCart(id) {
+        //     axios.delete("http://127.0.0.1:8000/api/admin/carts/" + id).then(() => {
+        //         this.getCarts()
+        //     });
+        // }
     },
 
     mounted() {
-        this.getCarts()
+        this.getOrder()
     }
 }
 </script>
@@ -34,11 +35,11 @@ export default {
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <h5 class="mb-0">Cart List</h5>
+                    <h5 class="mb-0">Order List</h5>
                 </div>
-                <div class="col-auto">
+                <!-- <div class="col-auto">
                     <router-link :to="{ name: 'cartAdd' }" class="btn btn-primary btn-lg">Add More</router-link>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="table-responsive text-nowrap">
@@ -46,23 +47,22 @@ export default {
                 <thead>
                     <tr>
                         <th>SL</th>
-                        <th>Product</th>
+                        <th>Product Name</th>
+                        <th>Order ID</th>
                         <th>Quantity</th>
-                        <th>User</th>
-                        <th>Options</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    <tr v-for="(c, i) in carts" :key="i">
+                    <tr v-for="(o, i) in order" :key="i">
                         <td>{{ i + 1 }}</td>
-                        <td>{{ c.product.name }}</td>
-                        <td>{{ c.quantity }}</td>
-                        <td>{{ c.user.name }}</td>
-                        <td>
+                        <td>{{ o.product.name }}</td>
+                        <td>{{ o.order_id }}</td>
+                        <td>{{ o.quantity }}</td>
+                        <!-- <td>
                             <router-link :to="{ name: 'cartUpdate', params: { id: c.id } }"
                                 class="btn btn-primary">Edit</router-link>
                             <button @click="deleteCart(c.id)" class="btn btn-danger mx-2">Delete</button>
-                        </td>
+                        </td> -->
                     </tr>
                 </tbody>
             </table>
