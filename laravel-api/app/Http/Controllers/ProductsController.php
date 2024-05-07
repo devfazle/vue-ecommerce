@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Sub_category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
@@ -112,7 +111,7 @@ class ProductsController extends Controller
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('photos/products'), $filename);
             // Update the product's photo path
-            $product->photo()->update(['path' => $filename]);
+             $product->photo()->update(['path' => $filename]);
         }
         $product->update($input);
         return $this->sendResponse($input, 'Product updated successfully!');
