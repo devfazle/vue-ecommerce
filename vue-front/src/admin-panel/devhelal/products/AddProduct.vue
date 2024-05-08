@@ -143,6 +143,7 @@ export default {
                                 <div class="card" style="width: 18rem;">
                                     <img v-if="imagePreview" :src="imagePreview" class="preview-image"/>
                             </div>
+                            
                             </div>
                         </div>
                     </div>
@@ -196,8 +197,7 @@ export default {
                                 <select class="form-select col-md-10 mt-2" v-model="sub_category_id"
                                     :disabled="sub_categorylist == ''">
                                     <option value="0">Sub Category</option>
-                                    <option v-for="(scdata, i) in sub_categorylist" :key="i" :value="scdata.id">{{
-                                        scdata.name }}</option>
+                                    <option v-for="(scdata, i) in sub_categorylist" :key="i" :value="scdata.id">{{scdata.name }}</option>
                                 </select>
                             </div>
 
