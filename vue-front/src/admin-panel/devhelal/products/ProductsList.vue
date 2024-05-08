@@ -108,7 +108,7 @@ export default {
                         <div class="col-md-8">
                           <div class="">
                             <h5 class="card-title">{{ data.name }}</h5>
-                            <p class="card-text">{{ data.description }}</p>
+                            <p class="card-text">{{ data.description.length <= 10 ? data.description : data.description.substr(0, 20) + '...' }}</p>
                           </div>
                         </div>
                       </div>
