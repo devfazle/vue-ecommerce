@@ -35,6 +35,7 @@ class ShipmentController extends Controller
         $validator = Validator::make($request->all(), [
             'delivery_date' => 'required',
             'recipient' => 'required',
+            'recipient_phone'=>'required',
             'address' => 'required',
             'status' => 'required',
             'orders_id' => 'required',
