@@ -32,17 +32,17 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'delivery_date' => 'required',
-            'recipient' => 'required',
-            'recipient_phone'=>'required',
-            'address' => 'required',
-            'status' => 'required',
-            'orders_id' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors(), 422);
-        }
+        // $validator = Validator::make($request->all(), [
+        //     'delivery_date' => 'required',
+        //     'recipient' => 'required',
+        //     'recipient_phone'=>'required',
+        //     'address' => 'required',
+        //     'status' => 'required',
+        //     'orders_id' => 'required',
+        // ]);
+        // if ($validator->fails()) {
+        //     return $this->sendError('Validation Error.', $validator->errors(), 422);
+        // }
         $input = $request->all();
         $shipment = Shipment::create($input);
         return $this->sendResponse($shipment, 'Shipment created successfully!');
