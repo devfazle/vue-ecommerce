@@ -55,230 +55,466 @@ const router = createRouter({
     {
       path: "/admin",
       name: "admin",
-      component: () => import('@/admin-panel/views/MainLayout.vue'),
+      component: () => import('@/admin-panel/views/Master.vue'),
       children: [
         {
-          path: "",
-          name: "dashboard",
-          component: AdminDashboard,
+          path: "login",
+          name: "login",
+          component: () => import('@/admin-panel/views/LogIn.vue'),
         },
         {
-          path: "forms",
-          name: "adminforms",
-          component: AdminForms,
-        },
-        {
-          path: "contact",
-          name: "contactus",
-          component: ContactUs,
-        },
-        {
-          path: "productlist",
-          name: "productslist",
-          component: ProductsList,
-        },  
-        {
-          path: "addproduct",
-          name: "addproducts",
-          component: AddProduct,
-        },
-            {
-              path: "updateproduct/:id",
-              name: "updateproduct",
-              component: UpdateProduct,
-            },
-        {
-          path: "product",
-          name: "products",
-          component: Products,
-        },
-        {
-          path: "coupons",
-          name: "coupons",
-          component: CouponsLaout,
+          path: "dash",
+          name: "main-layout",
+          component: () => import('@/admin-panel/views/MainLayout.vue'),
           children: [
             {
-              path: "coupons-add",
-              name: "couponsAdd",
-              component: CouponsAdd,
+              path: "",
+              name: "dashboard",
+              component: AdminDashboard,
             },
             {
-              path: "coupons-list",
-              name: "couponsshow",
-              component: CouponsList,
+              path: "forms",
+              name: "adminforms",
+              component: AdminForms,
             },
             {
-              path: "coupons-update/:id",
-              name: "couponsUpdate",
-              component: UpdateCupons,
+              path: "contact",
+              name: "contactus",
+              component: ContactUs,
             },
             {
-              path: "coupons-use",
-              name: "couponsUse",
-              component: UseCuponsAdd,
+              path: "productlist",
+              name: "productslist",
+              component: ProductsList,
+            },  
+            {
+              path: "addproduct",
+              name: "addproducts",
+              component: AddProduct,
+            },
+                {
+                  path: "updateproduct/:id",
+                  name: "updateproduct",
+                  component: UpdateProduct,
+                },
+            {
+              path: "product",
+              name: "products",
+              component: Products,
             },
             {
-              path: "coupons-uselist",
-              name: "couponsUselist",
-              component: UsecuponList,
+              path: "coupons",
+              name: "coupons",
+              component: CouponsLaout,
+              children: [
+                {
+                  path: "coupons-add",
+                  name: "couponsAdd",
+                  component: CouponsAdd,
+                },
+                {
+                  path: "coupons-list",
+                  name: "couponsshow",
+                  component: CouponsList,
+                },
+                {
+                  path: "coupons-update/:id",
+                  name: "couponsUpdate",
+                  component: UpdateCupons,
+                },
+                {
+                  path: "coupons-use",
+                  name: "couponsUse",
+                  component: UseCuponsAdd,
+                },
+                {
+                  path: "coupons-uselist",
+                  name: "couponsUselist",
+                  component: UsecuponList,
+                },
+                {
+                  path: "coupons-useupdate/:id",
+                  name: "couponsUseUpdate",
+                  component: UpdateUseCoupon,
+                },
+              ],
             },
             {
-              path: "coupons-useupdate/:id",
-              name: "couponsUseUpdate",
-              component: UpdateUseCoupon,
+              path: 'categorylist',
+              name: 'categorylist',
+              component: Categorylist,
+            },
+            {
+              path: 'category',
+              name: 'category',
+              component: Categoryadd,
+            },
+            {
+              path: 'categoryupdate/:id',
+              name: 'categoryupdate',
+              component: Categoryupdate,
+            },
+            {
+              path: 'sub_category',
+              name: 'sub-category',
+              component: Sub_categoryLayout,
+              children: [
+                {
+                  path: 'sub_add',
+                  name: 'sub_add',
+                  component: Sub_categoryAdd,
+                },
+                {
+                  path: 'sub_list',
+                  name: 'sub_list',
+                  component: Sub_categorylist,
+                },
+                {
+                  path: 'sub_update/:id',
+                  name: 'sub_update',
+                  component: Sub_categoryupdate,
+                },
+    
+              ]
+            },
+            {
+              path: 'wishlist',
+              name: 'wishlist',
+              component: Wishlistlayout,
+              children: [
+                {
+                  path: 'wishlistadd',
+                  name: 'wishlistadd',
+                  component: Wishlistadd,
+                },
+                {
+                  path: 'wishlisttable',
+                  name: 'wishlisttable',
+                  component: Wishlisttable,
+                },
+                {
+                  path: 'wishlistupdate/:id',
+                  name: 'wishlistupdate',
+                  component: Wishlistupdate,
+                },
+              ]
+            },
+            {
+              path: 'roles',
+              name: 'roles',
+              component: Roles,
+            },
+            {
+              path: 'rolecreate',
+              name: 'rolecreate',
+              component: RoleCreate,
+            },
+            {
+              path: 'roleedit/:id',
+              name: 'roleedit',
+              component: RoleEdit,
+            },
+            {
+              path: 'users',
+              name: 'users',
+              component: Users,
+            },
+            {
+              path: 'usercreate',
+              name: 'usercreate',
+              component: UserCreate,
+            },
+            {
+              path: 'useredit/:id',
+              name: 'useredit',
+              component: UserEdit
+            },
+            {
+              path: 'payment',
+              name: 'payment',
+              component: Payment,
+            },
+            {
+              path: 'paymentcreate',
+              name: 'paymentcreate',
+              component: PaytmentCreate,
+            },
+            {
+              path: 'paymentedit/:id',
+              name: 'paymentedit',
+              component: PaymentEdit
+            },
+            {
+              path: "cart1",
+              name: "cartOne",
+              component: CartLayout,
+              children: [
+                {
+                  path: "cart-add",
+                  name: "cartAdd",
+                  component: CartsAdd,
+                },
+                {
+                  path: "cart-table",
+                  name: "cartTable",
+                  component: CartTable,
+                },
+                {
+                  path: "cart-update/:id",
+                  name: "cartUpdate",
+                  component: UpdateCart,
+                },
+              ],
+            },
+            {
+              path: 'order-layout',
+              name: 'order-layout',
+              component: OrderLayout,
+              children: [
+                {
+                  path: 'order-list',
+                  name: 'order-list',
+                  component: OrderTable
+                },
+                {
+                  path: 'order-details/:id',
+                  name: 'order-details',
+                  component: OrderDetails
+                },
+    
+              ]
             },
           ],
         },
-        {
-          path: 'categorylist',
-          name: 'categorylist',
-          component: Categorylist,
-        },
-        {
-          path: 'category',
-          name: 'category',
-          component: Categoryadd,
-        },
-        {
-          path: 'categoryupdate/:id',
-          name: 'categoryupdate',
-          component: Categoryupdate,
-        },
-        {
-          path: 'sub_category',
-          name: 'sub-category',
-          component: Sub_categoryLayout,
-          children: [
-            {
-              path: 'sub_add',
-              name: 'sub_add',
-              component: Sub_categoryAdd,
-            },
-            {
-              path: 'sub_list',
-              name: 'sub_list',
-              component: Sub_categorylist,
-            },
-            {
-              path: 'sub_update/:id',
-              name: 'sub_update',
-              component: Sub_categoryupdate,
-            },
-
-          ]
-        },
-        {
-          path: 'wishlist',
-          name: 'wishlist',
-          component: Wishlistlayout,
-          children: [
-            {
-              path: 'wishlistadd',
-              name: 'wishlistadd',
-              component: Wishlistadd,
-            },
-            {
-              path: 'wishlisttable',
-              name: 'wishlisttable',
-              component: Wishlisttable,
-            },
-            {
-              path: 'wishlistupdate/:id',
-              name: 'wishlistupdate',
-              component: Wishlistupdate,
-            },
-          ]
-        },
-        {
-          path: 'roles',
-          name: 'roles',
-          component: Roles,
-        },
-        {
-          path: 'rolecreate',
-          name: 'rolecreate',
-          component: RoleCreate,
-        },
-        {
-          path: 'roleedit/:id',
-          name: 'roleedit',
-          component: RoleEdit,
-        },
-        {
-          path: 'users',
-          name: 'users',
-          component: Users,
-        },
-        {
-          path: 'usercreate',
-          name: 'usercreate',
-          component: UserCreate,
-        },
-        {
-          path: 'useredit/:id',
-          name: 'useredit',
-          component: UserEdit
-        },
-        {
-          path: 'payment',
-          name: 'payment',
-          component: Payment,
-        },
-        {
-          path: 'paymentcreate',
-          name: 'paymentcreate',
-          component: PaytmentCreate,
-        },
-        {
-          path: 'paymentedit/:id',
-          name: 'paymentedit',
-          component: PaymentEdit
-        },
-        {
-          path: "cart1",
-          name: "cartOne",
-          component: CartLayout,
-          children: [
-            {
-              path: "cart-add",
-              name: "cartAdd",
-              component: CartsAdd,
-            },
-            {
-              path: "cart-table",
-              name: "cartTable",
-              component: CartTable,
-            },
-            {
-              path: "cart-update/:id",
-              name: "cartUpdate",
-              component: UpdateCart,
-            },
-          ],
-        },
-        {
-          path: 'order-layout',
-          name: 'order-layout',
-          component: OrderLayout,
-          children: [
-            {
-              path: 'order-list',
-              name: 'order-list',
-              component: OrderTable
-            },
-            {
-              path: 'order-details/:id',
-              name: 'order-details',
-              component: OrderDetails
-            },
-
-          ]
-        },
-      ],
+      ]
     },
+    // {
+    //   path: "/admin",
+    //   name: "admin",
+    //   component: () => import('@/admin-panel/views/MainLayout.vue'),
+    //   children: [
+    //     {
+    //       path: "",
+    //       name: "dashboard",
+    //       component: AdminDashboard,
+    //     },
+    //     {
+    //       path: "forms",
+    //       name: "adminforms",
+    //       component: AdminForms,
+    //     },
+    //     {
+    //       path: "contact",
+    //       name: "contactus",
+    //       component: ContactUs,
+    //     },
+    //     {
+    //       path: "productlist",
+    //       name: "productslist",
+    //       component: ProductsList,
+    //     },  
+    //     {
+    //       path: "addproduct",
+    //       name: "addproducts",
+    //       component: AddProduct,
+    //     },
+    //         {
+    //           path: "updateproduct/:id",
+    //           name: "updateproduct",
+    //           component: UpdateProduct,
+    //         },
+    //     {
+    //       path: "product",
+    //       name: "products",
+    //       component: Products,
+    //     },
+    //     {
+    //       path: "coupons",
+    //       name: "coupons",
+    //       component: CouponsLaout,
+    //       children: [
+    //         {
+    //           path: "coupons-add",
+    //           name: "couponsAdd",
+    //           component: CouponsAdd,
+    //         },
+    //         {
+    //           path: "coupons-list",
+    //           name: "couponsshow",
+    //           component: CouponsList,
+    //         },
+    //         {
+    //           path: "coupons-update/:id",
+    //           name: "couponsUpdate",
+    //           component: UpdateCupons,
+    //         },
+    //         {
+    //           path: "coupons-use",
+    //           name: "couponsUse",
+    //           component: UseCuponsAdd,
+    //         },
+    //         {
+    //           path: "coupons-uselist",
+    //           name: "couponsUselist",
+    //           component: UsecuponList,
+    //         },
+    //         {
+    //           path: "coupons-useupdate/:id",
+    //           name: "couponsUseUpdate",
+    //           component: UpdateUseCoupon,
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       path: 'categorylist',
+    //       name: 'categorylist',
+    //       component: Categorylist,
+    //     },
+    //     {
+    //       path: 'category',
+    //       name: 'category',
+    //       component: Categoryadd,
+    //     },
+    //     {
+    //       path: 'categoryupdate/:id',
+    //       name: 'categoryupdate',
+    //       component: Categoryupdate,
+    //     },
+    //     {
+    //       path: 'sub_category',
+    //       name: 'sub-category',
+    //       component: Sub_categoryLayout,
+    //       children: [
+    //         {
+    //           path: 'sub_add',
+    //           name: 'sub_add',
+    //           component: Sub_categoryAdd,
+    //         },
+    //         {
+    //           path: 'sub_list',
+    //           name: 'sub_list',
+    //           component: Sub_categorylist,
+    //         },
+    //         {
+    //           path: 'sub_update/:id',
+    //           name: 'sub_update',
+    //           component: Sub_categoryupdate,
+    //         },
+
+    //       ]
+    //     },
+    //     {
+    //       path: 'wishlist',
+    //       name: 'wishlist',
+    //       component: Wishlistlayout,
+    //       children: [
+    //         {
+    //           path: 'wishlistadd',
+    //           name: 'wishlistadd',
+    //           component: Wishlistadd,
+    //         },
+    //         {
+    //           path: 'wishlisttable',
+    //           name: 'wishlisttable',
+    //           component: Wishlisttable,
+    //         },
+    //         {
+    //           path: 'wishlistupdate/:id',
+    //           name: 'wishlistupdate',
+    //           component: Wishlistupdate,
+    //         },
+    //       ]
+    //     },
+    //     {
+    //       path: 'roles',
+    //       name: 'roles',
+    //       component: Roles,
+    //     },
+    //     {
+    //       path: 'rolecreate',
+    //       name: 'rolecreate',
+    //       component: RoleCreate,
+    //     },
+    //     {
+    //       path: 'roleedit/:id',
+    //       name: 'roleedit',
+    //       component: RoleEdit,
+    //     },
+    //     {
+    //       path: 'users',
+    //       name: 'users',
+    //       component: Users,
+    //     },
+    //     {
+    //       path: 'usercreate',
+    //       name: 'usercreate',
+    //       component: UserCreate,
+    //     },
+    //     {
+    //       path: 'useredit/:id',
+    //       name: 'useredit',
+    //       component: UserEdit
+    //     },
+    //     {
+    //       path: 'payment',
+    //       name: 'payment',
+    //       component: Payment,
+    //     },
+    //     {
+    //       path: 'paymentcreate',
+    //       name: 'paymentcreate',
+    //       component: PaytmentCreate,
+    //     },
+    //     {
+    //       path: 'paymentedit/:id',
+    //       name: 'paymentedit',
+    //       component: PaymentEdit
+    //     },
+    //     {
+    //       path: "cart1",
+    //       name: "cartOne",
+    //       component: CartLayout,
+    //       children: [
+    //         {
+    //           path: "cart-add",
+    //           name: "cartAdd",
+    //           component: CartsAdd,
+    //         },
+    //         {
+    //           path: "cart-table",
+    //           name: "cartTable",
+    //           component: CartTable,
+    //         },
+    //         {
+    //           path: "cart-update/:id",
+    //           name: "cartUpdate",
+    //           component: UpdateCart,
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       path: 'order-layout',
+    //       name: 'order-layout',
+    //       component: OrderLayout,
+    //       children: [
+    //         {
+    //           path: 'order-list',
+    //           name: 'order-list',
+    //           component: OrderTable
+    //         },
+    //         {
+    //           path: 'order-details/:id',
+    //           name: 'order-details',
+    //           component: OrderDetails
+    //         },
+
+    //       ]
+    //     },
+    //   ],
+    // },
     {
       path: "/",
-      name: "h",
+      name: "main",
       component: () => import('@/front-panel/views/MainLayout.vue'),
       children: [
         {
