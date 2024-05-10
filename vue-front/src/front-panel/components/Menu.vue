@@ -25,7 +25,7 @@ export default {
 				<nav class="limiter-menu-desktop container">
 
 					<!-- Logo desktop -->
-					<router-link :to="{name: 'home'}" class="logo">
+					<router-link :to="{ name: 'home' }" class="logo">
 						<!-- <img src="@/assets/front-assets/images/icons/logo-01.png" alt="IMG-LOGO"> -->
 						<h1 style="color: black; font-size: 35px;"><i><b>vcommerce</b></i></h1>
 					</router-link>
@@ -57,12 +57,12 @@ export default {
 								<a href="contact.html">Contact</a>
 							</li>
 
-							<li v-show="$store.state.auth.user.role_id==2">
-								<router-link :to="{name: 'customer'}">Customer Panel</router-link>
+							<li v-show="$store.state.auth.user.role_id == 2">
+								<router-link :to="{ name: 'customer' }">Customer Panel</router-link>
 							</li>
 
-							<li v-show="$store.state.auth.user.role_id==3">
-								<router-link :to="{name: 'vendor'}">Vendor Panel</router-link>
+							<li v-show="$store.state.auth.user.role_id == 3">
+								<router-link :to="{ name: 'vendor' }">Vendor Panel</router-link>
 							</li>
 						</ul>
 					</div>
@@ -72,8 +72,13 @@ export default {
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
+						<router-link :to="{ name: 'login'}"
+							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+							<i class="zmdi zmdi-account"></i>
+						</router-link>
 
-						<div @click="updateSharedData" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+						<div @click="updateSharedData"
+							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
 							:data-notify="totalItems">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
