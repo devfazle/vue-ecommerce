@@ -154,15 +154,5 @@ export default {
             invoiceNumber: "",
         }
     },
-    method: {
-        generateInvoiceNumber() {
-            const timestamp = Date.now();
-            //this.invoiceNumber = `INV-${timestamp}`;
-            console.log(timestamp)
-        },
-    },
-    mounted() {
-        this.generateInvoiceNumber();
-    },
 }
 </script>

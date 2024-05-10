@@ -48,8 +48,8 @@ import Wishlistupdate from '@/admin-panel/foysal/components/wishlist/Wishlistupd
 import OrderTable from "@/admin-panel/fazle/order/OrderTable.vue";
 import OrderLayout from "@/admin-panel/fazle/order/OrderLayout.vue";
 import OrderDetails from "@/admin-panel/fazle/order/OrderDetails.vue";
-import AddPurcheses from "@/admin-panel/devhelal/purchases/AddPurcheses.vue";
-import PurchesesList from "@/admin-panel/devhelal/purchases/PurchesesList.vue";
+import AddPurchases from "@/admin-panel/devhelal/purchases/AddPurchases.vue";
+import PurchasesList from "@/admin-panel/devhelal/purchases/PurchasesList.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -77,12 +77,12 @@ const router = createRouter({
         {
           path: "purchaseslist",
           name: "purchaseslist",
-          component: PurchesesList,
+          component: PurchasesList,
         }, 
         {
           path: "addpurchases",
           name: "addpurchases",
-          component: AddPurcheses,
+          component: AddPurchases,
         }, 
         {
           path: "productlist",

@@ -93,11 +93,11 @@ components: {
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                     </div>
                   </th>
-                  <th>Invoice</th>
-                  <th>Created</th>
-                  <th>Vendor</th>
-                  <th>Title</th>
-                  <th>Proce</th>
+                  <th>INVOICE</th>
+                  <th>CREATED</th>
+                  <th>VENDOR</th>
+                  <th>TITLE</th>
+                  <th>PRICE</th>
                   <th>STATUS</th>
                   <th style="width: 230px" class="text-center">Action</th>
                 </tr>
