@@ -171,6 +171,26 @@
                 </ul>
             </li>
             <!-- coupons list end -->
+            <!-- Shipment list start -->
+            <li class="menu-item">
+                <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="Account Settings">Shipments</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <router-link :to="{name: 'shipment-add'}" class="menu-link">
+                            <div data-i18n="Account">Shipment</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <router-link :to="{name: 'shipment-list'}" class="menu-link">
+                            <div data-i18n="Account">Shipment List</div>
+                        </router-link>
+                    </li>
+                </ul>
+            </li>
+            <!-- shipment list end -->
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
