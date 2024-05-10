@@ -25,9 +25,10 @@ export default {
 				<nav class="limiter-menu-desktop container">
 
 					<!-- Logo desktop -->
-					<a href="#" class="logo">
-						<img src="@/assets/front-assets/images/icons/logo-01.png" alt="IMG-LOGO">
-					</a>
+					<router-link :to="{name: 'home'}" class="logo">
+						<!-- <img src="@/assets/front-assets/images/icons/logo-01.png" alt="IMG-LOGO"> -->
+						<h1 style="color: black; font-size: 35px;"><i><b>vcommerce</b></i></h1>
+					</router-link>
 
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
@@ -54,6 +55,14 @@ export default {
 
 							<li>
 								<a href="contact.html">Contact</a>
+							</li>
+
+							<li v-show="$store.state.auth.user.role_id==2">
+								<router-link :to="{name: 'customer'}">Customer Panel</router-link>
+							</li>
+
+							<li v-show="$store.state.auth.user.role_id==3">
+								<router-link :to="{name: 'vendor'}">Vendor Panel</router-link>
 							</li>
 						</ul>
 					</div>

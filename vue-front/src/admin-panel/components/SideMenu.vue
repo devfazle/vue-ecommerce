@@ -1,16 +1,20 @@
 <script>
-    export default {
-        name: "AdminSideMenu",
+import { mapActions } from 'vuex'
+export default {
+    name: "AdminSideMenu",
 
-        methods: {
-            toggleNearestLiClass(event) {
-                const nearestLi = event.target.closest('li.menu-item');
-                if (nearestLi) {
-                    nearestLi.classList.toggle('open');
-                }
+    methods: {
+        ...mapActions({
+            logout: 'auth/logout'
+        }),
+        toggleNearestLiClass(event) {
+            const nearestLi = event.target.closest('li.menu-item');
+            if (nearestLi) {
+                nearestLi.classList.toggle('open');
             }
         }
     }
+}
 </script>
 
 
@@ -75,7 +79,7 @@
         <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item">
-                <router-link :to="{name: 'dashboard'}" class="menu-link">
+                <router-link :to="{ name: 'dashboard' }" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-home-circle"></i>
                     <div data-i18n="Analytics">Dashboard</div>
                 </router-link>
@@ -87,11 +91,11 @@
                     <i class="menu-icon tf-icons bx bx-layout"></i>
                     <div data-i18n="Layouts">Layouts</div>
                 </a>
-                <router-link :to="{name: 'users'}" class="menu-link menu-toggle">
+                <router-link :to="{ name: 'users' }" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-layout"></i>
                     <div data-i18n="Layouts">Users</div>
                 </router-link>
-                <router-link :to="{name: 'payment'}" class="menu-link menu-toggle">
+                <router-link :to="{ name: 'payment' }" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-layout"></i>
                     <div data-i18n="Layouts">Payment</div>
                 </router-link>
@@ -136,12 +140,12 @@
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <router-link :to="{name: 'cartTable'}" class="menu-link">
+                        <router-link :to="{ name: 'cartTable' }" class="menu-link">
                             <div data-i18n="Account">Cart</div>
                         </router-link>
                     </li>
                     <li class="menu-item">
-                        <router-link :to="{name: 'order-list'}" class="menu-link">
+                        <router-link :to="{ name: 'order-list' }" class="menu-link">
                             <div data-i18n="Notifications">Orders</div>
                         </router-link>
                     </li>
@@ -161,12 +165,12 @@
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <router-link :to="{name: 'couponsshow'}" class="menu-link">
+                        <router-link :to="{ name: 'couponsshow' }" class="menu-link">
                             <div data-i18n="Account">Coupon Show</div>
                         </router-link>
                     </li>
                     <li class="menu-item">
-                        <router-link :to="{name: 'couponsUselist'}" class="menu-link">
+                        <router-link :to="{ name: 'couponsUselist' }" class="menu-link">
                             <div data-i18n="Account">Use Coupon Show</div>
                         </router-link>
                     </li>
@@ -180,7 +184,7 @@
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <router-link :to="{name: 'productslist'}" class="menu-link">
+                        <router-link :to="{ name: 'productslist' }" class="menu-link">
                             <div data-i18n="Basic">Product</div>
                         </router-link>
                     </li>
@@ -203,12 +207,12 @@
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <router-link :to="{name: 'categorylist'}" class="menu-link">
+                        <router-link :to="{ name: 'categorylist' }" class="menu-link">
                             <div data-i18n="Error">Category</div>
                         </router-link>
                     </li>
                     <li class="menu-item">
-                        <router-link :to="{name: 'sub_list'}" class="menu-link">
+                        <router-link :to="{ name: 'sub_list' }" class="menu-link">
                             <div data-i18n="Under Maintenance">Sub Category</div>
                         </router-link>
                     </li>
@@ -218,7 +222,7 @@
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
             <!-- Cards -->
             <li class="menu-item">
-                <router-link :to="{name: 'adminforms'}" href="cards-basic.html" class="menu-link">
+                <router-link :to="{ name: 'adminforms' }" href="cards-basic.html" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-collection"></i>
                     <div data-i18n="Basic">FORMS</div>
                 </router-link>
@@ -403,18 +407,16 @@
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
             <li class="menu-item">
-                <router-link :to="{name: 'contactus'}"
-                    class="menu-link">
+                <router-link :to="{ name: 'contactus' }" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-support"></i>
                     <div data-i18n="Support">Contact Us</div>
                 </router-link>
             </li>
             <li class="menu-item">
-                <router-link :to="{name: 'products'}"
-                     class="menu-link">
+                <a @click="logout" href="#" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-file"></i>
-                    <div data-i18n="Documentation">Product</div>
-                </router-link>
+                    <div data-i18n="Documentation">LogOut</div>
+                </a>
             </li>
         </ul>
     </aside>
