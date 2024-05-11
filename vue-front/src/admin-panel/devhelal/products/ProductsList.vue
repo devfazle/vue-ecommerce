@@ -25,6 +25,9 @@ export default {
   mounted() {
     this.getProductList();
   },
+ components: {
+  
+	}
 };
 </script>
 <template>

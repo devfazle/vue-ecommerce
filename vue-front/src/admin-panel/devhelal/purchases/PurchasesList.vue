@@ -1,36 +1,20 @@
 <script>
 import axios from "axios";
-import PurchesesModal from "./PurchesesModal.vue";
+import exampleModal from "./exampleModal.vue";
 export default {
   data() {
     return {
-      // url: "http://127.0.0.1:8000/api/admin/products",
-      // productlist: [],
       ModalShow: '',
     };
   },
   methods: {
-    // getProductList() {
-    //   axios.get(this.url).then((response) => {
-    //     this.productlist = response.data.data[0];
-    //   });
-    // },
-    // deleteProduct(id) {
-    //   axios.delete(`${this.url}/${id}`)
-    //   .then((response) => {
-    //             this.getProductList();
-    //         });
-      
-    // },
-    ExpendModalShow(){
-
+    showModal() {
+      const element = this.$refs.modal.$el;
+      $(element).modal('show');
     }
   },
-  mounted() {
-    // this.getProductList();
-  },
 components: {
-  //PurchesesModal
+  'example-modal': exampleModal
 	}
 };
 </script>
@@ -79,6 +63,20 @@ components: {
               </div>
               <div class="col-md-5"></div>
               <div class="col-md-4">
+
+<!-- ================================================== -->
+<div class="container">
+    <button class="btn btn-info" @click="showModal">Show Modal</button>
+    <example-modal ref="modal">
+      <div class="bg-warni">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, tempora!</p>
+      </div>
+     
+    </example-modal>
+  </div>
+
+
+<!-- ================================================== -->
                 <button class="col-md-6 btn btn-dark">Export</button>
                 <router-link :to="{ name: 'addpurchases'}" class="col-md-6 btn btn-primary">Add Purchases</router-link>
               </div>
