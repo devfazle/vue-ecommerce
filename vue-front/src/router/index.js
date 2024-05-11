@@ -78,7 +78,7 @@ const router = createRouter({
           path: "purchaseslist",
           name: "purchaseslist",
           component: PurchasesList,
-        }, 
+        },
         {
           path: "addpurchases",
           name: "addpurchases",

@@ -1,20 +1,19 @@
 <script>
 import axios from "axios";
-import exampleModal from "./exampleModal.vue";
+import ModalAddPurchasesVue from './ModalAddPurchases.vue';
 export default {
   data() {
     return {
-      ModalShow: '',
+      show: false
     };
   },
   methods: {
-    showModal() {
-      const element = this.$refs.modal.$el;
-      $(element).modal('show');
-    }
+    showf() {
+            this.show = true
+        }
   },
 components: {
-  'example-modal': exampleModal
+  ModalAddPurchasesVue,
 	}
 };
 </script>
@@ -64,19 +63,12 @@ components: {
               <div class="col-md-5"></div>
               <div class="col-md-4">
 
-<!-- ================================================== -->
+<!-- ======================== Purchases Modal start========================== -->
 <div class="container">
-    <button class="btn btn-info" @click="showModal">Show Modal</button>
-    <example-modal ref="modal">
-      <div class="bg-warni">
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, tempora!</p>
-      </div>
-     
-    </example-modal>
+    <button class="btn btn-info" @click="showf">Show Modal</button>
+    <ModalAddPurchasesVue :show="show"/>
   </div>
-
-
-<!-- ================================================== -->
+<!-- ============================Purchases Modal End ====================== -->
                 <button class="col-md-6 btn btn-dark">Export</button>
                 <router-link :to="{ name: 'addpurchases'}" class="col-md-6 btn btn-primary">Add Purchases</router-link>
               </div>
