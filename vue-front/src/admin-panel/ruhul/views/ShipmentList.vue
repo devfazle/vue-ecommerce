@@ -1,3 +1,4 @@
+
 <script>
 import axios from 'axios'
 
@@ -68,7 +69,7 @@ export default {
                         <td>{{ c.recipient_phone }}</td>
                         <td>{{ c.address }}</td>
                         <td>{{ c.status }}</td>
-                        <td>{{ c.id }}</td>
+                        <td>{{ c.order_id }}</td>
                         <td>
                           <button @click="update(c.id)" class="btn btn-info"><i class='bx bxs-edit'></i></button> 
                             &nbsp;

@@ -17,6 +17,7 @@ import UsecuponList from "@/admin-panel/ruhul/views/UsecuponList.vue";
 import UpdateUseCoupon from "@/admin-panel/ruhul/views/UpdateUseCoupon.vue";
 
 
+
 import CartTable from "@/admin-panel/fazle/views/CartTable.vue";
 import UpdateCart from "@/admin-panel/fazle/views/UpdateCart.vue";
 
@@ -171,6 +172,29 @@ const router = createRouter({
           path: 'categoryupdate/:id',
           name: 'categoryupdate',
           component: Categoryupdate,
+        },
+        {
+          path: "shipment",
+          name: "shipment",
+          component: ShipmentLayout,
+          children: [
+            {
+              path: "shipment-add",
+              name: "shipment-add",
+              component: ShipmentAdd,
+            },
+            {
+              path: "shipment-list",
+              name: "shipment-list",
+              component: ShipmentList,
+            },
+            {
+              path: "shipment-edit/:id",
+              name: "shipment-edit",
+              component: UpdateShipment,
+            },
+            
+          ],
         },
         {
           path: 'sub_category',
