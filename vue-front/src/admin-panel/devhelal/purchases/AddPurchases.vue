@@ -18,6 +18,7 @@
                 <div class="container">
                     <div class="card">
                         <div class="card-body p-0">
+                            <form  @submit.prevent="createPurchases()">
                             <div class="card-body">
                                 <div class="card-body">
                                     <strong style="color: red"></strong>
@@ -28,17 +29,28 @@
                                                 <label for>Invioce Number</label>
                                                 <div>
                                                     <input type="text" class="form-control" placeholder="Invioce Number"
-                                                        v-model="invoiceNumber" readonly />
+                                                        v-model="invoice_number" readonly />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-4">
                                             <div class="form-group row">
-                                                <label>Voucher Number</label>
+                                                <label>Vendor Name</label>
                                                 <div>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Voucher Number" />
+                                                    <select class="form-control" v-model="user_id">
+                                                                <option value>Select Vendor Name</option>
+                                                                <option v-for="(vdata, i) in vendorList" :key="i" :value="vdata.id">
+                                                        {{ vdata.name }}
+                                                    </option>
+                                                            </select>
+                                                            <!-- <select class="form-control" v-model="product_id"
+                                                    @change="getProductPrice()">
+                                                    <option value>Select Product Name</option>
+                                                    <option v-for="(pdata, i) in presult" :key="i" :value="pdata.id">
+                                                        {{ pdata.name }}
+                                                    </option>
+                                                </select> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -47,7 +59,7 @@
                                             <div class="form-group row">
                                                 <label>Added Date</label>
                                                 <div>
-                                                    <input type="date" class="form-control" />
+                                                    <input type="datetime-local" class="form-control" v-model="date"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -56,22 +68,6 @@
                                     <table class="table table-striped">
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    <div class="form-group row">
-                                                        <label>Vendor Name</label>
-                                                        <div>
-                                                            <select class="form-control">
-                                                                <option value>Select Vendor Name</option>
-                                                            </select>
-                                                            <!-- <select class="form-control" v-model="vendor_id">
-                                                    <option value>Select Vendor Name</option>
-                                                    <option v-for="(vdata, i) in vresult" :key="i" :value="vdata.id">
-                                                        {{ vdata.people.name }}
-                                                    </option>
-                                                </select> -->
-                                                        </div>
-                                                    </div>
-                                                </td>
                                                 <td>
                                                     <div class="form-group row">
                                                         <label>Product Name</label>
@@ -135,8 +131,10 @@
                                         <div class="col-8"></div>
                                         <div class="col-4"></div>
                                     </div>
+                                    <button type="submit">Submit</button>
                                 </div>
                             </div>
+                        </form>
                             <!-- /.card-body -->
                         </div>
                     </div>
@@ -148,11 +146,54 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+import ModalAddPurchases from './ModalAddPurchases.vue';
 export default {
     data() {
         return {
-            invoiceNumber: "",
+            url:"http://localhost:8000/api/admin/",
+            quantity:"",
+            invoice_number:"",
+            unit:"",
+            date:new Date().toISOString().slice(0, 16),
+            product_id:"",
+            user_id:'',
+            price:"",
+            vendorList:[]
         }
     },
+    methods:{
+        // ===============Generate a new UUID as the invoice number======================
+        invoiceNum(){
+            const invoice= "INV:"+uuidv4().substr(0,7);
+            this.invoice_number = invoice;
+        },
+        vendorName(){
+            axios.get(this.url+"users").then((res)=>{
+                const userlist=res.data.data;
+                const filteredUsers = userlist.filter((user) => user.role.name === "vendor");
+                //console.log(filteredUsers);
+                this.vendorList=filteredUsers;
+            });
+        },
+        createPurchases(){
+            const alldata={
+            quantity: this.quantity,
+            invoice_number: this.invoice_number,
+            unit: this.unit,
+            date: this.date,
+            product_id: this.product_id,
+            user_id: this.user_id,
+            price: this.price
+            };
+            console.log(alldata);
+        },
+
+    },
+    mounted() {
+    this.invoiceNum();
+    this.vendorName();
+  },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="show" class="modal-mask">
+    <div v-if="ShowM" class="modal-mask">
         <div class="modal-wrapper">
             <div class="modal-container">
                 <div class="modal-header">
@@ -29,16 +29,15 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 export default {
 	data() {
 		return {
-			show:false
+			
 		}
 	},
 	props: {
-        show: Boolean
+        ShowM: Boolean
 	},
     methods:{
         modalHide(){
-            this.show=false;
-            
+            this.$emit('showfunction', false);
         }
     }
 
@@ -65,9 +64,9 @@ export default {
 }
 
 .modal-container {
-    width: 300px;
-    height: 500px;
-    margin-right: 10%;
+    width: 35%;
+    height: 100vh;
+    margin-right: 0%;
     /* Adjust as needed for your design */
     padding: 10px 10px;
     background-color: #fff;

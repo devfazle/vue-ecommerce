@@ -4,12 +4,12 @@ import ModalAddPurchasesVue from './ModalAddPurchases.vue';
 export default {
   data() {
     return {
-      show: false
+      ShowModal: false
     };
   },
   methods: {
-    showf() {
-            this.show = true
+    showf(newValue) {
+            this.ShowModal=newValue
         }
   },
 components: {
@@ -20,6 +20,7 @@ components: {
 <template>
   
   <div class="container-xxl flex-grow-1 container-p-y">
+    <ModalAddPurchasesVue :ShowM="ShowModal" @showfunction="showf"/>
     <h4 class="fw-bold py-3 mb-4">
       <span class="text-muted fw-light">Purchases/</span> View All Purchases
     </h4>
@@ -66,7 +67,6 @@ components: {
 <!-- ======================== Purchases Modal start========================== -->
 <div class="container">
     <button class="btn btn-info" @click="showf">Show Modal</button>
-    <ModalAddPurchasesVue :show="show"/>
   </div>
 <!-- ============================Purchases Modal End ====================== -->
                 <button class="col-md-6 btn btn-dark">Export</button>

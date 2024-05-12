@@ -14,7 +14,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $purchases = Purchase::orderBy('id', 'desc')->with('user', 'order_item', 'product')->get();
+        $purchases = Purchase::orderBy('id', 'desc')->with('user','product')->get();
         return $this->sendResponse($purchases, 'Purchase list fetched successfully!');
 
     }
@@ -34,11 +34,11 @@ class PurchaseController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'quantity' => 'required',
-            'invoice_numb' => 'required',
+            'invoice_number' => 'required',
             'unit' => 'required',
             'date' => 'required',
-            'products_id' => 'required',
-            'users_id' => 'required',
+            'product_id' => 'required',
+            'user_id' => 'required',
             'price' => 'required',
         ]);
         if ($validator->fails()) {
@@ -54,7 +54,7 @@ class PurchaseController extends Controller
      */
     public function show(string $id)
     {
-        $purchases = Purchase::with('user', 'order_item', 'product')->find($id);
+        $purchases = Purchase::with('user', 'product')->find($id);
         return $this->sendResponse($purchases, 'Purchase list fetched successfully!');
 
     }
@@ -64,7 +64,7 @@ class PurchaseController extends Controller
      */
     public function edit(string $id)
     {
-        $purchases = Purchase::with('user', 'order_item', 'product')->find($id);
+        $purchases = Purchase::with('user','product')->find($id);
         return $this->sendResponse($purchases, 'Purchase list fetched successfully!');
 
     }
@@ -76,11 +76,11 @@ class PurchaseController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'quantity' => 'required',
-            'invoice_numb' => 'required',
+            'invoice_number' => 'required',
             'unit' => 'required',
             'date' => 'required',
-            'products_id' => 'required',
-            'users_id' => 'required',
+            'product_id' => 'required',
+            'user_id' => 'required',
             'price' => 'required',
         ]);
         if ($validator->fails()) {
