@@ -1,3 +1,55 @@
+
+<script>
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+export default {
+    data() {
+        return {
+            url:"http://localhost:8000/api/admin/",
+            quantity:"",
+            invoice_number:"",
+            unit:"",
+            date:new Date().toISOString().slice(0, 16),
+            product_id:"",
+            user_id:"",
+            price:"",
+            vendorList:[],
+        }
+    },
+    methods:{
+        // ===============Generate a new UUID as the invoice number======================
+        invoiceNum(){
+            const invoice= "INV:"+uuidv4().substr(0,7);
+            this.invoice_number = invoice;
+        },
+        vendorName(){
+            axios.get(this.url+"users").then((res)=>{
+                const userlist=res.data.data;
+                const filteredUsers = userlist.filter((user) => user.role_id === 3);
+                //console.log(filteredUsers);
+                this.vendorList=filteredUsers;
+            });
+        },
+        createPurchases(){
+            const alldata={
+            quantity: this.quantity,
+            invoice_number: this.invoice_number,
+            unit: this.unit,
+            date: this.date,
+            product_id: this.product_id,
+            user_id: this.user_id,
+            price: this.price
+            };
+            console.log(alldata);
+        },
+    },
+    mounted() {
+    this.invoiceNum();
+    this.vendorName();
+  },
+}
+</script>
+
 <template>
     <div>
         <div class="container-xxl flex-grow-1 container-p-y text-dark">
@@ -9,7 +61,7 @@
                 <div class="col-md-5 ">
                     <router-link :to="{ name: 'purchaseslist' }" class="btn btn-outline-danger">Discard</router-link>
                     <button class="btn btn-dark ml-2"> Save Draft</button>
-                    <button class="btn btn-primary ml-2" > Publish Purcheses</button>
+                    <button class="btn btn-primary ml-2"> Publish Purcheses</button>
                 </div>
 
             </div>
@@ -145,55 +197,3 @@
         </div>
     </div>
 </template>
-<script>
-import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
-import ModalAddPurchases from './ModalAddPurchases.vue';
-export default {
-    data() {
-        return {
-            url:"http://localhost:8000/api/admin/",
-            quantity:"",
-            invoice_number:"",
-            unit:"",
-            date:new Date().toISOString().slice(0, 16),
-            product_id:"",
-            user_id:'',
-            price:"",
-            vendorList:[]
-        }
-    },
-    methods:{
-        // ===============Generate a new UUID as the invoice number======================
-        invoiceNum(){
-            const invoice= "INV:"+uuidv4().substr(0,7);
-            this.invoice_number = invoice;
-        },
-        vendorName(){
-            axios.get(this.url+"users").then((res)=>{
-                const userlist=res.data.data;
-                const filteredUsers = userlist.filter((user) => user.role.name === "vendor");
-                //console.log(filteredUsers);
-                this.vendorList=filteredUsers;
-            });
-        },
-        createPurchases(){
-            const alldata={
-            quantity: this.quantity,
-            invoice_number: this.invoice_number,
-            unit: this.unit,
-            date: this.date,
-            product_id: this.product_id,
-            user_id: this.user_id,
-            price: this.price
-            };
-            console.log(alldata);
-        },
-
-    },
-    mounted() {
-    this.invoiceNum();
-    this.vendorName();
-  },
-}
-</script>

@@ -89,4 +89,13 @@ export default {
 .modal-default-button {
     float: right;
 }
+
+/* Modal transition styles */
+.modal-enter-active, .modal-leave-active {
+    transition: opacity 0.3s;
+}
+
+.modal-enter, .modal-leave-to /* .modal-leave-active in <2.1.8 */ {
+    opacity: 0;
+}
 </style>

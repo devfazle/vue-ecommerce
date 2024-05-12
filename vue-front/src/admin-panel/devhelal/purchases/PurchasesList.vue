@@ -4,7 +4,7 @@ import ModalAddPurchasesVue from './ModalAddPurchases.vue';
 export default {
   data() {
     return {
-      ShowModal: false
+      ShowModal: false,
     };
   },
   methods: {
