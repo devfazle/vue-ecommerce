@@ -40,7 +40,13 @@ export default {
           console.log(data);
           commit("SET_USER", data);
           commit("SET_AUTHENTICATED", true);
-          router.push({name:'dashboard'})
+          if (state.user.role_id == 1) {
+            router.push({ name: "dashboard" });
+          } else if (state.user.role_id == 2) {
+            router.push({ name: "customer" });
+          } else if (state.user.role_id == 3) {
+            router.push({ name: "vendor" });
+          }
         })
         .catch(({ response: { data } }) => {
           commit("SET_USER", {});
