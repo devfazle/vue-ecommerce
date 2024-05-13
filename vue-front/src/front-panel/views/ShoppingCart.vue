@@ -22,6 +22,9 @@ export default {
     productsInCart() {
       return this.$store.state.cart.products;
     },
+    userData() {
+      return this.$store.state.auth.user;
+    },
     ...mapGetters(["totalPrice"]),
     finalTotal() {
       this.total =
@@ -67,7 +70,8 @@ export default {
     storeOrder() {
       const orderData = {
         products: this.productsInCart,
-        total_price: this.totalPrice
+        total_price: this.totalPrice,
+        userData: this.userData
       };
 
       console.log("ok");
@@ -204,7 +208,7 @@ export default {
           <div
             class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm"
           >
-            <h4 class="mtext-109 cl2 p-b-30">Cart Totals</h4>
+            <h4 class="mtext-109 cl2 p-b-30">Cart Totals {{ userData }}</h4>
             <h1 class="cl2 p-b-30 text-success">{{ order_msg }}</h1>
 
             <div class="flex-w flex-t bor12 p-b-13">
