@@ -128,7 +128,6 @@
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Pages</span>
             </li>
-            <!-- coupons list start -->
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -152,7 +151,6 @@
                     </li>
                 </ul>
             </li>
-            <!-- coupons list end -->
             <!-- coupons list start -->
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
@@ -162,17 +160,37 @@
                 <ul class="menu-sub">
                     <li class="menu-item">
                         <router-link :to="{name: 'couponsshow'}" class="menu-link">
-                            <div data-i18n="Account">Coupon Show</div>
+                            <div data-i18n="Account">Coupon</div>
                         </router-link>
                     </li>
                     <li class="menu-item">
                         <router-link :to="{name: 'couponsUselist'}" class="menu-link">
-                            <div data-i18n="Account">Use Coupon Show</div>
+                            <div data-i18n="Account">Use Coupon</div>
                         </router-link>
                     </li>
                 </ul>
             </li>
             <!-- coupons list end -->
+            <!-- Shipment list start -->
+            <li class="menu-item">
+                <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="Account Settings">Shipments</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <router-link :to="{name: 'shipment-add'}" class="menu-link">
+                            <div data-i18n="Account">Shipment</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <router-link :to="{name: 'shipment-list'}" class="menu-link">
+                            <div data-i18n="Account">Shipment List</div>
+                        </router-link>
+                    </li>
+                </ul>
+            </li>
+            <!-- shipment list end -->
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>

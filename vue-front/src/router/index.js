@@ -17,6 +17,7 @@ import UsecuponList from "@/admin-panel/ruhul/views/UsecuponList.vue";
 import UpdateUseCoupon from "@/admin-panel/ruhul/views/UpdateUseCoupon.vue";
 
 
+
 import CartTable from "@/admin-panel/fazle/views/CartTable.vue";
 import UpdateCart from "@/admin-panel/fazle/views/UpdateCart.vue";
 
@@ -48,6 +49,12 @@ import Wishlistupdate from '@/admin-panel/foysal/components/wishlist/Wishlistupd
 import OrderTable from "@/admin-panel/fazle/order/OrderTable.vue";
 import OrderLayout from "@/admin-panel/fazle/order/OrderLayout.vue";
 import OrderDetails from "@/admin-panel/fazle/order/OrderDetails.vue";
+
+import ShipmentLayout from "@/admin-panel/ruhul/views/ShipmentLayout.vue";
+import ShipmentAdd from "@/admin-panel/ruhul/views/ShipmentAdd.vue";
+import ShipmentList from "@/admin-panel/ruhul/views/ShipmentList.vue";
+import UpdateShipment from "@/admin-panel/ruhul/views/UpdateShipment.vue";
+
 import AddPurchases from "@/admin-panel/devhelal/purchases/AddPurchases.vue";
 import PurchasesList from "@/admin-panel/devhelal/purchases/PurchasesList.vue";
 
@@ -141,6 +148,30 @@ const router = createRouter({
             },
           ],
         },
+
+        {
+          path: "shipment",
+          name: "shipment",
+          component: ShipmentLayout,
+          children: [
+            {
+              path: "shipment-add",
+              name: "shipment-add",
+              component: ShipmentAdd,
+            },
+            {
+              path: "shipment-list",
+              name: "shipment-list",
+              component: ShipmentList,
+            },
+            {
+              path: "shipment-edit/:id",
+              name: "shipment-edit",
+              component: UpdateShipment,
+            },
+            
+          ],
+        },
         {
           path: 'categorylist',
           name: 'categorylist',
@@ -155,6 +186,29 @@ const router = createRouter({
           path: 'categoryupdate/:id',
           name: 'categoryupdate',
           component: Categoryupdate,
+        },
+        {
+          path: "shipment",
+          name: "shipment",
+          component: ShipmentLayout,
+          children: [
+            {
+              path: "shipment-add",
+              name: "shipment-add",
+              component: ShipmentAdd,
+            },
+            {
+              path: "shipment-list",
+              name: "shipment-list",
+              component: ShipmentList,
+            },
+            {
+              path: "shipment-edit/:id",
+              name: "shipment-edit",
+              component: UpdateShipment,
+            },
+            
+          ],
         },
         {
           path: 'sub_category',
