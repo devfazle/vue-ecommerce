@@ -21,7 +21,7 @@ export default {
 <template>
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
         <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="#" class="app-brand-link">
                 <span class="app-brand-logo demo">
                     <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -102,27 +102,27 @@ export default {
 
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <a href="layouts-without-menu.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Without menu">Without menu</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="layouts-without-navbar.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Without navbar">Without navbar</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="layouts-container.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Container">Container</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="layouts-fluid.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Fluid">Fluid</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="layouts-blank.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Blank">Blank</div>
                         </a>
                     </li>
@@ -132,7 +132,6 @@ export default {
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Pages</span>
             </li>
-            <!-- coupons list start -->
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -150,13 +149,12 @@ export default {
                         </router-link>
                     </li>
                     <li class="menu-item">
-                        <a href="pages-account-settings-connections.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Connections">Connections</div>
                         </a>
                     </li>
                 </ul>
             </li>
-            <!-- coupons list end -->
             <!-- coupons list start -->
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
@@ -165,6 +163,7 @@ export default {
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
+
                         <router-link :to="{ name: 'couponsshow' }" class="menu-link">
                             <div data-i18n="Account">Coupon Show</div>
                         </router-link>
@@ -172,11 +171,32 @@ export default {
                     <li class="menu-item">
                         <router-link :to="{ name: 'couponsUselist' }" class="menu-link">
                             <div data-i18n="Account">Use Coupon Show</div>
+
                         </router-link>
                     </li>
                 </ul>
             </li>
             <!-- coupons list end -->
+            <!-- Shipment list start -->
+            <li class="menu-item">
+                <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="Account Settings">Shipments</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <router-link :to="{name: 'shipment-add'}" class="menu-link">
+                            <div data-i18n="Account">Shipment</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <router-link :to="{name: 'shipment-list'}" class="menu-link">
+                            <div data-i18n="Account">Shipment List</div>
+                        </router-link>
+                    </li>
+                </ul>
+            </li>
+            <!-- shipment list end -->
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
@@ -189,14 +209,9 @@ export default {
                         </router-link>
                     </li>
                     <li class="menu-item">
-                        <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                            <div data-i18n="Basic">Register</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
-                            <div data-i18n="Basic">Forgot Password</div>
-                        </a>
+                        <router-link :to="{name: 'purchaseslist'}" class="menu-link">
+                            <div data-i18n="Basic">Purchases</div>
+                        </router-link>
                     </li>
                 </ul>
             </li>
@@ -222,7 +237,9 @@ export default {
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
             <!-- Cards -->
             <li class="menu-item">
+
                 <router-link :to="{ name: 'adminforms' }" href="cards-basic.html" class="menu-link">
+
                     <i class="menu-icon tf-icons bx bx-collection"></i>
                     <div data-i18n="Basic">FORMS</div>
                 </router-link>
@@ -235,97 +252,97 @@ export default {
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <a href="ui-accordion.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Accordion">Accordion</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-alerts.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Alerts">Alerts</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-badges.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Badges">Badges</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-buttons.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Buttons">Buttons</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-carousel.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Carousel">Carousel</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-collapse.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Collapse">Collapse</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-dropdowns.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Dropdowns">Dropdowns</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-footer.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Footer">Footer</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-list-groups.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="List Groups">List groups</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-modals.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Modals">Modals</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-navbar.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Navbar">Navbar</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-offcanvas.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Offcanvas">Offcanvas</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-pagination-breadcrumbs.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Pagination &amp; Breadcrumbs">Pagination &amp; Breadcrumbs</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-progress.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Progress">Progress</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-spinners.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Spinners">Spinners</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-tabs-pills.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Tabs &amp; Pills">Tabs &amp; Pills</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-toasts.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Toasts">Toasts</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-tooltips-popovers.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Tooltips & Popovers">Tooltips &amp; popovers</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="ui-typography.html" class="menu-link">
+                        <a href="#" class="menu-link">
                             <div data-i18n="Typography">Typography</div>
                         </a>
                     </li>
@@ -353,7 +370,7 @@ export default {
             </li>
 
             <li class="menu-item">
-                <a href="icons-boxicons.html" class="menu-link">
+                <a href="#" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-crown"></i>
                     <div data-i18n="Boxicons">Boxicons</div>
                 </a>
@@ -399,7 +416,7 @@ export default {
             </li>
             <!-- Tables -->
             <li class="menu-item">
-                <a href="tables-basic.html" class="menu-link">
+                <a href="#" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-table"></i>
                     <div data-i18n="Tables">Tables</div>
                 </a>

@@ -44,13 +44,13 @@ export default {
                     });
             }
         },
-        getCupons() {
-            axios.get('http://127.0.0.1:8000/api/admin/couponusages')
-                .then((result) => {
-                    //this.cupons = result.data.data.cupons;
-                    //console.log(this.cupons);
-                });
-        },
+        // getCupons() {
+        //     axios.get('http://127.0.0.1:8000/api/admin/couponusages')
+        //         .then((result) => {
+        //             //this.cupons = result.data.data.cupons;
+        //             //console.log(this.cupons);
+        //         });
+        // },
         getData() {
             axios.get('http://127.0.0.1:8000/api/admin/couponusages/create')
                 .then((result) => {
@@ -62,7 +62,7 @@ export default {
     },
     mounted() {
         //this.getuse()
-        this.getCupons();
+        //this.getCupons();
         this.getData();
     }
 };

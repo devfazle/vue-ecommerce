@@ -35,9 +35,10 @@ class ShipmentController extends Controller
         $validator = Validator::make($request->all(), [
             'delivery_date' => 'required',
             'recipient' => 'required',
+            'recipient_phone'=>'required',
             'address' => 'required',
             'status' => 'required',
-            'orders_id' => 'required',
+            'order_id' => 'required',
         ]);
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors(), 422);
@@ -76,7 +77,7 @@ class ShipmentController extends Controller
             'recipient' => 'required',
             'address' => 'required',
             'status' => 'required',
-            'orders_id' => 'required',
+            'order_id' => 'required',
         ]);
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors(), 422);
