@@ -42,6 +42,7 @@ export default {
 			this.addtocart(productNew)
 			this.qty = 1;
 			console.log(this.$store.state.cart.products);
+			this.closeModal();
 		},
 		qtyInc() {
 			this.qty++;
@@ -114,7 +115,6 @@ export default {
 
 							<p class="stext-102 cl3 p-t-23">
 								{{ product.description }}
-								{{ product.photo ? product.photo.path : 'No data' }}
 							</p>
 
 							<!--  -->

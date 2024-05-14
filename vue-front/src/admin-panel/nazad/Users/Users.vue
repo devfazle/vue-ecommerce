@@ -13,7 +13,9 @@
                     <div class="card-body">
                         <div class="container">
                             <h2>Users Table</h2>
-                            <div><RouterLink class="btn btn-primary" :to="{name:'usercreate'}">Add Users</RouterLink></div>
+                            <div>
+                                <RouterLink class="btn btn-primary" :to="{ name: 'usercreate' }">Add Users</RouterLink>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead class="thead-dark">
@@ -29,17 +31,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(data, k) in list">
-                                            <td>{{++k}}</td>
+                                        <tr v-for="(data, k) in list" :key="k">
+                                            <td>{{ ++k }}</td>
                                             <td>{{ data.name }}</td>
                                             <td>{{ data.email }}</td>
                                             <td>{{ data.address }}</td>
                                             <td>{{ data.bank_info }}</td>
                                             <td>{{ data.phone_number }}</td>
-                                            <td>{{ data.role.name }}</td>
+                                            <td>{{
+                                                data.role_id === 1 ? "Admin" :
+                                                data.role_id === 2 ? "Customer" :
+                                                data.role_id === 3 ? "Vendor" :
+                                                data.role_id === 4 ? "Guest" :
+                                                ""
+                                            }}</td>
                                             <td>
                                                 <button class="btn btn-primary" @click="update(data.id)">Edit</button>
-                                                <button class="btn btn-danger" @click="deleteUser(data.id)">Delete</button>
+                                                <button class="btn btn-danger"
+                                                    @click="deleteUser(data.id)">Delete</button>
                                             </td>
                                         </tr>
                                         <!-- Add more rows for additional products -->
@@ -59,7 +68,7 @@ export default {
     data() {
         return {
             url: 'http://localhost:8000/api/admin/users',
-            list:'',
+            list: '',
 
         }
     },
@@ -68,13 +77,13 @@ export default {
             axios.get(this.url)
                 .then((result) => {
                     this.list = result.data.data
-                    
-                //    console.log(result.data.data)
+
+                    //    console.log(result.data.data)
 
                 });
         },
         update(id) {
-            this.$router.push({path:'/admin/useredit/'+id});
+            this.$router.push({ path: '/admin/useredit/' + id });
         },
         async deleteUser(id) {
             try {

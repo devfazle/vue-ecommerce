@@ -4,20 +4,21 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            carts: []
+            carts: [],
+            url: this.$store.state.base.url
         }
     },
 
     methods: {
         getCarts() {
-            axios.get('http://127.0.0.1:8000/api/admin/carts')
+            axios.get(this.url+'admin/carts')
                 .then((result) => {
                     this.carts = result.data.data;
                     console.log(result);
                 })
         },
         deleteCart(id) {
-            axios.delete("http://127.0.0.1:8000/api/admin/carts/" + id).then(() => {
+            axios.delete(this.url+"admin/carts/" + id).then(() => {
                 this.getCarts()
             });
         }

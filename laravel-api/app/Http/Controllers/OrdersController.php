@@ -38,33 +38,39 @@ class OrdersController extends Controller
         // if($validator->fails()){
         //     return $this->sendError('Validation Error.', $validator->errors(),422);
         // }
+        $role_id = $request->userData['role_id'];
 
-        $products = $request->products;
-        $total_price = $request->total_price;
-        $order_date = date("Y-m-d H:i:s");
-        $user_id = 2;
+        if ($role_id == 2) {
+            $products = $request->products;
+            $total_price = $request->total_price;
+            $order_date = date("Y-m-d H:i:s");
+            $user_id = $request->userData['id'];
 
-        $orders_table = [
-            "total_price" => $total_price,
-            "order_date" => $order_date,
-            "user_id" => $user_id
-        ];
-
-        $order = Order::create($orders_table);
-        $order_id = $order['id'];
-
-        $pro_data = [];
-
-        foreach ($products as $p) {
-            $pro_data[] = [
-                "product_id" => $p['id'],
-                "order_id" => $order_id,
-                "quantity" => $p['quantity']
+            $orders_table = [
+                "total_price" => $total_price,
+                "order_date" => $order_date,
+                "user_id" => $user_id
             ];
-        }
 
-        $order_items = Order_item::insert($pro_data);
-        return $this->sendResponse($order_items, 'Order Placed Successfully!');
+            $order = Order::create($orders_table);
+            $order_id = $order['id'];
+
+            $pro_data = [];
+
+            foreach ($products as $p) {
+                $pro_data[] = [
+                    "product_id" => $p['id'],
+                    "order_id" => $order_id,
+                    "quantity" => $p['quantity']
+                ];
+            }
+
+            $order_items = Order_item::insert($pro_data);
+            return $this->sendResponse($order_items, 'Order Placed Successfully!');
+        } else {
+            $info = "your user id is ".$role_id;
+            return $this->sendResponse($info, 'Order not placed!');
+        }
     }
 
     /**
