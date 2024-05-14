@@ -18,10 +18,9 @@ export default {
     methods: {
 
         getInfo() {
-            axios.get('http://127.0.0.1:8000/api/admin/shipments')
+            axios.get('http://127.0.0.1:8000/api/admin/orders')
                 .then((result) => {
-                    this.orders = result.data.data.orders;
-                    console.log(this.orders);
+                    this.orders = result.data.data;
                 })
         },
 
