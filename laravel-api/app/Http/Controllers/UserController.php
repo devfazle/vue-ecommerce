@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'desc')->with('role')->get();
+        $users = User::orderBy('id', 'desc')->with('role','photo')->get();
         return $this->sendResponse($users, 'User list fetched successfully!');
     }
 
@@ -114,7 +114,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        
+
         if ($user->photo) {
             // Get the photo path
             $photoPath = public_path('images') . '/' . $user->photo->path;
