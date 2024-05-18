@@ -27,6 +27,9 @@ class Product extends Model
     public function cart(){
         return $this->hasMany(Cart::class);
     }
+    public function product_reviews(){
+        return $this->hasMany(Product_Reviews::class);
+    }
     public function photo()
     {
         return $this->morphOne(Photo::class, 'imageable');

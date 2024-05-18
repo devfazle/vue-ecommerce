@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderItemsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\ProductReviewsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RoleController;
@@ -37,6 +38,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('shipments',ShipmentController::class)->names('shipments');
     Route::resource('subcategorys',SubCategoryController::class)->names('subcategorys');
     Route::resource('wishlists',WishlistController::class)->names('wishlists');
+    Route::resource('productreviews',ProductReviewsController::class)->names('productreviews');
     Route::resource('photos',PhotoController::class)->names('photos');
 });
 
