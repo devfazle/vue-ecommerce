@@ -41,7 +41,7 @@ class UserController extends Controller
             'userData.password' => 'required|string|min:5',
             'userData.address' => 'required|string|max:255',
             'userData.bank_info' => 'required|string|max:255',
-            'userData.role_id' => 'required|integer|exists:roles,id',
+            'userData.role_id' => 'required|integer',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 

@@ -386,6 +386,18 @@ const routes = [
           middleware: "customer",
           title: "Customer Dashboard",
         },
+        children: [
+          {
+            path: "",
+            name: "customer-order-list",
+            component: () => import("@/front-panel/fazle/components/OrderList.vue"),
+          },
+          {
+            path: "customer-wish-list",
+            name: "customer-wish-list",
+            component: () => import("@/front-panel/fazle/components/WishList.vue"),
+          },
+        ]
       },
     ],
   },
@@ -425,13 +437,6 @@ router.beforeEach((to, from, next) => {
       next({ name: "login" });
     }
   }
-  // } else {
-  //   if (store.state.auth.authenticated && store.state.auth.user.role_id == 1) {
-  //     next();
-  //   } else {
-  //     next({ name: "login" });
-  //   }
-  // }
 });
 
 export default router;
