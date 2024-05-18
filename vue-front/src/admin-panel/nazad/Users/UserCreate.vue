@@ -15,23 +15,6 @@ export default {
         }
     },
     methods: {
-        save() {
-            axios.post(this.url, {
-                name: this.name,
-                email: this.email,
-                phone_number: this.phone_number,
-                password: this.password,
-                address: this.address,
-                bank_info: this.bank_info,
-                role_id: this.role_id,
-            })
-                .then((response) => {
-                    this.$router.push('/admin/users');
-                }, (error) => {
-                    console.log(error);
-                });
-
-        },
 
         onFileChange(e) {
             this.image = e.target.files[0];
@@ -39,16 +22,6 @@ export default {
         },
 
         saveContent() {
-
-            // const formData = new FormData();
-            // formData.append('name', this.name);
-            // formData.append('email', this.email);
-            // formData.append('phone_number', this.phone_number);
-            // formData.append('password', this.password);
-            // formData.append('address', this.address);
-            // formData.append('bank_info', this.bank_info);
-            // formData.append('role_id', this.role_id);
-            // formData.append('image', this.image);
 
             const userData = {
                 name: this.name,
@@ -74,6 +47,7 @@ export default {
                     console.log(response);
                 });
         }
+        
     }
 
 }
@@ -88,7 +62,7 @@ export default {
             <div class="col-xl">
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Users Form {{ image }}</h5>
+                        <h5 class="mb-0">Users Form</h5>
                         <small class="text-muted float-end">Default label</small>
                     </div>
                     <div class="card-body">
