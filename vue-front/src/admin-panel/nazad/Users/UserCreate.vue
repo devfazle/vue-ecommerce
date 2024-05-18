@@ -38,18 +38,34 @@ export default {
             console.log(this.image);
         },
 
-        async saveContent() {
-            const formData = new FormData();
-            formData.append('name', this.name);
-            formData.append('email', this.email);
-            formData.append('phone_number', this.phone_number);
-            formData.append('password', this.password);
-            formData.append('address', this.address);
-            formData.append('bank_info', this.bank_info);
-            formData.append('role_id', this.role_id);
-            formData.append('image', this.image);
+        saveContent() {
 
-            axios.post('http://127.0.0.1:8000/api/admin/users', formData, {
+            // const formData = new FormData();
+            // formData.append('name', this.name);
+            // formData.append('email', this.email);
+            // formData.append('phone_number', this.phone_number);
+            // formData.append('password', this.password);
+            // formData.append('address', this.address);
+            // formData.append('bank_info', this.bank_info);
+            // formData.append('role_id', this.role_id);
+            // formData.append('image', this.image);
+
+            const userData = {
+                name: this.name,
+                email: this.email,
+                phone_number: this.phone_number,
+                password: this.password,
+                address: this.address,
+                bank_info: this.bank_info,
+                role_id: this.role_id,
+            }
+
+            const allData = {
+                userData: userData,
+                image: this.image
+            }
+
+            axios.post('http://127.0.0.1:8000/api/admin/users', allData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
