@@ -68,7 +68,7 @@ class OrdersController extends Controller
             $order_items = Order_item::insert($pro_data);
             return $this->sendResponse($order_items, 'Order Placed Successfully!');
         } else {
-            $info = "your user id is ".$role_id;
+            $info = "your user id is " . $role_id;
             return $this->sendResponse($info, 'Order not placed!');
         }
     }
@@ -112,6 +112,12 @@ class OrdersController extends Controller
     public function destroy(string $id)
     {
         $orders = Order::find($id)->delete();
+        return $this->sendResponse($orders, 'Order deleted successfully!');
+    }
+
+    public function getCustomerOrders(Request $r)
+    {
+        $orders = Order::where('user_id', $r->id)->with('order_items')->get();
         return $this->sendResponse($orders, 'Order deleted successfully!');
     }
 }

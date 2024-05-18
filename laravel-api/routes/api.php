@@ -30,6 +30,7 @@ Route::prefix('admin')->group(function(){
     Route::post('checkcoupon',[CuponsController::class, 'checkCoupon'])->name('checkcoupon');
     Route::resource('orderitems',OrderItemsController::class)->names('orderitems');
     Route::resource('orders',OrdersController::class)->names('orders');
+    Route::post('customerorders',[OrdersController::class, 'getCustomerOrders'])->name('customerorders');
     Route::resource('payments',PaymentsController::class)->names('payments');
     Route::resource('products',ProductsController::class)->names('products');
     Route::resource('purchases',PurchaseController::class)->names('purchases');

@@ -36,7 +36,7 @@
                                             <td>{{ ++k }}</td>
                                             <td>{{ data.name }}</td>
                                             <td>
-                                                <img :src="`http://127.0.0.1:8000/images/${data.photo ? data.photo.path : 'no-image.jpg'}`"
+                                                <img :src="`http://127.0.0.1:8000/photos/users/${data.photo ? data.photo.path : 'no-image.jpg'}`"
                                                     class="img-fluid rounded" alt="user-image" />
                                             </td>
                                             <td>{{ data.email }}</td>

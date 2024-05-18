@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 
-
+use function Laravel\Prompts\password;
 
 class UserController extends Controller
 {
@@ -50,11 +50,11 @@ class UserController extends Controller
         }
 
         $input = $request->userData;
-        $input['password'] = bcrypt($request->password);
+        $input['password'] = bcrypt($request->userData->password);
         $user = User::create($input);
 
         $imageName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
+        $request->image->move(public_path('photos/users'), $imageName);
 
         $image = $user->photo()->create(['path' => $imageName]);
 

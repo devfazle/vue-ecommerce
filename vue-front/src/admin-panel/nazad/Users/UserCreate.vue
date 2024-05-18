@@ -45,7 +45,7 @@ export default {
             })
                 .then((response) => {
                     console.log(response);
-                    this.$router.push({ name: 'usercreate' });
+                    this.$router.push({ name: 'users' });
                 });
         }
         

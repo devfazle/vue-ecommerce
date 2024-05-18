@@ -1,10 +1,12 @@
 <script>
+import axios from 'axios';
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: "CustomerPanel",
   data() {
     return {
-      activeTab: 'orders'
+      activeTab: 'orders',
+      
     };
   },
   methods: {
@@ -13,12 +15,22 @@ export default {
     }),
     setActiveTab(tab) {
       this.activeTab = tab;
+    },
+    getOrders() {
+      axios.post(this.url + 'admin/customerorders', {id: this.user.id})
+        .then((result) => {
+          console.log(result);
+        })
     }
   },
   computed: {
     ...mapGetters('auth', {
       user: 'user',
-    })
+    }),
+    ...mapGetters(['url'])
+  },
+  mounted() {
+    this.getOrders()
   }
 }
 </script>
@@ -31,7 +43,7 @@ export default {
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="main-breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="index.html">Home {{ url }}</a></li>
             <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
             <li class="breadcrumb-item active" aria-current="page">Customer</li>
           </ol>
@@ -131,7 +143,6 @@ export default {
                   </div>
                 </div>
                 <hr>
-                <hr>
                 <div class="row">
                   <div class="col-sm-3">
                     <h6 class="mb-0">Mobile</h6>
@@ -162,14 +173,16 @@ export default {
               <div class="nav-wrapper d-flex align-items-center justify-content-between">
                 <ul class="nav nav-pills d-none d-md-flex" id="pills-tab" role="tablist">
                   <li class="nav-item" role="presentation">
-                    <router-link :to="{ name: 'customer-order-list' }" class="nav-link" id="pills-company-tab" :class="{ active: activeTab === 'orders' }"
-                      @click.prevent="setActiveTab('orders')" data-toggle="pill" href="#pills-company" role="tab"
-                      aria-controls="pills-company" aria-selected="true">Orders</router-link>
+                    <router-link :to="{ name: 'customer-order-list' }" class="nav-link" id="pills-company-tab"
+                      :class="{ active: activeTab === 'orders' }" @click.prevent="setActiveTab('orders')"
+                      data-toggle="pill" href="#pills-company" role="tab" aria-controls="pills-company"
+                      aria-selected="true">Orders</router-link>
                   </li>
                   <li class="nav-item" role="presentation">
-                    <router-link :to="{ name: 'customer-wish-list' }" class="nav-link" id="pills-product-tab" :class="{ active: activeTab === 'wishlist' }"
-                      @click.prevent="setActiveTab('wishlist')" data-toggle="pill" href="#pills-product" role="tab"
-                      aria-controls="pills-product" aria-selected="false">Wishlist</router-link>
+                    <router-link :to="{ name: 'customer-wish-list' }" class="nav-link" id="pills-product-tab"
+                      :class="{ active: activeTab === 'wishlist' }" @click.prevent="setActiveTab('wishlist')"
+                      data-toggle="pill" href="#pills-product" role="tab" aria-controls="pills-product"
+                      aria-selected="false">Wishlist</router-link>
                   </li>
                   <li class="nav-item" role="presentation">
                     <a class="nav-link" id="pills-news-tab" :class="{ active: activeTab === 'cart' }"
@@ -185,7 +198,7 @@ export default {
               <div class="col-sm-12 mb-3">
                 <div class="card h-100">
                   <div class="card-body">
-                    <router-view/>
+                    <router-view />
                   </div>
                 </div>
               </div>

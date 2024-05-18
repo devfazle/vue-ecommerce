@@ -386,6 +386,7 @@ const routes = [
           middleware: "customer",
           title: "Customer Dashboard",
         },
+        redirect: { name: "customer-order-list" },
         children: [
           {
             path: "",
