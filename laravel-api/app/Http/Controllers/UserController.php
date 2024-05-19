@@ -50,7 +50,7 @@ class UserController extends Controller
         }
 
         $input = $request->userData;
-        $input['password'] = bcrypt($request->userData->password);
+        $input['password'] = bcrypt($request->userData['password']);
         $user = User::create($input);
 
         $imageName = time() . '.' . $request->image->extension();

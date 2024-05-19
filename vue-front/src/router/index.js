@@ -398,6 +398,11 @@ const routes = [
             name: "customer-wish-list",
             component: () => import("@/front-panel/fazle/components/WishList.vue"),
           },
+          {
+            path: "customer-invoice",
+            name: "customer-invoice",
+            component: () => import("@/front-panel/fazle/components/Cinvoice.vue"),
+          },
         ]
       },
     ],

@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       activeTab: 'orders',
-      
+
     };
   },
   methods: {
@@ -16,21 +16,11 @@ export default {
     setActiveTab(tab) {
       this.activeTab = tab;
     },
-    getOrders() {
-      axios.post(this.url + 'admin/customerorders', {id: this.user.id})
-        .then((result) => {
-          console.log(result);
-        })
-    }
   },
   computed: {
     ...mapGetters('auth', {
       user: 'user',
     }),
-    ...mapGetters(['url'])
-  },
-  mounted() {
-    this.getOrders()
   }
 }
 </script>
@@ -43,7 +33,7 @@ export default {
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb" class="main-breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home {{ url }}</a></li>
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
             <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
             <li class="breadcrumb-item active" aria-current="page">Customer</li>
           </ol>
@@ -169,27 +159,31 @@ export default {
             </div>
 
             <!-- navbar -->
-            <div class="mt-3 mb-2">
-              <div class="nav-wrapper d-flex align-items-center justify-content-between">
-                <ul class="nav nav-pills d-none d-md-flex" id="pills-tab" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <router-link :to="{ name: 'customer-order-list' }" class="nav-link" id="pills-company-tab"
-                      :class="{ active: activeTab === 'orders' }" @click.prevent="setActiveTab('orders')"
-                      data-toggle="pill" href="#pills-company" role="tab" aria-controls="pills-company"
-                      aria-selected="true">Orders</router-link>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <router-link :to="{ name: 'customer-wish-list' }" class="nav-link" id="pills-product-tab"
-                      :class="{ active: activeTab === 'wishlist' }" @click.prevent="setActiveTab('wishlist')"
-                      data-toggle="pill" href="#pills-product" role="tab" aria-controls="pills-product"
-                      aria-selected="false">Wishlist</router-link>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="pills-news-tab" :class="{ active: activeTab === 'cart' }"
-                      @click.prevent="setActiveTab('cart')" data-toggle="pill" href="#pills-news" role="tab"
-                      aria-controls="pills-news" aria-selected="false">Cart</a>
-                  </li>
-                </ul>
+            <div class="card mb-3 mt-3 mb-2">
+              <div class="card-body">
+                <div class="row">
+                  <div class="nav-wrapper d-flex align-items-center justify-content-between ml-4">
+                    <ul class="nav nav-pills d-none d-md-flex" id="pills-tab" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <router-link :to="{ name: 'customer-order-list' }" class="nav-link" id="pills-company-tab"
+                          :class="{ active: activeTab === 'orders' }" @click.prevent="setActiveTab('orders')"
+                          data-toggle="pill" href="#pills-company" role="tab" aria-controls="pills-company"
+                          aria-selected="true">Orders</router-link>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <router-link :to="{ name: 'customer-wish-list' }" class="nav-link" id="pills-product-tab"
+                          :class="{ active: activeTab === 'wishlist' }" @click.prevent="setActiveTab('wishlist')"
+                          data-toggle="pill" href="#pills-product" role="tab" aria-controls="pills-product"
+                          aria-selected="false">Wishlist</router-link>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="pills-news-tab" :class="{ active: activeTab === 'cart' }"
+                          @click.prevent="setActiveTab('cart')" data-toggle="pill" href="#pills-news" role="tab"
+                          aria-controls="pills-news" aria-selected="false">Cart</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- navbar end -->
