@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product_Reviews extends Model
 {
     use HasFactory;
+    protected $table = "product_reviews";
     protected $guarded = ['id'];
     public function user() {
         return $this->belongsTo(User::class);
