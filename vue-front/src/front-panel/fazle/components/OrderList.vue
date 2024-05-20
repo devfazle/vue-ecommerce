@@ -6,7 +6,8 @@ export default {
     data() {
         return {
             orders: [],
-            showModal: false
+            showModal: false,
+            selectedOrder: []
         }
     },
     methods: {
@@ -23,6 +24,15 @@ export default {
         sModal() {
             this.showModal = true;
         },
+
+        viewOrderDetails(orderId) {
+            this.selectedOrder = this.findOrderById(this.orders, orderId);
+        },
+
+        findOrderById(orders, id) {
+            return orders.find(order => order.id === id);
+        }
+
     },
     computed: {
         ...mapGetters('auth', {
@@ -59,12 +69,13 @@ export default {
                     <td>pending</td>
                     <td>
                         <button class="btn btn-danger">Request Cancellation</button>
-                        <button @click="sModal" class="btn btn-info mt-2">View Invoice</button>
+                        <button @click="sModal(),viewOrderDetails(o.id)" class="btn btn-info mt-2">View Invoice</button>
                     </td>
                 </tr>
             </tbody>
         </table>
 
+        <!-- modal starts here -->
         <div>
             <div>
                 <div v-if="showModal" class="modal-backdrop">
@@ -82,8 +93,8 @@ export default {
                                                     class="fa fa-print"></i> Print</button>
                                             <button type="button" class="btn btn-danger" @click="exportPDF"><i
                                                     class="fa fa-file-pdf-o"></i> Export as PDF</button>
-                                            <button type="button" class="btn btn-danger ml-1"
-                                                @click="closeModal"><i class="fa fa-file-pdf-o"></i>
+                                            <button type="button" class="btn btn-danger ml-1" @click="closeModal"><i
+                                                    class="fa fa-file-pdf-o"></i>
                                                 Close</button>
                                         </div>
                                         <hr>
@@ -113,10 +124,10 @@ export default {
                                                 <div class="row contacts">
                                                     <div class="col invoice-to">
                                                         <div class="text-gray-light">INVOICE TO:</div>
-                                                        <h2 class="to">John Doe</h2>
-                                                        <div class="address">796 Silver Harbour, TX 79273, US</div>
+                                                        <h2 class="to">{{ user.name }}</h2>
+                                                        <div class="address">{{ user.address }}</div>
                                                         <div class="email"><a
-                                                                href="mailto:john@example.com">john@example.com</a>
+                                                                href="mailto:john@example.com">{{ user.email }}</a>
                                                         </div>
                                                     </div>
                                                     <div class="col invoice-details">
@@ -129,76 +140,45 @@ export default {
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th class="text-left">DESCRIPTION</th>
-                                                            <th class="text-right">HOUR PRICE</th>
-                                                            <th class="text-right">HOURS</th>
-                                                            <th class="text-right">TOTAL</th>
+                                                            <th class="text-left">Product Name</th>
+                                                            <th class="text-right">Unit Price</th>
+                                                            <th class="text-right">Quantity</th>
+                                                            <th class="text-right">Total Price</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td class="no">04</td>
+                                                        <tr v-for="(p, i) in selectedOrder.order_items" :key="i">
+                                                            <td class="no">{{ ++i }}</td>
                                                             <td class="text-left">
                                                                 <h3>
                                                                     <a target="_blank" href="javascript:;">
-                                                                        Youtube channel
+                                                                        {{ p.product.name }}
                                                                     </a>
                                                                 </h3>
                                                                 <a target="_blank" href="javascript:;">
-                                                                    Useful videos to improve your Javascript skills.
-                                                                    Subscribe and stay tuned :)
+                                                                    {{ p.product.description }}
                                                                 </a>
                                                             </td>
-                                                            <td class="unit">$0.00</td>
-                                                            <td class="qty">100</td>
-                                                            <td class="total">$0.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="no">01</td>
-                                                            <td class="text-left">
-                                                                <h3>Website Design</h3>Creating a recognizable design
-                                                                solution based on the company's existing visual identity
-                                                            </td>
-                                                            <td class="unit">$40.00</td>
-                                                            <td class="qty">30</td>
-                                                            <td class="total">$1,200.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="no">02</td>
-                                                            <td class="text-left">
-                                                                <h3>Website Development</h3>Developing a Content
-                                                                Management System-based Website
-                                                            </td>
-                                                            <td class="unit">$40.00</td>
-                                                            <td class="qty">80</td>
-                                                            <td class="total">$3,200.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="no">03</td>
-                                                            <td class="text-left">
-                                                                <h3>Search Engines Optimization</h3>Optimize the site
-                                                                for search engines (SEO)
-                                                            </td>
-                                                            <td class="unit">$40.00</td>
-                                                            <td class="qty">20</td>
-                                                            <td class="total">$800.00</td>
+                                                            <td class="unit">{{ p.product.price }}</td>
+                                                            <td class="qty">{{ p.quantity }}</td>
+                                                            <td class="total">{{ p.product.price*p.quantity }}</td>
                                                         </tr>
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
                                                             <td colspan="2"></td>
                                                             <td colspan="2">SUBTOTAL</td>
-                                                            <td>$5,200.00</td>
+                                                            <td>{{ selectedOrder.total_price }} ৳</td>
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2"></td>
                                                             <td colspan="2">TAX 25%</td>
-                                                            <td>$1,300.00</td>
+                                                            <td>{{ selectedOrder.total_price*0.25 }} ৳</td>
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2"></td>
                                                             <td colspan="2">GRAND TOTAL</td>
-                                                            <td>$6,500.00</td>
+                                                            <td>{{ selectedOrder.total_price*1.25 }} ৳</td>
                                                         </tr>
                                                     </tfoot>
                                                 </table>
