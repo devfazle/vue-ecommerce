@@ -8,19 +8,6 @@ import FrontPage from "@/front-panel/views/FrontPage.vue";
 import CartsAdd from "@/admin-panel/fazle/views/CartsAdd.vue";
 import CartLayout from "@/admin-panel/fazle/views/CartLayout.vue";
 
-import CouponsAdd from "@/admin-panel/ruhul/views/CouponsAdd.vue";
-import CouponsLaout from "@/admin-panel/ruhul/views/CouponsLaout.vue";
-import CouponsList from "@/admin-panel/ruhul/views/CouponsList.vue";
-import UpdateCupons from "@/admin-panel/ruhul/views/UpdateCupons.vue";
-import UseCuponsAdd from "@/admin-panel/ruhul/views/UseCuponsAdd.vue";
-import UsecuponList from "@/admin-panel/ruhul/views/UsecuponList.vue";
-import UpdateUseCoupon from "@/admin-panel/ruhul/views/UpdateUseCoupon.vue";
-import ProductReviewLayout from "@/admin-panel/ruhul/views/ProductReviewLayout.vue";
-import ProductReviewTable from "@/admin-panel/ruhul/views/ProductReviewTable.vue";
-import ProductReviewCreate from "@/admin-panel/ruhul/views/ProductReviewCreate.vue";
-import ProductReviewEdit from "@/admin-panel/ruhul/views/ProductReviewEdit.vue";
-
-
 import CartTable from "@/admin-panel/fazle/views/CartTable.vue";
 import UpdateCart from "@/admin-panel/fazle/views/UpdateCart.vue";
 
@@ -54,19 +41,8 @@ import OrderLayout from "@/admin-panel/fazle/order/OrderLayout.vue";
 import OrderDetails from "@/admin-panel/fazle/order/OrderDetails.vue";
 
 import store from "@/stores";
-import ShipmentLayout from "@/admin-panel/ruhul/views/ShipmentLayout.vue";
-import ShipmentAdd from "@/admin-panel/ruhul/views/ShipmentAdd.vue";
-import ShipmentList from "@/admin-panel/ruhul/views/ShipmentList.vue";
-import UpdateShipment from "@/admin-panel/ruhul/views/UpdateShipment.vue";
-
 import AddPurchases from "@/admin-panel/devhelal/purchases/AddPurchases.vue";
 import PurchasesList from "@/admin-panel/devhelal/purchases/PurchasesList.vue";
-import ProductReviewLayout from "@/admin-panel/ruhul/views/ProductReviewLayout.vue";
-import ProductReviewTable from "@/admin-panel/ruhul/views/ProductReviewTable.vue";
-import ProductReviewCreate from "@/admin-panel/ruhul/views/ProductReviewCreate.vue";
-//import ProductReviewTable from "@/admin-panel/ruhul/views/ProductReviewTable.vue";
-import ProductReviewEdit from "@/admin-panel/ruhul/views/ProductReviewEdit.vue";
-
 const routes = [
   {
     path: "/admin",
@@ -136,63 +112,40 @@ const routes = [
           name: "addpurchases",
           component: AddPurchases,
         },
-        {
-          path: "product-review",
-          name: "product-review",
-          component: ProductReviewLayout,
-          children: [
-            {
-              path: "product-review-add",
-              name: "product-review-add",
-              component: ProductReviewCreate,
-            },
-            {
-              path: "product-review-list",
-              name: "product-review-list",
-              component: ProductReviewTable,
-            },
-            {
-              path: "product-review-edit/:id",
-              name: "product-review-edit",
-              component: ProductReviewEdit,
-            },
-            
-          ],
-        },
           {
             path: "coupons",
             name: "coupons",
-            component: CouponsLaout,
+            component: ()=>import("@/admin-panel/ruhul/views/CouponsLaout.vue"),
             children: [
               {
                 path: "coupons-add",
                 name: "couponsAdd",
-                component: CouponsAdd,
+                component: ()=>import("@/admin-panel/ruhul/views/CouponsAdd.vue"),
               },
               {
                 path: "coupons-list",
                 name: "couponsshow",
-                component: CouponsList,
+                component: ()=>import("@/admin-panel/ruhul/views/CouponsList.vue"),
               },
               {
                 path: "coupons-update/:id",
                 name: "couponsUpdate",
-                component: UpdateCupons,
+                component: ()=>import("@/admin-panel/ruhul/views/UpdateCupons.vue"),
               },
               {
                 path: "coupons-use",
                 name: "couponsUse",
-                component: UseCuponsAdd,
+                component: ()=>import("@/admin-panel/ruhul/views/UseCuponsAdd.vue"),
               },
               {
                 path: "coupons-uselist",
                 name: "couponsUselist",
-                component: UsecuponList,
+                component: ()=>import("@/admin-panel/ruhul/views/UsecuponList.vue"),
               },
               {
                 path: "coupons-useupdate/:id",
                 name: "couponsUseUpdate",
-                component: UpdateUseCoupon,
+                component: ()=>import("@/admin-panel/ruhul/views/UpdateUseCoupon.vue"),
               },
             ],
           },
@@ -303,22 +256,22 @@ const routes = [
           {
           path: "shipment",
           name: "shipment",
-          component: ShipmentLayout,
+          component: ()=>import("@/admin-panel/ruhul/views/ShipmentLayout.vue"),
           children: [
             {
               path: "shipment-add",
               name: "shipment-add",
-              component: ShipmentAdd,
+              component: ()=>import("@/admin-panel/ruhul/views/ShipmentAdd.vue"),
             },
             {
               path: "shipment-list",
               name: "shipment-list",
-              component: ShipmentList,
+              component: ()=>import("@/admin-panel/ruhul/views/ShipmentList.vue"),
             },
             {
               path: "shipment-edit/:id",
               name: "shipment-edit",
-              component: UpdateShipment,
+              component: ()=>import("@/admin-panel/ruhul/views/UpdateShipment.vue"),
             },
             
           ],
@@ -326,22 +279,22 @@ const routes = [
           {
           path: "product-review",
           name: "product-review",
-          component: ProductReviewLayout,
+          component: ()=>import("@/admin-panel/ruhul/views/ProductReviewLayout.vue"),
           children: [
             {
               path: "product-review-add",
               name: "product-review-add",
-              component: ProductReviewCreate,
+              component:()=>import("@/admin-panel/ruhul/views/ProductReviewCreate.vue") ,
             },
             {
               path: "product-review-list",
               name: "product-review-list",
-              component: ProductReviewTable,
+              component:()=>import("@/admin-panel/ruhul/views/ProductReviewTable.vue") ,
             },
             {
               path: "product-review-edit/:id",
               name: "product-review-edit",
-              component: ProductReviewEdit,
+              component: ()=>import("@/admin-panel/ruhul/views/ProductReviewEdit.vue"),
             },
             
           ],
