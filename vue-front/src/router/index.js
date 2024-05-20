@@ -61,6 +61,11 @@ import UpdateShipment from "@/admin-panel/ruhul/views/UpdateShipment.vue";
 
 import AddPurchases from "@/admin-panel/devhelal/purchases/AddPurchases.vue";
 import PurchasesList from "@/admin-panel/devhelal/purchases/PurchasesList.vue";
+import ProductReviewLayout from "@/admin-panel/ruhul/views/ProductReviewLayout.vue";
+import ProductReviewTable from "@/admin-panel/ruhul/views/ProductReviewTable.vue";
+import ProductReviewCreate from "@/admin-panel/ruhul/views/ProductReviewCreate.vue";
+//import ProductReviewTable from "@/admin-panel/ruhul/views/ProductReviewTable.vue";
+import ProductReviewEdit from "@/admin-panel/ruhul/views/ProductReviewEdit.vue";
 
 const routes = [
   {
@@ -314,6 +319,29 @@ const routes = [
               path: "shipment-edit/:id",
               name: "shipment-edit",
               component: UpdateShipment,
+            },
+            
+          ],
+        },
+          {
+          path: "product-review",
+          name: "product-review",
+          component: ProductReviewLayout,
+          children: [
+            {
+              path: "product-review-add",
+              name: "product-review-add",
+              component: ProductReviewCreate,
+            },
+            {
+              path: "product-review-list",
+              name: "product-review-list",
+              component: ProductReviewTable,
+            },
+            {
+              path: "product-review-edit/:id",
+              name: "product-review-edit",
+              component: ProductReviewEdit,
             },
             
           ],
