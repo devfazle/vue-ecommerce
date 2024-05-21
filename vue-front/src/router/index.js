@@ -300,6 +300,29 @@ const routes = [
           ],
         },
           {
+          path: "product-price",
+          name: "product-price",
+          component: ()=>import("@/admin-panel/ruhul/views/ProductPriceLayout.vue"),
+          children: [
+            {
+              path: "product-price-add",
+              name: "product-price-add",
+              component:()=>import("@/admin-panel/ruhul/views/ProductPriceCreate.vue") ,
+            },
+            {
+              path: "product-price-list",
+              name: "product-price-list",
+              component:()=>import("@/admin-panel/ruhul/views/ProductPriceTable.vue") ,
+            },
+            {
+              path: "product-price-edit/:id",
+              name: "product-price-edit",
+              component: ()=>import("@/admin-panel/ruhul/views/ProductPriceEdit.vue"),
+            },
+            
+          ],
+        },
+          {
             path: "cart1",
             name: "cartOne",
             component: CartLayout,
