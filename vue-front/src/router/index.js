@@ -360,6 +360,11 @@ const routes = [
         component: Product,
       },
       {
+        path: "about",
+        name: "about",
+        component: () => import("@/front-panel/views/AboutPage.vue"),
+      },
+      {
         path: "shopping-cart",
         name: "cart",
         component: () => import("@/front-panel/views/ShoppingCart.vue"),
