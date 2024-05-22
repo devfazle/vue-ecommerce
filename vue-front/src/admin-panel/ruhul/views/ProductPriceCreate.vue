@@ -74,7 +74,6 @@ export default {
                 placeholder="selling price" />
             <small v-if="!selling_price" class="">Please enter selling Price.</small>
         </div>
-       
         <div class="mb-3">
             <input type="text" class="form-control" list="tt1" id="tt" v-model="product_id"
                 placeholder="select products">
