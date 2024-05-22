@@ -36,7 +36,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["incrementQuantity", "decrementQuantity"]),
+    ...mapActions(["incrementQuantity", "decrementQuantity", "clearCart"]),
     applyCoupon() {
       axios
         .post("http://127.0.0.1:8000/api/admin/checkcoupon", {
@@ -88,6 +88,11 @@ export default {
         });
 
       this.orderMsg();
+
+      setTimeout(() => {
+        this.clearCart();
+        this.$router.push({ name: 'customer' });
+      }, 5000);
     },
   },
   watch: {

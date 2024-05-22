@@ -12,7 +12,7 @@
                     </div>
                     <div class="card-body">
                         <div class="container">
-                            <h2>Users Table</h2>
+                            <h2>Payment Table</h2>
                             <div><RouterLink class="btn btn-primary" :to="{name:'paymentcreate'}">Add Payment</RouterLink></div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">

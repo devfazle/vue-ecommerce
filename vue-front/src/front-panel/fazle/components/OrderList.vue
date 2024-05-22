@@ -1,6 +1,7 @@
 <script>
 import axios from "axios";
 import { mapGetters } from 'vuex';
+import html2pdf from 'html2pdf.js';
 export default {
     name: "CustomerOrderList",
     data() {
@@ -31,6 +32,29 @@ export default {
 
         findOrderById(orders, id) {
             return orders.find(order => order.id === id);
+        },
+        printInvoice() {
+            const printContents = document.getElementById('invoice2').innerHTML;
+            const originalContents = document.body.innerHTML;
+            const newWindow = window.open('', '', 'height=500, width=800');
+            newWindow.document.write('<html><head><title>Invoice</title>');
+            newWindow.document.write('</head><body>');
+            newWindow.document.write(printContents);
+            newWindow.document.write('</body></html>');
+            newWindow.document.close();
+            newWindow.print();
+            newWindow.close();
+        },
+        exportPDF() {
+            const element = document.getElementById('invoice2');
+            const options = {
+                margin: 1,
+                filename: `Invoice_${this.selectedOrder.id}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(element).set(options).save();
         }
 
     },
@@ -57,6 +81,7 @@ export default {
                     <th scope="col">Total Price (tk)</th>
                     <th scope="col">Date</th>
                     <th scope="col">Payment</th>
+                    <th scope="col">Shipping</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -66,10 +91,12 @@ export default {
                     <td>{{ o.id }}</td>
                     <td>{{ o.total_price }}</td>
                     <td>{{ o.order_date }}</td>
-                    <td>pending</td>
+                    <td>Status: {{ o.payment ? o.payment.status : 'no data' }}, Method: {{ o.payment ? o.payment.method
+                        : 'no data' }}</td>
+                    <td>Status: {{ o.shipment ? o.shipment.status : 'no data' }}</td>
                     <td>
                         <button class="btn btn-danger">Request Cancellation</button>
-                        <button @click="sModal(),viewOrderDetails(o.id)" class="btn btn-info ml-1">View Invoice</button>
+                        <button @click="sModal(), viewOrderDetails(o.id)" class="btn btn-info mt-1">View Invoice</button>
                     </td>
                 </tr>
             </tbody>
@@ -89,23 +116,24 @@ export default {
                                 <div id="invoice">
                                     <div class="toolbar hidden-print">
                                         <div class="text-end">
-                                            <button type="button" class="btn btn-dark" @click="printInvoice"><i
+                                            <button type="button" class="btn btn-dark mr-1" @click="printInvoice"><i
                                                     class="fa fa-print"></i> Print</button>
-                                            <button type="button" class="btn btn-danger" @click="exportPDF"><i
+                                            <button type="button" class="btn btn-info" @click="exportPDF"><i
                                                     class="fa fa-file-pdf-o"></i> Export as PDF</button>
                                             <button type="button" class="btn btn-danger ml-1" @click="closeModal"><i
-                                                    class="fa fa-file-pdf-o"></i>
+                                                    class="fa fa-times"></i>
                                                 Close</button>
                                         </div>
                                         <hr>
                                     </div>
-                                    <div class="invoice overflow-auto">
+                                    <div class="invoice overflow-auto" id="invoice2">
                                         <div style="min-width: 600px">
                                             <header>
                                                 <div class="row">
                                                     <div class="col">
                                                         <a href="javascript:;">
-                                                            <img :src="`http://127.0.0.1:8000/photos/users/${user.photo ? user.photo.path : 'no-image.jpg'}`" width="80" alt="">
+                                                            <img :src="`http://127.0.0.1:8000/photos/users/${user.photo ? user.photo.path : 'no-image.jpg'}`"
+                                                                width="80" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="col company-details">
@@ -126,8 +154,8 @@ export default {
                                                         <div class="text-gray-light">INVOICE TO:</div>
                                                         <h2 class="to">{{ user.name }}</h2>
                                                         <div class="address">{{ user.address }}</div>
-                                                        <div class="email"><a
-                                                                href="mailto:john@example.com">{{ user.email }}</a>
+                                                        <div class="email"><a href="mailto:john@example.com">{{
+                                                                user.email }}</a>
                                                         </div>
                                                     </div>
                                                     <div class="col invoice-details">
@@ -161,7 +189,7 @@ export default {
                                                             </td>
                                                             <td class="unit">{{ p.product.price }}</td>
                                                             <td class="qty">{{ p.quantity }}</td>
-                                                            <td class="total">{{ p.product.price*p.quantity }}</td>
+                                                            <td class="total">{{ p.product.price * p.quantity }}</td>
                                                         </tr>
                                                     </tbody>
                                                     <tfoot>
@@ -173,12 +201,12 @@ export default {
                                                         <tr>
                                                             <td colspan="2"></td>
                                                             <td colspan="2">TAX 25%</td>
-                                                            <td>{{ selectedOrder.total_price*0.25 }} ৳</td>
+                                                            <td>{{ selectedOrder.total_price * 0.25 }} ৳</td>
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2"></td>
                                                             <td colspan="2">GRAND TOTAL</td>
-                                                            <td>{{ selectedOrder.total_price*1.25 }} ৳</td>
+                                                            <td>{{ selectedOrder.total_price * 1.25 }} ৳</td>
                                                         </tr>
                                                     </tfoot>
                                                 </table>

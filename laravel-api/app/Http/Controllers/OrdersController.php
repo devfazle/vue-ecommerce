@@ -131,7 +131,7 @@ class OrdersController extends Controller
 
     public function getCustomerOrders(Request $r)
     {
-        $orders = Order::where('user_id', $r->id)->with('order_items.product')->orderBy('created_at', 'desc')->get();
+        $orders = Order::where('user_id', $r->id)->with('order_items.product','payment','shipment')->orderBy('created_at', 'desc')->get();
         return $this->sendResponse($orders, 'Order deleted successfully!');
     }
 }
