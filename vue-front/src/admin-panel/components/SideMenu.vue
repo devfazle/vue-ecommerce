@@ -276,6 +276,19 @@ export default {
                     </li>
                 </ul>
             </li>
+            <li class="menu-item">
+                <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-cart-alt"></i>
+                    <div data-i18n="Misc">Vendor Return</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <router-link :to="{ name: 'vendor-return-list' }" class="menu-link">
+                            <div data-i18n="Error">Vendor Return List</div>
+                        </router-link>
+                    </li>
+                </ul>
+            </li>
             <!-- Components -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
             <!-- Cards -->

@@ -18,6 +18,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendorReturnController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('payments',PaymentsController::class)->names('payments');
     Route::resource('products',ProductsController::class)->names('products');
     Route::resource('purchases',PurchaseController::class)->names('purchases');
+    Route::resource('vendorreturns',VendorReturnController::class)->names('vendorreturns');
     Route::resource('roles',RoleController::class)->names('roles');
     Route::resource('shipments',ShipmentController::class)->names('shipments');
     Route::resource('subcategorys',SubCategoryController::class)->names('subcategorys');

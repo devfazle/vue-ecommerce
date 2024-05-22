@@ -17,6 +17,7 @@
                                 <input type="text" v-model="name" class="form-control" id="basic-default-fullname"
                                     placeholder="John Doe" />
                             </div>
+                            <router-link :to="{ name: 'roles' }" class="btn brn-sm btn-primary">Back</router-link> &nbsp;
                             <button type="submit" class="btn btn-primary">Send</button>
                         </form>
                     </div>

@@ -254,6 +254,28 @@ const routes = [
             component: PaymentEdit,
           },
           {
+            path:"vendor-return",
+            name:"vendor-return",
+            component: ()=>import("@/admin-panel/nazad/vendorReturn/VendorReturnLayout.vue"),
+            children:[
+              {
+                path:"vendor-return-list",
+                name:"vendor-return-list",
+                component: ()=>import("@/admin-panel/nazad/vendorReturn/VendorReturnList.vue"),
+              },
+              {
+                path:"vendor-return-add",
+                name:"vendor-return-add",
+                component: ()=>import("@/admin-panel/nazad/vendorReturn/VendorReturnAdd.vue"),
+              },
+              {
+                path:"vendor-return-edit",
+                name:"vendor-return-edit",
+                component: ()=>import("@/admin-panel/nazad/vendorReturn/VendorReturnEdit.vue"),
+              },
+            ]
+          },
+          {
           path: "shipment",
           name: "shipment",
           component: ()=>import("@/admin-panel/ruhul/views/ShipmentLayout.vue"),

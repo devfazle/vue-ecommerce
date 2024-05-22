@@ -32,8 +32,9 @@
                                 <div class="input-group input-group-merge">
                                     <select class="form-control" v-model="method" @onchange="this.value" >
                                         <option >Select one</option>
-                                        <option value="bkash">Bikash</option>
+                                        <option value="bikash">Bikash</option>
                                         <option value="cash">Cash On</option>
+                                        <option value="rocket">Rocket</option>
                                     </select>
                                 </div>
                             </div>
@@ -47,6 +48,7 @@
                                     </select>
                                 </div>
                             </div>
+                            <router-link :to="{ name: 'payment' }" class="btn brn-sm btn-primary">Back</router-link> &nbsp;
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                     </div>

@@ -41,6 +41,7 @@
                                 <textarea id="basic-default-message" v-model="bank_info" class="form-control"
                                     placeholder="Inter your bank account and name"></textarea>
                             </div>
+                            <router-link :to="{ name: 'users' }" class="btn brn-sm btn-primary">Back</router-link> &nbsp;
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                     </div>

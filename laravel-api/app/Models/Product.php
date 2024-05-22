@@ -33,6 +33,9 @@ class Product extends Model
     public function product_price(){
         return $this->hasOne(ProductPrice::class);
     }
+    public function vendorReturns(){
+        return $this->hasMany(VendorReturn::class);
+    }
     public function photo()
     {
         return $this->morphOne(Photo::class, 'imageable');
