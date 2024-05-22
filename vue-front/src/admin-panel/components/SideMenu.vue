@@ -165,12 +165,12 @@ export default {
                     <li class="menu-item">
 
                         <router-link :to="{ name: 'couponsshow' }" class="menu-link">
-                            <div data-i18n="Account">Coupon Show</div>
+                            <div data-i18n="Account">Coupon </div>
                         </router-link>
                     </li>
                     <li class="menu-item">
                         <router-link :to="{ name: 'couponsUselist' }" class="menu-link">
-                            <div data-i18n="Account">Use Coupon Show</div>
+                            <div data-i18n="Account">Use Coupon </div>
 
                         </router-link>
                     </li>
@@ -197,6 +197,49 @@ export default {
                 </ul>
             </li>
             <!-- shipment list end -->
+            <!-- Product price list start -->
+            <li class="menu-item">
+                <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="Account Settings">Product price</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <router-link :to="{name: 'product-price-add'}" class="menu-link">
+                            <div data-i18n="Account">Product price</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <router-link :to="{name: 'product-price-list'}" class="menu-link">
+                            <div data-i18n="Account">Product price List</div>
+                        </router-link>
+                    </li>
+                </ul>
+            </li>
+            <!-- Product price list end -->
+
+
+            <li class="menu-item">
+                <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="Account Settings">Product review</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <router-link :to="{name: 'product-review-add'}" class="menu-link">
+                            <div data-i18n="Account">Product review</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <router-link :to="{name: 'product-review-list'}" class="menu-link">
+                            <div data-i18n="Account">Product review List</div>
+                        </router-link>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Product list end -->
+
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
