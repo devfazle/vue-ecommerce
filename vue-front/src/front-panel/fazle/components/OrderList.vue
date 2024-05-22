@@ -2,13 +2,17 @@
 import axios from "axios";
 import { mapGetters } from 'vuex';
 import html2pdf from 'html2pdf.js';
+import Modal from '../components/Modal.vue';
+
 export default {
     name: "CustomerOrderList",
     data() {
         return {
             orders: [],
             showModal: false,
-            selectedOrder: []
+            selectedOrder: [],
+            showModal2: false,
+            shipmentStatus: ''
         }
     },
     methods: {
@@ -28,11 +32,13 @@ export default {
 
         viewOrderDetails(orderId) {
             this.selectedOrder = this.findOrderById(this.orders, orderId);
+            this.shipmentStatus = this.selectedOrder.shipment ? this.selectedOrder.shipment.status : 'no data';
         },
 
         findOrderById(orders, id) {
             return orders.find(order => order.id === id);
         },
+
         printInvoice() {
             const printContents = document.getElementById('invoice2').innerHTML;
             const originalContents = document.body.innerHTML;
@@ -55,6 +61,13 @@ export default {
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             html2pdf().from(element).set(options).save();
+        },
+        getStepColor(step) {
+            const steps = ['processing', 'shipped', 'route', 'delivered'];
+            const activeIndex = steps.indexOf(this.shipmentStatus);
+            const stepIndex = steps.indexOf(step);
+
+            return stepIndex <= activeIndex ? 'active-color' : 'inactive-color';
         }
 
     },
@@ -63,10 +76,24 @@ export default {
             user: 'user',
         }),
         ...mapGetters(['url']),
+
+        activeSteps() {
+            const steps = ['processing', 'shipped', 'route', 'delivered'];
+            const activeIndex = steps.indexOf(this.shipmentStatus);
+            return steps.map((step, index) => {
+                return index <= activeIndex ? 'active step0' : 'step0';
+            });
+
+        },
+
+        
     },
     mounted() {
         this.getOrders();
-    }
+    },
+    components: {
+        Modal
+    },
 }
 </script>
 
@@ -96,7 +123,10 @@ export default {
                     <td>Status: {{ o.shipment ? o.shipment.status : 'no data' }}</td>
                     <td>
                         <button class="btn btn-danger">Request Cancellation</button>
-                        <button @click="sModal(), viewOrderDetails(o.id)" class="btn btn-info mt-1">View Invoice</button>
+                        <button @click="sModal(), viewOrderDetails(o.id)" class="btn btn-info mt-1">View
+                            Invoice</button>
+                        <button @click="showModal2 = true, viewOrderDetails(o.id)"
+                            class="btn btn-primary mt-1 ml-1">Track Order</button>
                     </td>
                 </tr>
             </tbody>
@@ -155,7 +185,7 @@ export default {
                                                         <h2 class="to">{{ user.name }}</h2>
                                                         <div class="address">{{ user.address }}</div>
                                                         <div class="email"><a href="mailto:john@example.com">{{
-                                                                user.email }}</a>
+                                                            user.email }}</a>
                                                         </div>
                                                     </div>
                                                     <div class="col invoice-details">
@@ -229,6 +259,71 @@ export default {
                 </div>
             </div>
         </div>
+
+        <!-- modala starts here -->
+        <div>
+            <button @click="showModal2 = true" class="btn btn-primary">Open Modal</button>
+
+            <Modal :title="'Order Tracker'" :isVisible="showModal2" @close="showModal2 = false">
+                <div class="container">
+                    <div class="card">
+                        <div class="row d-flex justify-content-between px-3 top">
+                            <div class="d-flex">
+                                <h5>ORDER <span class="text-primary font-weight-bold">#Y34XDHR</span></h5>
+                            </div>
+                            <div class="d-flex flex-column text-sm-right">
+                                <p class="mb-0">Expected Arrival <span>01/12/19</span></p>
+                                <p>USPS <span class="font-weight-bold">234094567242423422898</span></p>
+                            </div>
+                        </div>
+                        <!-- Add class 'active' to progress -->
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-12">
+                                <ul id="progressbar" class="text-center">
+                                    <li :class="activeSteps[0]">Processed</li>
+                                    <li :class="activeSteps[1]">Shipped</li>
+                                    <li :class="activeSteps[2]">On Route</li>
+                                    <li :class="activeSteps[3]">Arrived</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between top">
+                            <div class="row d-flex icon-content">
+                                <img :class="[getStepColor('processing') === 'active-color' ? 'active-icon' : 'inactive-icon']"
+                                    class="icon" src="https://i.imgur.com/9nnc9Et.png">
+                                <div :class="getStepColor('processing')" class="d-flex flex-column">
+                                    <p class="font-weight-bold">Order<br>Processed</p>
+                                </div>
+                            </div>
+                            <div class="row d-flex icon-content">
+                                <img :class="[getStepColor('shipped') === 'active-color' ? 'active-icon' : 'inactive-icon']"
+                                    class="icon" src="https://i.imgur.com/u1AzR7w.png">
+                                <div :class="getStepColor('shipped')" class="d-flex flex-column">
+                                    <p class="font-weight-bold">Order<br>Shipped</p>
+                                </div>
+                            </div>
+                            <div class="row d-flex icon-content">
+                                <img :class="[getStepColor('route') === 'active-color' ? 'active-icon' : 'inactive-icon']"
+                                    class="icon" src="https://i.imgur.com/TkPm63y.png">
+                                <div :class="getStepColor('route')" class="d-flex flex-column">
+                                    <p class="font-weight-bold">Order<br>En Route</p>
+                                </div>
+                            </div>
+                            <div class="row d-flex icon-content">
+                                <img :class="[getStepColor('delivered') === 'active-color' ? 'active-icon' : 'inactive-icon']"
+                                    class="icon" src="https://i.imgur.com/HdsziHP.png">
+                                <div :class="getStepColor('delivered')" class="d-flex flex-column">
+                                    <p class="font-weight-bold">Order<br>Arrived</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+        </div>
+        <!-- modal ends here -->
+
     </div>
 
 </template>
@@ -460,5 +555,151 @@ body {
     border-left: 6px solid #0d6efd;
     background: #e7f2ff;
     padding: 10px;
+}
+
+
+/* modal css */
+body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-color: #8C9EFF;
+    background-repeat: no-repeat;
+}
+
+.card {
+    z-index: 0;
+    background-color: #ECEFF1;
+    padding-bottom: 20px;
+    margin-top: 90px;
+    margin-bottom: 90px;
+    border-radius: 10px;
+}
+
+.top {
+    padding-top: 40px;
+    padding-left: 13% !important;
+    padding-right: 13% !important;
+}
+
+/*Icon progressbar*/
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #455A64;
+    padding-left: 0px;
+    margin-top: 30px;
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 13px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+}
+
+#progressbar .step0:before {
+    font-family: FontAwesome;
+    content: "\f10c";
+    color: #fff;
+}
+
+#progressbar li:before {
+    width: 40px;
+    height: 40px;
+    line-height: 45px;
+    display: block;
+    font-size: 20px;
+    background: #C5CAE9;
+    border-radius: 50%;
+    margin: auto;
+    padding: 0px;
+}
+
+/*ProgressBar connectors*/
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 12px;
+    background: #C5CAE9;
+    position: absolute;
+    left: 0;
+    top: 16px;
+    z-index: -1;
+}
+
+#progressbar li:last-child:after {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: absolute;
+    left: -50%;
+}
+
+#progressbar li:nth-child(2):after,
+#progressbar li:nth-child(3):after {
+    left: -50%;
+}
+
+#progressbar li:first-child:after {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    position: absolute;
+    left: 50%;
+}
+
+#progressbar li:last-child:after {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#progressbar li:first-child:after {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+/*Color number of the step and the connector before it*/
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: #651FFF;
+}
+
+#progressbar li.active:before {
+    font-family: FontAwesome;
+    content: "\f00c";
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+}
+
+.icon-content {
+    padding-bottom: 20px;
+}
+
+@media screen and (max-width: 992px) {
+    .icon-content {
+        width: 50%;
+    }
+}
+
+/* active color */
+.active-color {
+    color: #651FFF;
+}
+
+.inactive-color {
+    color: #C5CAE9;
+}
+
+.active-icon {
+    filter: grayscale(0);
+}
+
+.inactive-icon {
+    filter: grayscale(100%);
 }
 </style>
