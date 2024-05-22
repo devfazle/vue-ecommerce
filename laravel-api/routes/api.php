@@ -43,7 +43,8 @@ Route::prefix('admin')->group(function(){
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    $user = $request->user()->load('photo');
+    return $user;
 });
 
 Route::post('login',[LoginController::class,'login']);

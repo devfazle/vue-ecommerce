@@ -38,7 +38,7 @@ export default {
         ...mapGetters('auth', {
             user: 'user',
         }),
-        ...mapGetters(['url'])
+        ...mapGetters(['url']),
     },
     mounted() {
         this.getOrders();
@@ -69,7 +69,7 @@ export default {
                     <td>pending</td>
                     <td>
                         <button class="btn btn-danger">Request Cancellation</button>
-                        <button @click="sModal(),viewOrderDetails(o.id)" class="btn btn-info mt-2">View Invoice</button>
+                        <button @click="sModal(),viewOrderDetails(o.id)" class="btn btn-info ml-1">View Invoice</button>
                     </td>
                 </tr>
             </tbody>
@@ -105,18 +105,18 @@ export default {
                                                 <div class="row">
                                                     <div class="col">
                                                         <a href="javascript:;">
-                                                            <!-- <img src="assets/images/logo-icon.png" width="80" alt=""> -->
+                                                            <img :src="`http://127.0.0.1:8000/photos/users/${user.photo ? user.photo.path : 'no-image.jpg'}`" width="80" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="col company-details">
                                                         <h2 class="name">
                                                             <a target="_blank" href="javascript:;">
-                                                                Arboshiki
+                                                                V-Commerce
                                                             </a>
                                                         </h2>
                                                         <div>455 Foggy Heights, AZ 85004, US</div>
                                                         <div>(123) 456-789</div>
-                                                        <div>company@example.com</div>
+                                                        <div>vcommerce@vue.com</div>
                                                     </div>
                                                 </div>
                                             </header>

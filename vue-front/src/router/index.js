@@ -365,6 +365,11 @@ const routes = [
         component: () => import("@/front-panel/views/AboutPage.vue"),
       },
       {
+        path: "modalshow",
+        name: "modalshow",
+        component: () => import("@/front-panel/fazle/views/ModalShow.vue"),
+      },
+      {
         path: "shopping-cart",
         name: "cart",
         component: () => import("@/front-panel/views/ShoppingCart.vue"),

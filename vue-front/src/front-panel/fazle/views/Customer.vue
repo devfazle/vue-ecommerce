@@ -45,7 +45,7 @@ export default {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
+                  <img :src="`http://127.0.0.1:8000/photos/users/${user.photo ? user.photo.path : 'no-image.jpg'}`" alt="Admin" class="rounded-circle"
                     width="150">
                   <div class="mt-3">
                     <h4>{{ user.name }}</h4>
