@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Order_item;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -66,7 +67,20 @@ class OrdersController extends Controller
             }
 
             $order_items = Order_item::insert($pro_data);
-            return $this->sendResponse($order_items, 'Order Placed Successfully!');
+
+            // making payment
+            $payment_input = [
+                'date' => $order_date,
+                'method' => 'bkash',
+                'amount' => $total_price,
+                'status' => 'complete',
+                'order_id' => $order_id
+            ];
+
+            $payment = Payment::create($payment_input);
+
+            return $this->sendResponse($payment, 'Order Placed Successfully!');
+
         } else {
             $info = "your user id is " . $role_id;
             return $this->sendResponse($info, 'Order not placed!');
@@ -117,7 +131,7 @@ class OrdersController extends Controller
 
     public function getCustomerOrders(Request $r)
     {
-        $orders = Order::where('user_id', $r->id)->with('order_items.product')->get();
+        $orders = Order::where('user_id', $r->id)->with('order_items.product')->orderBy('created_at', 'desc')->get();
         return $this->sendResponse($orders, 'Order deleted successfully!');
     }
 }

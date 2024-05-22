@@ -74,7 +74,7 @@ export default {
     storeOrder() {
       const orderData = {
         products: this.productsInCart,
-        total_price: this.totalPrice,
+        total_price: this.finalTotal,
         userData: this.userData
       };
 
