@@ -5,11 +5,11 @@
           <h5 class="modal-title">{{ title }}</h5>
           <button type="button" class="close" @click="closeModal">&times;</button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="height: 470px;">
           <slot></slot>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" @click="closeModal">Close</button>
+          <button type="button" class="btn btn-danger" @click="closeModal">Close</button>
         </div>
       </div>
     </div>
