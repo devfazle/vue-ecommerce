@@ -75,9 +75,9 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-                .then((response) => {
-                    this.$router.push({ name: 'productslist' });
-                });
+            .then((response) => {
+                this.$router.push({ name:'productslist' });
+            });
         },
     },
     mounted() {
