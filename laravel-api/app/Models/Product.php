@@ -27,7 +27,6 @@ class Product extends Model
     public function cart(){
         return $this->hasMany(Cart::class);
     }
-
     public function Inventory(){
         return $this->hasOne(Inventory::class);
     }

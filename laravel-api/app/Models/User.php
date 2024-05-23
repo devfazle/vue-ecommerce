@@ -26,29 +26,41 @@ class User extends Authenticatable
         "role_id",
         'password',
     ];
-    public function role() {
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
-    public function cart() {
+    public function cart()
+    {
         return $this->hasMany(Cart::class);
     }
-    public function order() {
+    public function order()
+    {
         return $this->hasMany(Order::class);
     }
-    public function payment() {
+    public function payment()
+    {
         return $this->hasMany(Payment::class);
     }
-    public function cupon_usage() {
+    public function cupon_usage()
+    {
         return $this->hasMany(Coupon_usage::class);
     }
-    public function wishlist() {
+    public function wishlist()
+    {
         return $this->hasMany(Wishlist::class);
     }
-    public function purchase() {
+    public function purchase()
+    {
         return $this->hasMany(Purchase::class);
     }
     public function product_reviews() {
         return $this->hasMany(Product_Reviews::class);
+    }
+
+    public function photo()
+    {
+        return $this->morphOne(Photo::class, 'imageable');
     }
 
     /**
@@ -73,5 +85,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
 }

@@ -416,6 +416,16 @@ const routes = [
         component: Product,
       },
       {
+        path: "about",
+        name: "about",
+        component: () => import("@/front-panel/views/AboutPage.vue"),
+      },
+      {
+        path: "modalshow",
+        name: "modalshow",
+        component: () => import("@/front-panel/fazle/views/ModalShow.vue"),
+      },
+      {
         path: "shopping-cart",
         name: "cart",
         component: () => import("@/front-panel/views/ShoppingCart.vue"),
@@ -442,6 +452,24 @@ const routes = [
           middleware: "customer",
           title: "Customer Dashboard",
         },
+        redirect: { name: "customer-order-list" },
+        children: [
+          {
+            path: "",
+            name: "customer-order-list",
+            component: () => import("@/front-panel/fazle/components/OrderList.vue"),
+          },
+          {
+            path: "customer-wish-list",
+            name: "customer-wish-list",
+            component: () => import("@/front-panel/fazle/components/WishList.vue"),
+          },
+          {
+            path: "customer-invoice",
+            name: "customer-invoice",
+            component: () => import("@/front-panel/fazle/components/Cinvoice.vue"),
+          },
+        ]
       },
     ],
   },

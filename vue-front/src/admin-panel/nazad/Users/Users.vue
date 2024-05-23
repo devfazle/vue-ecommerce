@@ -22,6 +22,7 @@
                                         <tr>
                                             <th>Sl</th>
                                             <th>Name</th>
+                                            <th>Image</th>
                                             <th>Email</th>
                                             <th>Address</th>
                                             <th>Bank info</th>
@@ -34,16 +35,20 @@
                                         <tr v-for="(data, k) in list" :key="k">
                                             <td>{{ ++k }}</td>
                                             <td>{{ data.name }}</td>
+                                            <td>
+                                                <img :src="`http://127.0.0.1:8000/photos/users/${data.photo ? data.photo.path : 'no-image.jpg'}`"
+                                                    class="img-fluid rounded" alt="user-image" />
+                                            </td>
                                             <td>{{ data.email }}</td>
                                             <td>{{ data.address }}</td>
                                             <td>{{ data.bank_info }}</td>
                                             <td>{{ data.phone_number }}</td>
                                             <td>{{
                                                 data.role_id === 1 ? "Admin" :
-                                                data.role_id === 2 ? "Customer" :
-                                                data.role_id === 3 ? "Vendor" :
-                                                data.role_id === 4 ? "Guest" :
-                                                ""
+                                                    data.role_id === 2 ? "Customer" :
+                                                        data.role_id === 3 ? "Vendor" :
+                                                            data.role_id === 4 ? "Guest" :
+                                                                ""
                                             }}</td>
                                             <td>
                                                 <button class="btn btn-primary" @click="update(data.id)">Edit</button>
