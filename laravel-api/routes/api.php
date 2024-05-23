@@ -4,6 +4,7 @@ use App\Http\Controllers\CartsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CouponUsagesController;
 use App\Http\Controllers\CuponsController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderItemsController;
@@ -39,6 +40,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('shipments',ShipmentController::class)->names('shipments');
     Route::resource('subcategorys',SubCategoryController::class)->names('subcategorys');
     Route::resource('wishlists',WishlistController::class)->names('wishlists');
+    Route::resource('inventory',InventoryController::class)->names('inventory');
     Route::resource('productreviews',ProductReviewsController::class)->names('productreviews');
     Route::resource('productprice',ProductPriceController::class)->names('productprice');
     Route::resource('photos',PhotoController::class)->names('photos');

@@ -39,6 +39,10 @@ import Wishlistupdate from "@/admin-panel/foysal/components/wishlist/Wishlistupd
 import OrderTable from "@/admin-panel/fazle/order/OrderTable.vue";
 import OrderLayout from "@/admin-panel/fazle/order/OrderLayout.vue";
 import OrderDetails from "@/admin-panel/fazle/order/OrderDetails.vue";
+import Inventory from "@/admin-panel/foysal/components/inventory/Inventory.vue";
+import Inventoryadd from "@/admin-panel/foysal/components/inventory/Inventoryadd.vue";
+import Inventorylist from "@/admin-panel/foysal/components/inventory/Inventorylist.vue";
+import Inventoryupdate from "@/admin-panel/foysal/components/inventory/Inventoryupdate.vue";
 
 import store from "@/stores";
 import AddPurchases from "@/admin-panel/devhelal/purchases/AddPurchases.vue";
@@ -296,8 +300,29 @@ const routes = [
               name: "product-review-edit",
               component: ()=>import("@/admin-panel/ruhul/views/ProductReviewEdit.vue"),
             },
-            
           ],
+        },
+          {
+          path: 'inventory',
+          name: 'inventory',
+          component: Inventory,
+          children: [ 
+            {
+              path: 'inventoryadd',
+              name: 'inventoryadd',
+              component: Inventoryadd,
+            },
+            {
+              path: 'inventorylist',
+              name: 'inventorylist',
+              component: Inventorylist,
+            },
+            {
+              path: 'inventoryupdate/:id',
+              name: 'inventoryupdate',
+              component: Inventoryupdate,
+            },
+          ]
         },
           {
           path: "product-price",
@@ -456,13 +481,6 @@ router.beforeEach((to, from, next) => {
       next({ name: "login" });
     }
   }
-  // } else {
-  //   if (store.state.auth.authenticated && store.state.auth.user.role_id == 1) {
-  //     next();
-  //   } else {
-  //     next({ name: "login" });
-  //   }
-  // }
 });
 
 export default router;
