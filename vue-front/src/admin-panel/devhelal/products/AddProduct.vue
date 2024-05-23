@@ -70,7 +70,7 @@ export default {
                 }
             })
             .then((response) => {
-                this.$router.push({ name: 'productslist' });
+                this.$router.push({ name:'productslist' });
             });
             
         },
