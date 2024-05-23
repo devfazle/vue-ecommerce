@@ -58,7 +58,7 @@ export default {
                         <td>{{ o.id }}</td>
                         <td>{{ o.total_price }}</td>
                         <td>{{ o.order_date }}</td>
-                        <td>{{ o.user_id }}</td>
+                        <td>{{ [o.user_id] }} {{ o.user.name }}</td>
                         <td>
                             <router-link :to="{ name: 'order-details', params: { id: o.id } }"
                                 class="btn btn-primary">View</router-link>

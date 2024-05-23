@@ -1,12 +1,16 @@
 import { createStore } from 'vuex'
 import cart from './cart.js';
-import createPersistedState from 'vuex-persistedstate'
+import createPersistedState from 'vuex-persistedstate';
+import base from './base.js';
+import auth from './auth.js';
 
 // Create a new store instance.
 const store = createStore(
     {
         modules:{
-            cart
+            cart,
+            base,
+            auth
         },
         plugins:[
             createPersistedState(

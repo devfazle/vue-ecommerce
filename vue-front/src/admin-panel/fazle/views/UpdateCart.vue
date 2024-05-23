@@ -9,14 +9,15 @@ export default {
             user_id: 0,
             product_id: 0,
             quantity: 0,
-            id: this.$route.params.id
+            id: this.$route.params.id,
+            url: this.$store.state.base.url
         }
     },
 
     methods: {
 
         getInfo() {
-            axios.get('http://127.0.0.1:8000/api/admin/carts/create')
+            axios.get(this.url+'admin/carts/create')
                 .then((result) => {
                     this.users = result.data.data.users;
                     this.products = result.data.data.products;
@@ -25,7 +26,7 @@ export default {
         },
 
         getCart() {
-            axios.get("http://127.0.0.1:8000/api/admin/carts/" + this.id + '/edit')
+            axios.get(this.url+"admin/carts/" + this.id + '/edit')
                 .then((response) => {
                     const cart = response.data.data;
                     this.user_id = cart.user_id;
@@ -41,7 +42,7 @@ export default {
                 quantity: this.quantity
             }
 
-            axios.put("http://127.0.0.1:8000/api/admin/carts/"+this.id, cartData)
+            axios.put(this.url+"admin/carts/"+this.id, cartData)
                 .then((response) => {
                     console.log(response);
                 });
@@ -59,6 +60,7 @@ export default {
 
 
 <template>
+    <div>
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">Cart Update</h5>
     </div>
@@ -84,4 +86,5 @@ export default {
         </div>
         <button @click="updateCart" type="submit" class="btn btn-primary">Submit</button>
     </div>
+</div>
 </template>

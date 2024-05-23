@@ -62,6 +62,7 @@ export default {
 
 
 <template>
+	<div>
 	<!-- Header -->
 	<Header :cartShow="cartShow" @update-shared-data="updateSharedData" />
 
@@ -86,4 +87,5 @@ export default {
 
 	<!-- Modal1 -->
 	<!-- <Modal /> -->
+</div>
 </template>

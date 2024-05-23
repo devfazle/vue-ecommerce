@@ -22,6 +22,9 @@ export default {
     productsInCart() {
       return this.$store.state.cart.products;
     },
+    userData() {
+      return this.$store.state.auth.user;
+    },
     ...mapGetters(["totalPrice"]),
     finalTotal() {
       this.total =
@@ -67,7 +70,8 @@ export default {
     storeOrder() {
       const orderData = {
         products: this.productsInCart,
-        total_price: this.totalPrice
+        total_price: this.totalPrice,
+        userData: this.userData
       };
 
       console.log("ok");
@@ -91,6 +95,7 @@ export default {
 </script>
 
 <template>
+  <div>
   <!-- breadcrumb -->
   <div class="container">
     <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -364,4 +369,5 @@ export default {
       </div>
     </div>
   </div>
+</div>
 </template>

@@ -42,7 +42,8 @@
                                     <option value="">Select one</option>
                                     <option value="1">Admin</option>
                                     <option value="2">Customer</option>
-                                    <option value="3">Guest</option>
+                                    <option value="3">Vendor</option>
+                                    <option value="4">Guest</option>
                                 </select>
                             </div>
                             <div class="mb-3">

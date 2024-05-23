@@ -17,22 +17,27 @@ class LoginController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
+
         if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors(), 422);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        if (User::where('email', $request->email)->first()) {
-            $user = User::where('email', $request->email)->first();
-            if (Hash::check($request->password, $user->password)) {
-                $success['token'] =  $user->createToken('round56')->plainTextToken;
-                $success['user'] =  $user;
-                Auth::login($user);
-                return $this->sendResponse($success, 'Login successful.');
-            }
-        } else {
-            return $this->sendError('Unauthorised.', ['error' => ['No user found with this phone number']], 422);
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json(['error' => 'No user found with this email'], 422);
         }
+
+        if (!Hash::check($request->password, $user->password)) {
+            return response()->json(['error' => 'Incorrect password'], 422);
+        }
+
+        $success['token'] =  $user->createToken('round56')->plainTextToken;
+        $success['user'] =  $user;
+        Auth::login($user);
+        return response()->json(['data' => $success], 200);
     }
+
 
     public function logout(Request $request)
     {
