@@ -12,10 +12,11 @@ export default {
             vendorList: [],
             products: [],
             items: [],
+            selectedUser: null,
         }
     },
     methods: {
-        addProduct(event) {
+         addProduct(event) {
             const id = parseInt(event.target.value);
             console.log(id);
             const selectedProduct = this.products.find(product => product.id === id);
@@ -28,9 +29,9 @@ export default {
                     quantity: 0,
                     price: 0
                 })
-            }
-            
-        },
+            }     
+         },
+         
         addItems() {
             this.items.push({
                 product_id: 0,
@@ -139,13 +140,11 @@ export default {
                                             <div class="col-3">
                                                 <div class="form-group row">
                                                     <label>Select Product</label>
-                                                    <input type="text" class="form-control" @change="addProduct($event) "
-                                                        list="product-list" placeholder="Select Products" >
-                                                    <datalist id="product-list">
+<input type="text" class="form-control" @change="addProduct($event)" list="product-list" placeholder="Select Products">
+     <datalist id="product-list">
                                                         <option v-for="(product, index) in products" :key="index"
                                                             :value="product.id">
                                                             {{ product.name }}
-                                                            {{ product.id }}
                                                         </option>
                                                     </datalist>
                                                 </div>
@@ -163,63 +162,9 @@ export default {
                                         </div>
 
 
-                                        <!-- ==========================add item start============================================= -->
-                                        <!-- ==========================add item start============================================= -->
+ <!-- ==========================add item start============================================= -->
+ <!-- ==========================add item start============================================= -->
                                         <hr />
-                                        <!-- <table class="table table-striped">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-group row">
-                                                            <label>Product Name</label>
-                                                            <div>
-                                                                <select class="form-control">
-                                                                    <option value>Select Product Name</option>
-                                                                </select>
-                                                               
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group row">
-                                                            <label>Product Quantity</label>
-                                                            <div>
-                                                                <input type="number" class="form-control"
-                                                                    placeholder="Product Quantity" />
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group row">
-                                                            <label>Product Unit</label>
-                                                            <div>
-                                                                <input type="number" class="form-control"
-                                                                    placeholder="Product Unit" readonly />
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group row">
-                                                            <label>Product Unit Price</label>
-                                                            <div>
-                                                                <input type="number" class="form-control"
-                                                                    placeholder="Product Unit Price" readonly />
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group row">
-                                                            <label>Total Price</label>
-                                                            <div>
-                                                                <input type="number" class="form-control"
-                                                                    placeholder="Total" readonly />
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table> -->
                                         <template v-for="(item, index) in items" :key="index">
                                             <div class="row mt-3">
                                                 <div class="col-md-3">
@@ -248,8 +193,8 @@ export default {
                                                 </div>
                                             </div>
                                         </template>
-                                        <!-- ==========================add item end============================================= -->
-                                        <!-- ==========================add item end============================================= -->
+<!-- ==========================add item end============================================= -->
+<!-- ==========================add item end============================================= -->
 
 
                                         <hr />
