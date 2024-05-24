@@ -276,6 +276,24 @@ export default {
                     </li>
                 </ul>
             </li>
+            <li class="menu-item">
+                <a @click="toggleNearestLiClass($event)" href="javascript:void(0)" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-copy"></i>
+                    <div data-i18n="Extended UI">Reports</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <router-link :to="{ name: 'customer-list' }" class="menu-link">
+                            <div data-i18n="Perfect Scrollbar">Customer Report</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <a href="extended-ui-text-divider.html" class="menu-link">
+                            <div data-i18n="Text Divider">Text Divider</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <!-- Components -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
             <!-- Cards -->

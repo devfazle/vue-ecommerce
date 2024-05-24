@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'desc')->with('role','photo')->get();
+        $users = User::orderBy('id', 'desc')->with('role', 'photo')->get();
         return $this->sendResponse($users, 'User list fetched successfully!');
     }
 
@@ -128,5 +128,14 @@ class UserController extends Controller
         }
 
         return $this->sendResponse($user, 'User deleted successfully!');
+    }
+
+    public function customerList()
+    {
+        $customerList = User::where('role_id', 2)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return $this->sendResponse($customerList, 'User list fetched successfully!');
     }
 }
