@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import PurchasesList from './PurchasesList.vue';
 export default {
     data() {
         return {
@@ -13,32 +14,32 @@ export default {
             products: [],
             items: [],
             selectedUser: null,
+            quantity: 1,
+            grandTotal:0,
         }
     },
     methods: {
-         addProduct(event) {
+        getQuantity(event) {
+            const quantity = (event.target.value);
+            //quantity= this.item.totalPrice
+            console.log(this.items);
+        },
+        addProduct(event) {
             const id = parseInt(event.target.value);
-            console.log(id);
+            // console.log(id);
             const selectedProduct = this.products.find(product => product.id === id);
+            //console.log(selectedProduct);
             const itemExists = this.items.find(item => item.product_id === id);
             if (selectedProduct && !itemExists) {
                 this.items.push({
                     product_id: id,
                     product_name: selectedProduct.name,
-                    unit: '',
-                    quantity: 0,
-                    price: 0
+                    unit: 1,
+                    quantity: this.quantity,
+                    price: selectedProduct.price,
+                    totalPrice: selectedProduct.price * this.quantity,
                 })
-            }     
-         },
-         
-        addItems() {
-            this.items.push({
-                product_id: 0,
-                unit: '',
-                quantity: 0,
-                price: 0
-            })
+            }
         },
         removeItem(index) {
             this.items.splice(index, 1)
@@ -66,19 +67,39 @@ export default {
                 this.vendorList = filteredUsers;
             });
         },
-        // createPurchases() {
-        //     const alldata = {
-        //         quantity: this.quantity,
-        //         invoice_number: this.invoice_number,
-        //         unit: this.unit,
-        //         date: this.date,
-        //         product_id: this.product_id,
-        //         user_id: this.user_id,
-        //         price: this.price
-        //     };
-        //     console.log(alldata);
-        // },
+        createPurchases() {
+            const alldata = {
+                //quantity: this.quantity,
+                invoice_number: this.invoice_number,
+                //unit: this.unit,
+                date: this.date,
+                //product_id: this.product_id,
+                user_id: this.user_id,
+                purchas: this.items
+                //price: this.price
+            };
+            console.log(alldata);
+        },
+        calculatePrice(item) {
+            const selectedProduct = this.products.find(product => product.id === item.product_id);
+            if (selectedProduct && item.quantity) {
+                const totalPrice = (selectedProduct.price * item.quantity).toFixed(2);
+                item.totalPrice = totalPrice;
+            }
+        },
+        getTotalPrice() {
+      for(let item of this.items) {
+        console.log(item.totalPrice)
+        //this.grandTotal+= parseInt(item.totalPrice)
+      }
+    }
     },
+    watch: {
+    items: {
+      handler: 'getTotalPrice',
+      deep: true
+    }
+  },
     mounted() {
         this.invoiceNum();
         this.vendorName();
@@ -140,8 +161,9 @@ export default {
                                             <div class="col-3">
                                                 <div class="form-group row">
                                                     <label>Select Product</label>
-<input type="text" class="form-control" @change="addProduct($event)" list="product-list" placeholder="Select Products">
-     <datalist id="product-list">
+                                                    <input type="text" class="form-control" @change="addProduct($event)"
+                                                        list="product-list" placeholder="Select Products">
+                                                    <datalist id="product-list">
                                                         <option v-for="(product, index) in products" :key="index"
                                                             :value="product.id">
                                                             {{ product.name }}
@@ -162,10 +184,10 @@ export default {
                                         </div>
 
 
- <!-- ==========================add item start============================================= -->
- <!-- ==========================add item start============================================= -->
+                                        <!-- ==========================add item start============================================= -->
+                                        <!-- ==========================add item start============================================= -->
                                         <hr />
-                                        <template v-for="(item, index) in items" :key="index">
+                                        <div v-for="(item, index) in items" :key="index">
                                             <div class="row mt-3">
                                                 <div class="col-md-3">
                                                     <label v-if="index == 0" class="form-label">Product</label>
@@ -174,30 +196,40 @@ export default {
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label v-if="index == 0" class="form-label">Unit</label>
-                                                    <input type="text" class="form-control" v-model="item.unit"
-                                                        readonly>
+                                                    <input type="text" class="form-control" v-model="item.unit">
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                     <label v-if="index == 0" class="form-label">Quantity</label>
-                                                    <input type="text" class="form-control" v-model="item.quantity"
+                                                    <input type="number" class="form-control" v-model="item.quantity"
                                                         @input="calculatePrice(item)">
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <label v-if="index == 0" class="form-label">Price</label>
-                                                    <input type="text" class="form-control" v-model="item.price"
+                                                <div class="col-md-2">
+                                                    <label v-if="index == 0" class="form-label">Per Price</label>
+                                                    <input type="number" class="form-control" v-model="item.price"
+                                                        readonly>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label v-if="index == 0" class="form-label">Total Price</label>
+                                                    <input type="number" class="form-control" v-model="item.totalPrice"
                                                         readonly>
                                                 </div>
                                                 <div :class="'col-md-1 ' + (index === 0 ? 'mt-4' : '')">
-                                                    <button @click="removeItem(index)"
-                                                        class="btn btn-danger">⛔</button>
+                                                    <button @click="removeItem(index)" class="btn btn-danger">⛔</button>
                                                 </div>
                                             </div>
-                                        </template>
-<!-- ==========================add item end============================================= -->
-<!-- ==========================add item end============================================= -->
-
-
+                                        </div>
+                                        <!-- ==========================add item end============================================= -->
+                                        <!-- ==========================add item end============================================= -->
                                         <hr />
+
+                                        <div class="d-flex justify-content-end mt-3"> 
+                                            <div class="col-md-2" >
+                                                    <label class="form-label">Grand Total </label>
+                                                    <input type="number" class="form-control" v-model="grandTotal"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                        
                                         <div class="row">
                                             <div class="col-8"></div>
                                             <div class="col-4"></div>
