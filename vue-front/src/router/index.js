@@ -39,6 +39,10 @@ import Wishlistupdate from "@/admin-panel/foysal/components/wishlist/Wishlistupd
 import OrderTable from "@/admin-panel/fazle/order/OrderTable.vue";
 import OrderLayout from "@/admin-panel/fazle/order/OrderLayout.vue";
 import OrderDetails from "@/admin-panel/fazle/order/OrderDetails.vue";
+import Inventory from "@/admin-panel/foysal/components/inventory/Inventory.vue";
+import Inventoryadd from "@/admin-panel/foysal/components/inventory/Inventoryadd.vue";
+import Inventorylist from "@/admin-panel/foysal/components/inventory/Inventorylist.vue";
+import Inventoryupdate from "@/admin-panel/foysal/components/inventory/Inventoryupdate.vue";
 
 import store from "@/stores";
 import AddPurchases from "@/admin-panel/devhelal/purchases/AddPurchases.vue";
@@ -296,8 +300,29 @@ const routes = [
               name: "product-review-edit",
               component: ()=>import("@/admin-panel/ruhul/views/ProductReviewEdit.vue"),
             },
-            
           ],
+        },
+          {
+          path: 'inventory',
+          name: 'inventory',
+          component: Inventory,
+          children: [ 
+            {
+              path: 'inventoryadd',
+              name: 'inventoryadd',
+              component: Inventoryadd,
+            },
+            {
+              path: 'inventorylist',
+              name: 'inventorylist',
+              component: Inventorylist,
+            },
+            {
+              path: 'inventoryupdate/:id',
+              name: 'inventoryupdate',
+              component: Inventoryupdate,
+            },
+          ]
         },
           {
           path: "product-price",
@@ -391,6 +416,16 @@ const routes = [
         component: Product,
       },
       {
+        path: "about",
+        name: "about",
+        component: () => import("@/front-panel/views/AboutPage.vue"),
+      },
+      {
+        path: "modalshow",
+        name: "modalshow",
+        component: () => import("@/front-panel/fazle/views/ModalShow.vue"),
+      },
+      {
         path: "shopping-cart",
         name: "cart",
         component: () => import("@/front-panel/views/ShoppingCart.vue"),
@@ -417,6 +452,24 @@ const routes = [
           middleware: "customer",
           title: "Customer Dashboard",
         },
+        redirect: { name: "customer-order-list" },
+        children: [
+          {
+            path: "",
+            name: "customer-order-list",
+            component: () => import("@/front-panel/fazle/components/OrderList.vue"),
+          },
+          {
+            path: "customer-wish-list",
+            name: "customer-wish-list",
+            component: () => import("@/front-panel/fazle/components/WishList.vue"),
+          },
+          {
+            path: "customer-invoice",
+            name: "customer-invoice",
+            component: () => import("@/front-panel/fazle/components/Cinvoice.vue"),
+          },
+        ]
       },
     ],
   },
@@ -456,13 +509,6 @@ router.beforeEach((to, from, next) => {
       next({ name: "login" });
     }
   }
-  // } else {
-  //   if (store.state.auth.authenticated && store.state.auth.user.role_id == 1) {
-  //     next();
-  //   } else {
-  //     next({ name: "login" });
-  //   }
-  // }
 });
 
 export default router;

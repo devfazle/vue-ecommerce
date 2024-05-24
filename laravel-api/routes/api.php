@@ -4,6 +4,7 @@ use App\Http\Controllers\CartsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CouponUsagesController;
 use App\Http\Controllers\CuponsController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderItemsController;
@@ -32,6 +33,7 @@ Route::prefix('admin')->group(function(){
     Route::post('checkcoupon',[CuponsController::class, 'checkCoupon'])->name('checkcoupon');
     Route::resource('orderitems',OrderItemsController::class)->names('orderitems');
     Route::resource('orders',OrdersController::class)->names('orders');
+    Route::post('customerorders',[OrdersController::class, 'getCustomerOrders'])->name('customerorders');
     Route::resource('payments',PaymentsController::class)->names('payments');
     Route::resource('products',ProductsController::class)->names('products');
     Route::resource('purchases',PurchaseController::class)->names('purchases');
@@ -39,6 +41,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('shipments',ShipmentController::class)->names('shipments');
     Route::resource('subcategorys',SubCategoryController::class)->names('subcategorys');
     Route::resource('wishlists',WishlistController::class)->names('wishlists');
+    Route::resource('inventory',InventoryController::class)->names('inventory');
     Route::resource('productreviews',ProductReviewsController::class)->names('productreviews');
     Route::resource('productprice',ProductPriceController::class)->names('productprice');
     Route::resource('photos',PhotoController::class)->names('photos');
@@ -46,7 +49,8 @@ Route::prefix('admin')->group(function(){
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    $user = $request->user()->load('photo');
+    return $user;
 });
 
 Route::post('login',[LoginController::class,'login']);

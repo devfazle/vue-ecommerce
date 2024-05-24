@@ -58,6 +58,9 @@ const cart = {
         foundProduct.quantity--;
       }
     },
+    CLEAR_CART(state) {
+      state.products = [];
+    },
   },
   actions: {
     addcart({ commit, state }, payload) {
@@ -72,6 +75,9 @@ const cart = {
     },
     decrementQuantity({ commit }, product) {
       commit("DECREMENT_QUANTITY", product);
+    },
+    clearCart({ commit }) {
+      commit("CLEAR_CART");
     },
   },
   getters: {
