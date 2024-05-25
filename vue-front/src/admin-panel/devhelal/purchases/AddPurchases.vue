@@ -1,7 +1,6 @@
 <script>
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import PurchasesList from './PurchasesList.vue';
 export default {
     data() {
         return {
@@ -13,8 +12,6 @@ export default {
             vendorList: [],
             products: [],
             items: [],
-            selectedUser: null,
-            quantity: 1,
             grandTotal:0,
         }
     },
@@ -26,23 +23,23 @@ export default {
         },
         addProduct(event) {
             const id = parseInt(event.target.value);
-            // console.log(id);
             const selectedProduct = this.products.find(product => product.id === id);
-            //console.log(selectedProduct);
             const itemExists = this.items.find(item => item.product_id === id);
             if (selectedProduct && !itemExists) {
                 this.items.push({
                     product_id: id,
                     product_name: selectedProduct.name,
                     unit: 1,
-                    quantity: this.quantity,
+                    quantity: 1,
                     price: selectedProduct.price,
-                    totalPrice: selectedProduct.price * this.quantity,
+                    totalPrice: selectedProduct.price * 1,
                 })
             }
+            this.getTotalPrice()
         },
         removeItem(index) {
-            this.items.splice(index, 1)
+            this.items.splice(index, 1);
+            this.getTotalPrice();
         },
         getProducts() {
             axios.get(this.url + "products")
@@ -63,43 +60,52 @@ export default {
             axios.get(this.url + "users").then((res) => {
                 const userlist = res.data.data;
                 const filteredUsers = userlist.filter((user) => user.role_id === 3);
-                //console.log(filteredUsers);
                 this.vendorList = filteredUsers;
             });
         },
         createPurchases() {
             const alldata = {
-                //quantity: this.quantity,
                 invoice_number: this.invoice_number,
-                //unit: this.unit,
                 date: this.date,
-                //product_id: this.product_id,
                 user_id: this.user_id,
-                purchas: this.items
-                //price: this.price
+                purchases: this.items
             };
             console.log(alldata);
+            axios.post(this.url+ "purchases",alldata)
+            .then((res)=>{
+                this.$router.push({ name: 'purchaseslist' });
+            })
         },
-        calculatePrice(item) {
+        calculatePrice(item,event) {
             const selectedProduct = this.products.find(product => product.id === item.product_id);
+            const valueOfQuantity=(event.target.value);
+            if(valueOfQuantity < 1){
+                    alert("O Hello! You can not use nagetive value!!");
+                    if(item.quantity<1){
+                        item.quantity=1;
+                    };
+                    if(item.price<1){
+                        item.price=selectedProduct.price;
+                    };
+                    }
             if (selectedProduct && item.quantity) {
                 const totalPrice = (selectedProduct.price * item.quantity).toFixed(2);
+                const totalPriceq = (item.price * item.quantity);
                 item.totalPrice = totalPrice;
+                item.totalPrice = totalPriceq;
+                this.getTotalPrice()
             }
         },
+        // ===============Generate grandTotal as the all total price sum======================
         getTotalPrice() {
-      for(let item of this.items) {
-        console.log(item.totalPrice)
-        //this.grandTotal+= parseInt(item.totalPrice)
-      }
-    }
+            this.grandTotal=0;
+            const p = this.items;
+            for (let i = 0; i < p.length; i++) {
+            const tprice=parseInt((p[i].totalPrice));
+            this.grandTotal+=tprice;
+            }    
     },
-    watch: {
-    items: {
-      handler: 'getTotalPrice',
-      deep: true
-    }
-  },
+    },
     mounted() {
         this.invoiceNum();
         this.vendorName();
@@ -131,7 +137,6 @@ export default {
                                 <div class="card-body">
                                     <div class="card-body">
                                         <strong style="color: red"></strong>
-
                                         <div class="row">
                                             <div class="col-3">
                                                 <div class="form-group row">
@@ -143,7 +148,6 @@ export default {
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="col-3">
                                                 <div class="form-group row">
                                                     <label>Vendor Name</label>
@@ -171,7 +175,6 @@ export default {
                                                     </datalist>
                                                 </div>
                                             </div>
-
                                             <div class="col-3">
                                                 <div class="form-group row">
                                                     <label>Added Date</label>
@@ -182,10 +185,7 @@ export default {
                                                 </div>
                                             </div>
                                         </div>
-
-
-                                        <!-- ==========================add item start============================================= -->
-                                        <!-- ==========================add item start============================================= -->
+ <!-- ==========================add item start============================================= -->
                                         <hr />
                                         <div v-for="(item, index) in items" :key="index">
                                             <div class="row mt-3">
@@ -201,12 +201,12 @@ export default {
                                                 <div class="col-md-2">
                                                     <label v-if="index == 0" class="form-label">Quantity</label>
                                                     <input type="number" class="form-control" v-model="item.quantity"
-                                                        @input="calculatePrice(item)">
+                                                        @input="calculatePrice(item,$event)" min="1">
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label v-if="index == 0" class="form-label">Per Price</label>
                                                     <input type="number" class="form-control" v-model="item.price"
-                                                        readonly>
+                                                    @input="calculatePrice(item,$event)">
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label v-if="index == 0" class="form-label">Total Price</label>
@@ -218,10 +218,8 @@ export default {
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- ==========================add item end============================================= -->
-                                        <!-- ==========================add item end============================================= -->
+<!-- ==========================add item end============================================= -->
                                         <hr />
-
                                         <div class="d-flex justify-content-end mt-3"> 
                                             <div class="col-md-2" >
                                                     <label class="form-label">Grand Total </label>
@@ -229,7 +227,6 @@ export default {
                                                         readonly>
                                                 </div>
                                             </div>
-                                        
                                         <div class="row">
                                             <div class="col-8"></div>
                                             <div class="col-4"></div>

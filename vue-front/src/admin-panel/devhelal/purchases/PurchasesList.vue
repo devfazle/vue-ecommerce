@@ -5,12 +5,17 @@ export default {
   data() {
     return {
       ShowModal: false,
+      allPurcheses:[],
+      url:"http://localhost:8000/api/admin/",
     };
   },
   methods: {
     showf(newValue) {
             this.ShowModal=newValue
-        }
+        },
+    getPurchese(){
+console.log('ok');
+    }
   },
 components: {
   ModalAddPurchasesVue,
