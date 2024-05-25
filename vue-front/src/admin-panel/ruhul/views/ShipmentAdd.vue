@@ -88,6 +88,7 @@ export default {
                     <option value="cancelled">Cancelled</option>
                 </select>
             </div>
+            
 
 
 
@@ -104,6 +105,6 @@ export default {
 
         
         <button @click="storeData" type="submit" class="btn btn-primary">Submit</button>
-
+    </div>
     </div>
 </template>

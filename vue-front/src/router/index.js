@@ -39,11 +39,6 @@ import Wishlistupdate from "@/admin-panel/foysal/components/wishlist/Wishlistupd
 import OrderTable from "@/admin-panel/fazle/order/OrderTable.vue";
 import OrderLayout from "@/admin-panel/fazle/order/OrderLayout.vue";
 import OrderDetails from "@/admin-panel/fazle/order/OrderDetails.vue";
-import Inventory from "@/admin-panel/foysal/components/inventory/Inventory.vue";
-import Inventoryadd from "@/admin-panel/foysal/components/inventory/Inventoryadd.vue";
-import Inventorylist from "@/admin-panel/foysal/components/inventory/Inventorylist.vue";
-import Inventoryupdate from "@/admin-panel/foysal/components/inventory/Inventoryupdate.vue";
-
 import store from "@/stores";
 import AddPurchases from "@/admin-panel/devhelal/purchases/AddPurchases.vue";
 import PurchasesList from "@/admin-panel/devhelal/purchases/PurchasesList.vue";
@@ -305,22 +300,22 @@ const routes = [
           {
           path: 'inventory',
           name: 'inventory',
-          component: Inventory,
+          component: ()=>import("@/admin-panel/foysal/components/inventory/Inventory.vue"),
           children: [ 
             {
               path: 'inventoryadd',
               name: 'inventoryadd',
-              component: Inventoryadd,
+              component: ()=>import("@/admin-panel/foysal/components/inventory/Inventoryadd.vue"),
             },
             {
               path: 'inventorylist',
               name: 'inventorylist',
-              component: Inventorylist,
+              component: ()=>import("@/admin-panel/foysal/components/inventory/Inventorylist.vue"),
             },
             {
               path: 'inventoryupdate/:id',
               name: 'inventoryupdate',
-              component: Inventoryupdate,
+              component: ()=>import("@/admin-panel/foysal/components/inventory/Inventoryupdate.vue"),
             },
           ]
         },
