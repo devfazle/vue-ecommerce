@@ -51,7 +51,7 @@ export default {
                 <thead>
                     <tr>
                         <th>SL</th>
-                        <th>Product inventory</th>
+                        <th>Products </th>
                         <th>Quantity</th>
                         <th>Action</th>
                     </tr>
