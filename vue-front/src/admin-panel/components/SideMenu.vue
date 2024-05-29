@@ -66,7 +66,7 @@ export default {
                         </g>
                     </svg>
                 </span>
-                <span class="app-brand-text demo menu-text fw-bolder ms-2">vuemart</span>
+                <span class="app-brand-text demo menu-text fw-bolder ms-2">vcommerce</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -149,54 +149,28 @@ export default {
                         </router-link>
                     </li>
                     <li class="menu-item">
+                        <router-link :to="{ name: 'couponsshow' }" class="menu-link">
+                            <div data-i18n="Notifications">Coupons</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <router-link :to="{ name: 'couponsUselist' }" class="menu-link">
+                            <div data-i18n="Notifications">Use Coupon</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <router-link :to="{ name: 'shipment-list' }" class="menu-link">
+                            <div data-i18n="Notifications">Shipments</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
                         <a href="#" class="menu-link">
                             <div data-i18n="Connections">Connections</div>
                         </a>
                     </li>
                 </ul>
             </li>
-            <!-- coupons list start -->
-            <li class="menu-item">
-                <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                    <div data-i18n="Account Settings">Coupons</div>
-                </a>
-                <ul class="menu-sub">
-                    <li class="menu-item">
-
-                        <router-link :to="{ name: 'couponsshow' }" class="menu-link">
-                            <div data-i18n="Account">Coupon Show</div>
-                        </router-link>
-                    </li>
-                    <li class="menu-item">
-                        <router-link :to="{ name: 'couponsUselist' }" class="menu-link">
-                            <div data-i18n="Account">Use Coupon Show</div>
-
-                        </router-link>
-                    </li>
-                </ul>
-            </li>
-            <!-- coupons list end -->
-            <!-- Shipment list start -->
-            <li class="menu-item">
-                <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                    <div data-i18n="Account Settings">Shipments</div>
-                </a>
-                <ul class="menu-sub">
-                    <li class="menu-item">
-                        <router-link :to="{name: 'shipment-add'}" class="menu-link">
-                            <div data-i18n="Account">Shipment</div>
-                        </router-link>
-                    </li>
-                    <li class="menu-item">
-                        <router-link :to="{name: 'shipment-list'}" class="menu-link">
-                            <div data-i18n="Account">Shipment List</div>
-                        </router-link>
-                    </li>
-                </ul>
-            </li>
-            <!-- shipment list end -->
+                 
             <li class="menu-item">
                 <a @click="toggleNearestLiClass($event)" href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
@@ -211,6 +185,21 @@ export default {
                     <li class="menu-item">
                         <router-link :to="{name: 'purchaseslist'}" class="menu-link">
                             <div data-i18n="Basic">Purchases</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <router-link :to="{name: 'product-review-list'}" class="menu-link">
+                            <div data-i18n="Basic">Product review</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <router-link :to="{name: 'product-price-list'}" class="menu-link">
+                            <div data-i18n="Basic">Product price</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <router-link :to="{name: 'inventorylist'}" class="menu-link">
+                            <div data-i18n="Basic">Product inventory</div>
                         </router-link>
                     </li>
                 </ul>
@@ -230,6 +219,24 @@ export default {
                         <router-link :to="{ name: 'sub_list' }" class="menu-link">
                             <div data-i18n="Under Maintenance">Sub Category</div>
                         </router-link>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a @click="toggleNearestLiClass($event)" href="javascript:void(0)" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-copy"></i>
+                    <div data-i18n="Extended UI">Reports</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <router-link :to="{ name: 'customer-list' }" class="menu-link">
+                            <div data-i18n="Perfect Scrollbar">Customer Report</div>
+                        </router-link>
+                    </li>
+                    <li class="menu-item">
+                        <a href="extended-ui-text-divider.html" class="menu-link">
+                            <div data-i18n="Text Divider">Text Divider</div>
+                        </a>
                     </li>
                 </ul>
             </li>

@@ -67,6 +67,7 @@ export default {
 
 
 <template>
+    <div>
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">Shipment Update</h5>
     </div>
@@ -97,7 +98,8 @@ export default {
         <option value="a">select status</option>
         <option value="pending">Pending</option>
         <option value="processing">Processing</option>
-        <option value="Shipped">Shipped</option>
+        <option value="shipped">Shipped</option>
+        <option value="route">On Route</option>
         <option value="delivered">Delivered</option>
         <option value="cancelled">Cancelled</option>
     </select>
@@ -113,4 +115,5 @@ export default {
         </div>
         <button @click="updateship" type="submit" class="btn btn-primary">Submit</button>
     </div>
+</div>
 </template>

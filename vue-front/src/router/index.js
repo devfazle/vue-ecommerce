@@ -8,15 +8,6 @@ import FrontPage from "@/front-panel/views/FrontPage.vue";
 import CartsAdd from "@/admin-panel/fazle/views/CartsAdd.vue";
 import CartLayout from "@/admin-panel/fazle/views/CartLayout.vue";
 
-import CouponsAdd from "@/admin-panel/ruhul/views/CouponsAdd.vue";
-import CouponsLaout from "@/admin-panel/ruhul/views/CouponsLaout.vue";
-import CouponsList from "@/admin-panel/ruhul/views/CouponsList.vue";
-import UpdateCupons from "@/admin-panel/ruhul/views/UpdateCupons.vue";
-import UseCuponsAdd from "@/admin-panel/ruhul/views/UseCuponsAdd.vue";
-import UsecuponList from "@/admin-panel/ruhul/views/UsecuponList.vue";
-import UpdateUseCoupon from "@/admin-panel/ruhul/views/UpdateUseCoupon.vue";
-
-
 import CartTable from "@/admin-panel/fazle/views/CartTable.vue";
 import UpdateCart from "@/admin-panel/fazle/views/UpdateCart.vue";
 
@@ -48,16 +39,9 @@ import Wishlistupdate from "@/admin-panel/foysal/components/wishlist/Wishlistupd
 import OrderTable from "@/admin-panel/fazle/order/OrderTable.vue";
 import OrderLayout from "@/admin-panel/fazle/order/OrderLayout.vue";
 import OrderDetails from "@/admin-panel/fazle/order/OrderDetails.vue";
-
 import store from "@/stores";
-import ShipmentLayout from "@/admin-panel/ruhul/views/ShipmentLayout.vue";
-import ShipmentAdd from "@/admin-panel/ruhul/views/ShipmentAdd.vue";
-import ShipmentList from "@/admin-panel/ruhul/views/ShipmentList.vue";
-import UpdateShipment from "@/admin-panel/ruhul/views/UpdateShipment.vue";
-
 import AddPurchases from "@/admin-panel/devhelal/purchases/AddPurchases.vue";
 import PurchasesList from "@/admin-panel/devhelal/purchases/PurchasesList.vue";
-
 const routes = [
   {
     path: "/admin",
@@ -118,49 +102,56 @@ const routes = [
             component: Products,
           },
           {
-          path: "purchaseslist",
-          name: "purchaseslist",
-          component: PurchasesList,
-        },
-        {
-          path: "addpurchases",
-          name: "addpurchases",
-          component: AddPurchases,
-        },
+            path: "purchaseslist",
+            name: "purchaseslist",
+            component: PurchasesList,
+          },
+          {
+            path: "addpurchases",
+            name: "addpurchases",
+            component: AddPurchases,
+          },
           {
             path: "coupons",
             name: "coupons",
-            component: CouponsLaout,
+            component: () =>
+              import("@/admin-panel/ruhul/views/CouponsLaout.vue"),
             children: [
               {
                 path: "coupons-add",
                 name: "couponsAdd",
-                component: CouponsAdd,
+                component: () =>
+                  import("@/admin-panel/ruhul/views/CouponsAdd.vue"),
               },
               {
                 path: "coupons-list",
                 name: "couponsshow",
-                component: CouponsList,
+                component: () =>
+                  import("@/admin-panel/ruhul/views/CouponsList.vue"),
               },
               {
                 path: "coupons-update/:id",
                 name: "couponsUpdate",
-                component: UpdateCupons,
+                component: () =>
+                  import("@/admin-panel/ruhul/views/UpdateCupons.vue"),
               },
               {
                 path: "coupons-use",
                 name: "couponsUse",
-                component: UseCuponsAdd,
+                component: () =>
+                  import("@/admin-panel/ruhul/views/UseCuponsAdd.vue"),
               },
               {
                 path: "coupons-uselist",
                 name: "couponsUselist",
-                component: UsecuponList,
+                component: () =>
+                  import("@/admin-panel/ruhul/views/UsecuponList.vue"),
               },
               {
                 path: "coupons-useupdate/:id",
                 name: "couponsUseUpdate",
-                component: UpdateUseCoupon,
+                component: () =>
+                  import("@/admin-panel/ruhul/views/UpdateUseCoupon.vue"),
               },
             ],
           },
@@ -269,28 +260,105 @@ const routes = [
             component: PaymentEdit,
           },
           {
-          path: "shipment",
-          name: "shipment",
-          component: ShipmentLayout,
-          children: [
+            path: "shipment",
+            name: "shipment",
+            component: () =>
+              import("@/admin-panel/ruhul/views/ShipmentLayout.vue"),
+            children: [
+              {
+                path: "shipment-add",
+                name: "shipment-add",
+                component: () =>
+                  import("@/admin-panel/ruhul/views/ShipmentAdd.vue"),
+              },
+              {
+                path: "shipment-list",
+                name: "shipment-list",
+                component: () =>
+                  import("@/admin-panel/ruhul/views/ShipmentList.vue"),
+              },
+              {
+                path: "shipment-edit/:id",
+                name: "shipment-edit",
+                component: () =>
+                  import("@/admin-panel/ruhul/views/UpdateShipment.vue"),
+              },
+            ],
+          },
+          {
+            path: "product-review",
+            name: "product-review",
+            component: () =>
+              import("@/admin-panel/ruhul/views/ProductReviewLayout.vue"),
+            children: [
+              {
+                path: "product-review-add",
+                name: "product-review-add",
+                component: () =>
+                  import("@/admin-panel/ruhul/views/ProductReviewCreate.vue"),
+              },
+              {
+                path: "product-review-list",
+                name: "product-review-list",
+                component: () =>
+                  import("@/admin-panel/ruhul/views/ProductReviewTable.vue"),
+              },
+              {
+                path: "product-review-edit/:id",
+                name: "product-review-edit",
+                component: () =>
+                  import("@/admin-panel/ruhul/views/ProductReviewEdit.vue"),
+              },
+            ],
+          },
+          {
+          path: 'inventory',
+          name: 'inventory',
+          component: ()=>import("@/admin-panel/foysal/components/inventory/Inventory.vue"),
+          children: [ 
             {
-              path: "shipment-add",
-              name: "shipment-add",
-              component: ShipmentAdd,
+              path: 'inventoryadd',
+              name: 'inventoryadd',
+              component: ()=>import("@/admin-panel/foysal/components/inventory/Inventoryadd.vue"),
             },
             {
-              path: "shipment-list",
-              name: "shipment-list",
-              component: ShipmentList,
+              path: 'inventorylist',
+              name: 'inventorylist',
+              component: ()=>import("@/admin-panel/foysal/components/inventory/Inventorylist.vue"),
             },
             {
-              path: "shipment-edit/:id",
-              name: "shipment-edit",
-              component: UpdateShipment,
+              path: 'inventoryupdate/:id',
+              name: 'inventoryupdate',
+              component: ()=>import("@/admin-panel/foysal/components/inventory/Inventoryupdate.vue"),
             },
-            
-          ],
+          ]
         },
+          {
+            path: "product-price",
+            name: "product-price",
+            component: () =>
+              import("@/admin-panel/ruhul/views/ProductPriceLayout.vue"),
+            children: [
+              {
+                path: "product-price-add",
+                name: "product-price-add",
+                component: () =>
+                  import("@/admin-panel/ruhul/views/ProductPriceCreate.vue"),
+              },
+              {
+                path: "product-price-list",
+                name: "product-price-list",
+                component: () =>
+                  import("@/admin-panel/ruhul/views/ProductPriceTable.vue"),
+              },
+              {
+                path: "product-price-edit/:id",
+                name: "product-price-edit",
+                component: () =>
+                  import("@/admin-panel/ruhul/views/ProductPriceEdit.vue"),
+              },
+            ],
+          },
           {
             path: "cart1",
             name: "cartOne",
@@ -316,6 +384,32 @@ const routes = [
                 name: "flight",
                 component: () =>
                   import("@/admin-panel/fazle/views/FlightTable.vue"),
+              },
+            ],
+          },
+          {
+            path: "customer-report",
+            name: "customer-report",
+            component: () =>
+              import("@/admin-panel/fazle/customer-report/components/CustomerLayout.vue"),
+            children: [
+              {
+                path: "customer-list",
+                name: "customer-list",
+                component: () =>
+                  import("@/admin-panel/fazle/customer-report/views/CustomerList.vue"),
+              },
+              {
+                path: "creport/:id",
+                name: "creport",
+                component: () =>
+                  import("@/admin-panel/fazle/customer-report/views/CustomerReport.vue"),
+              },
+              {
+                path: "coreport/:id",
+                name: "coreport",
+                component: () =>
+                  import("@/admin-panel/fazle/customer-report/views/CustomerOrderReport.vue"),
               },
             ],
           },
@@ -360,6 +454,16 @@ const routes = [
         component: Product,
       },
       {
+        path: "about",
+        name: "about",
+        component: () => import("@/front-panel/views/AboutPage.vue"),
+      },
+      {
+        path: "modalshow",
+        name: "modalshow",
+        component: () => import("@/front-panel/fazle/views/ModalShow.vue"),
+      },
+      {
         path: "shopping-cart",
         name: "cart",
         component: () => import("@/front-panel/views/ShoppingCart.vue"),
@@ -386,6 +490,27 @@ const routes = [
           middleware: "customer",
           title: "Customer Dashboard",
         },
+        redirect: { name: "customer-order-list" },
+        children: [
+          {
+            path: "",
+            name: "customer-order-list",
+            component: () =>
+              import("@/front-panel/fazle/components/OrderList.vue"),
+          },
+          {
+            path: "customer-wish-list",
+            name: "customer-wish-list",
+            component: () =>
+              import("@/front-panel/fazle/components/WishList.vue"),
+          },
+          {
+            path: "customer-invoice",
+            name: "customer-invoice",
+            component: () =>
+              import("@/front-panel/fazle/components/Cinvoice.vue"),
+          },
+        ],
       },
     ],
   },
@@ -425,13 +550,6 @@ router.beforeEach((to, from, next) => {
       next({ name: "login" });
     }
   }
-  // } else {
-  //   if (store.state.auth.authenticated && store.state.auth.user.role_id == 1) {
-  //     next();
-  //   } else {
-  //     next({ name: "login" });
-  //   }
-  // }
 });
 
 export default router;

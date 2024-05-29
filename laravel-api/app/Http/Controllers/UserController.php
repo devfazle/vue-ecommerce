@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
 
+use function Laravel\Prompts\password;
 
 class UserController extends Controller
 {
@@ -15,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'desc')->with('role')->get();
+        $users = User::orderBy('id', 'desc')->with('role', 'photo')->get();
         return $this->sendResponse($users, 'User list fetched successfully!');
     }
 
@@ -33,21 +35,35 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|unique:users',
-            'name' => 'required',
-            "address" => 'required',
-            "phone_number" => 'required',
-            "bank_info" => 'required',
-            "role_id" => 'required',
-            "password" => 'required',
+            'userData.name' => 'required|string|max:255',
+            'userData.email' => 'required|string|email|max:255|unique:users,email',
+            'userData.phone_number' => 'required|string|max:15',
+            'userData.password' => 'required|string|min:5',
+            'userData.address' => 'required|string|max:255',
+            'userData.bank_info' => 'required|string|max:255',
+            'userData.role_id' => 'required|integer',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+
         if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors(), 422);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
-        $input = $request->all();
-        $input['password'] = bcrypt($request->password);
+
+        $input = $request->userData;
+        $input['password'] = bcrypt($request->userData['password']);
         $user = User::create($input);
-        return $this->sendResponse($user, 'User created successfully!');
+
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('photos/users'), $imageName);
+
+        $image = $user->photo()->create(['path' => $imageName]);
+
+        $data = [
+            'user' => $user,
+            'image' => $image
+        ];
+
+        return $this->sendResponse($data, 'User created successfully!');
     }
 
     /**
@@ -55,7 +71,6 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-
     }
 
     /**
@@ -97,7 +112,30 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $users = User::find($id)->delete();
-        return $this->sendResponse($users, 'User deleted successfully!');
+        $user = User::find($id);
+        $user->delete();
+
+        if ($user->photo) {
+            // Get the photo path
+            $photoPath = public_path('images') . '/' . $user->photo->path;
+
+            // Delete the photo file if it exists
+            if (File::exists($photoPath)) {
+                File::delete($photoPath);
+            }
+
+            $user->photo->delete();
+        }
+
+        return $this->sendResponse($user, 'User deleted successfully!');
+    }
+
+    public function customerList()
+    {
+        $customerList = User::where('role_id', 2)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return $this->sendResponse($customerList, 'User list fetched successfully!');
     }
 }
