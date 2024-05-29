@@ -10,7 +10,7 @@ export default {
             recipient_phone: "",
             address: "",
             status: "a",
-            order_id: 0,
+            order_id: "",
         }
     },
 
@@ -88,16 +88,23 @@ export default {
                     <option value="cancelled">Cancelled</option>
                 </select>
             </div>
+            
 
 
-            <div class="mb-3">
-                <label class="form-label" for="basic-default-company">Order Id</label>
-                <select class="form-select" v-model="order_id">
-                    <option value="0">Open this select menu</option>
-                    <option v-for="(p, i) in orders" :key="i" :value="p.id">{{ p.id }}</option>
-                </select>
-            </div>
-            <button @click="storeData" type="submit" class="btn btn-primary">Submit</button>
+
+        <div class="mb-3">
+            <label class="form-label" for="basic-default-company">Order Id</label>
+            <input type="text" class="form-control" list="tt1" id="tt" v-model="order_id"
+                placeholder="select order id">
+            <datalist id="tt1">
+                <option disabled value="">Select a order</option>
+                <option v-for="(p, i) in orders" :key="i" :value="p.id">{{ p.id }}</option>
+            </datalist>
+            <small v-if="!order_id" class="">Please select a order</small>
         </div>
+
+        
+        <button @click="storeData" type="submit" class="btn btn-primary">Submit</button>
+    </div>
     </div>
 </template>
