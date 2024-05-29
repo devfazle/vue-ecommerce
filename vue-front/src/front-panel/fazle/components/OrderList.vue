@@ -84,9 +84,7 @@ export default {
                 return index <= activeIndex ? 'active step0' : 'step0';
             });
 
-        },
-
-        
+        }, 
     },
     mounted() {
         this.getOrders();
