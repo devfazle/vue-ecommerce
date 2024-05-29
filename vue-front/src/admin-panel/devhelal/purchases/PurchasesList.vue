@@ -5,17 +5,28 @@ export default {
   data() {
     return {
       ShowModal: false,
-      allPurcheses:[],
-      url:"http://localhost:8000/api/admin/",
+      allPurchases:[],
+      url:this.$store.state.base.url+"admin/",
     };
   },
   methods: {
     showf(newValue) {
             this.ShowModal=newValue
         },
-    getPurchese(){
-console.log('ok');
-    }
+    getPurchases(){
+      axios.get(this.url+"purchases").then((response) => {
+        const alldata= response.data.data;
+        this.allPurchases = response.data.data;
+              });
+    },
+    calculateTotalPrice(data) {
+    //   for (let i=0; i< data.length; i++){
+    console.log(data.price) ;}
+    // },
+  },
+  mounted(){
+    this.getPurchases();
+    //this.calculateTotalPrice();
   },
 components: {
   ModalAddPurchasesVue,
@@ -99,12 +110,18 @@ components: {
               </thead>
               <!-- <tbody v-for="(data, i) in productlist" :key="i" class="text-center"> -->
               <tbody  class="text-center">
-               <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
+               <tr v-for="(data, i) in allPurchases" :key="i">
+                <td>
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                    </div>
+                  </td>
+                <td>{{ i }}</td>
+                <td>{{ data[0].date}}</td>
+                <td>{{ data[0].user.name}}</td>
+                <td>For New LL</td>
+                <td>{{ calculateTotalPrice(data) }}</td>
+                <!-- <td>{{ data}}</td> -->
                 <td>6</td>
                 <td>7</td>
                </tr>

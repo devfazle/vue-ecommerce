@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 export default {
     data() {
         return {
-            url: "http://localhost:8000/api/admin/",
+            url: this.$store.state.base.url+"admin/",
             invoice_number: "",
             date: new Date().toISOString().slice(0, 16),
             user_id: "",
