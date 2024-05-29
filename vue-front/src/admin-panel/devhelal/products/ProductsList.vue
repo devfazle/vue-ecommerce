@@ -4,7 +4,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      url: "http://127.0.0.1:8000/api/admin/products",
+      url: this.$store.state.base.url+"admin/products",
       productlist: [],
     };
   },

@@ -1,10 +1,11 @@
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import { mapActions } from 'vuex';
 export default {
     data() {
         return {
-            url: "http://127.0.0.1:8000/api/admin/products",
-            category_url: "http://127.0.0.1:8000/api/admin/categorys",
+            url: this.$store.state.base.url+"admin/products",
+            category_url:  this.$store.state.base.url+"admin/categorys",
             category_id: 0,
             name: "",
             price: "",
