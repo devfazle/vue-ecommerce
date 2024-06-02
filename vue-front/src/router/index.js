@@ -42,6 +42,7 @@ import OrderDetails from "@/admin-panel/fazle/order/OrderDetails.vue";
 import store from "@/stores";
 import AddPurchases from "@/admin-panel/devhelal/purchases/AddPurchases.vue";
 import PurchasesList from "@/admin-panel/devhelal/purchases/PurchasesList.vue";
+import Invoice from "@/admin-panel/devhelal/purchases/Invoice.vue";
 const routes = [
   {
     path: "/admin",
@@ -110,6 +111,11 @@ const routes = [
             path: "addpurchases",
             name: "addpurchases",
             component: AddPurchases,
+          },
+          {
+            path: "purchasesinvoice",
+            name: "purchasesinvoice",
+            component: Invoice,
           },
           {
             path: "coupons",

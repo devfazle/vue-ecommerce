@@ -7,26 +7,45 @@ export default {
       ShowModal: false,
       allPurchases:[],
       url:this.$store.state.base.url+"admin/",
+      ttotal:0,
     };
   },
   methods: {
     showf(newValue) {
             this.ShowModal=newValue
         },
+
+    //  =============== get all purchases  ==============================
     getPurchases(){
       axios.get(this.url+"purchases").then((response) => {
         const alldata= response.data.data;
         this.allPurchases = response.data.data;
               });
     },
+
+    //  ===============calculate Total Price to one invoice purchases ===============
     calculateTotalPrice(data) {
-    //   for (let i=0; i< data.length; i++){
-    console.log(data.price) ;}
-    // },
+  let prices = 0;
+  data.forEach((item) => {
+    const price = item.price*item.quantity;
+    prices += parseInt(price) ;
+  });
+  return prices;
+},
+
+  // =============== Convert UTC time to Bangladesh time (BDT) ===============
+    convertToBDT(utcTime) {
+  const utcDate = new Date(utcTime);
+  utcDate.setHours(utcDate.getHours() + 6);
+  //  ===============Format the result as "YYYY-MM-DD hh:mm:ss AM/PM" ===============
+  const options = {
+    year: 'numeric',month: '2-digit',day: '2-digit',hour: '2-digit',minute: '2-digit',second: '2-digit',hour12: true,};
+  const bdtDateTime = utcDate.toLocaleString('en-US', options);
+  return bdtDateTime;
+}
   },
   mounted(){
     this.getPurchases();
-    //this.calculateTotalPrice();
   },
 components: {
   ModalAddPurchasesVue,
@@ -34,7 +53,6 @@ components: {
 };
 </script>
 <template>
-  
   <div class="container-xxl flex-grow-1 container-p-y">
     <ModalAddPurchasesVue :ShowM="ShowModal" @showfunction="showf"/>
     <h4 class="fw-bold py-3 mb-4">
@@ -117,10 +135,11 @@ components: {
                     </div>
                   </td>
                 <td>{{ i }}</td>
-                <td>{{ data[0].date}}</td>
+                <td>{{ convertToBDT(data[0].date) }}</td>
                 <td>{{ data[0].user.name}}</td>
                 <td>For New LL</td>
-                <td>{{ calculateTotalPrice(data) }}</td>
+                <td>{{ calculateTotalPrice(data,i) }}</td>
+                <!-- <td></td> -->
                 <!-- <td>{{ data}}</td> -->
                 <td>6</td>
                 <td>7</td>
@@ -132,6 +151,6 @@ components: {
         </div>
       </div>
     </div>
-    
+
   </div>
 </template>
