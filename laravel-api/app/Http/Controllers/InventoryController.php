@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventory;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,7 +24,13 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        
+        $product_inventory = Product::get();
+    
+        $data = [
+            'product_inventory' => $product_inventory,
+        ];
+
+        return $this->sendResponse($data, 'Product inventory list fetched successfully!'); 
     }
 
     /**
@@ -33,7 +40,7 @@ class InventoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'quantity' => 'required',
-            'products_id' => 'required',
+            'product_id' => 'required',
         
         ]);
         if ($validator->fails()) {
@@ -58,7 +65,7 @@ class InventoryController extends Controller
      */
     public function edit(string $id)
     {
-        $inventory = Inventory::with('quantity','product')->find($id);
+        $inventory = Inventory::with('product')->find($id);
         return $this->sendResponse($inventory, 'Inventory list fetched successfully!');
     }
 
@@ -69,7 +76,7 @@ class InventoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'quantity' => 'required',
-            'products_id' => 'required',
+            'product_id' => 'required',
           
         ]);
         if ($validator->fails()) {
